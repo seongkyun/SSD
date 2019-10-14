@@ -17,7 +17,7 @@ from ssd.utils.dist_util import synchronize
 from ssd.utils.logger import setup_logger
 from ssd.utils.misc import str2bool
 
-
+# Train the model
 def train(cfg, args):
     logger = logging.getLogger('SSD.trainer')
     model = build_detection_model(cfg)
@@ -49,7 +49,7 @@ def main():
     parser = argparse.ArgumentParser(description='Single Shot MultiBox Detector Training With PyTorch')
     parser.add_argument(
         "--config-file",
-        default="",
+        default="./configs/mobilenet_v2_ssd320_custom.yaml",
         metavar="FILE",
         help="path to config file",
         type=str,

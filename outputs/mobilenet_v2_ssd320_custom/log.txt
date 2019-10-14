@@ -1,0 +1,778 @@
+2019-10-15 01:00:52,923 SSD INFO: Using 1 GPUs
+2019-10-15 01:00:52,923 SSD INFO: Namespace(config_file='./configs/mobilenet_v2_ssd320_custom.yaml', distributed=False, eval_step=2500, local_rank=0, log_step=10, num_gpus=1, opts=[], save_step=2500, skip_test=False, use_tensorboard=True)
+2019-10-15 01:00:52,923 SSD INFO: Loaded configuration file ./configs/mobilenet_v2_ssd320_custom.yaml
+2019-10-15 01:00:52,923 SSD INFO: 
+MODEL:
+  NUM_CLASSES: 6
+  BOX_HEAD:
+    PREDICTOR: 'SSDLiteBoxPredictor'
+  BACKBONE:
+    NAME: 'mobilenet_v2'
+    OUT_CHANNELS: (96, 1280, 512, 256, 256, 64)
+  PRIORS:
+    FEATURE_MAPS: [20, 10, 5, 3, 2, 1]
+    STRIDES: [16, 32, 64, 100, 150, 300]
+    MIN_SIZES: [60, 105, 150, 195, 240, 285]
+    MAX_SIZES: [105, 150, 195, 240, 285, 330]
+    ASPECT_RATIOS: [[2, 3], [2, 3], [2, 3], [2, 3], [2, 3], [2, 3]]
+    BOXES_PER_LOCATION: [6, 6, 6, 6, 6, 6]
+INPUT:
+  IMAGE_SIZE: 320
+DATASETS:
+  TRAIN: ("custom_train",)
+  TEST: ("custom_test",)
+# Training set size: 1700 images
+SOLVER: 
+  #MAX_ITER: 120000
+  #LR_STEPS: [80000, 100000]
+  MAX_ITER: 260000
+  LR_STEPS: [100000, 190000]
+  GAMMA: 0.1
+  BATCH_SIZE: 16
+  LR: 1e-3
+
+OUTPUT_DIR: 'outputs/mobilenet_v2_ssd320_custom'
+2019-10-15 01:00:52,923 SSD INFO: Running with config:
+DATASETS:
+  TEST: ('custom_test',)
+  TRAIN: ('custom_train',)
+DATA_LOADER:
+  NUM_WORKERS: 0
+  PIN_MEMORY: True
+INPUT:
+  IMAGE_SIZE: 320
+  PIXEL_MEAN: [123, 117, 104]
+MODEL:
+  BACKBONE:
+    NAME: mobilenet_v2
+    OUT_CHANNELS: (96, 1280, 512, 256, 256, 64)
+    PRETRAINED: True
+  BOX_HEAD:
+    NAME: SSDBoxHead
+    PREDICTOR: SSDLiteBoxPredictor
+  CENTER_VARIANCE: 0.1
+  DEVICE: cuda
+  META_ARCHITECTURE: SSDDetector
+  NEG_POS_RATIO: 3
+  NUM_CLASSES: 6
+  PRIORS:
+    ASPECT_RATIOS: [[2, 3], [2, 3], [2, 3], [2, 3], [2, 3], [2, 3]]
+    BOXES_PER_LOCATION: [6, 6, 6, 6, 6, 6]
+    CLIP: True
+    FEATURE_MAPS: [20, 10, 5, 3, 2, 1]
+    MAX_SIZES: [105, 150, 195, 240, 285, 330]
+    MIN_SIZES: [60, 105, 150, 195, 240, 285]
+    STRIDES: [16, 32, 64, 100, 150, 300]
+  SIZE_VARIANCE: 0.2
+  THRESHOLD: 0.5
+OUTPUT_DIR: outputs/mobilenet_v2_ssd320_custom
+SOLVER:
+  BATCH_SIZE: 16
+  GAMMA: 0.1
+  LR: 0.001
+  LR_STEPS: [100000, 190000]
+  MAX_ITER: 260000
+  MOMENTUM: 0.9
+  WARMUP_FACTOR: 0.3333333333333333
+  WARMUP_ITERS: 500
+  WEIGHT_DECAY: 0.0005
+TEST:
+  BATCH_SIZE: 10
+  CONFIDENCE_THRESHOLD: 0.01
+  MAX_PER_CLASS: -1
+  MAX_PER_IMAGE: 100
+  NMS_THRESHOLD: 0.45
+2019-10-15 01:00:54,612 SSD.trainer INFO: No checkpoint found.
+2019-10-15 01:00:54,615 SSD.trainer INFO: Start training ...
+2019-10-15 01:01:01,777 SSD.trainer INFO: iter: 000010, lr: 0.00035, time: 0.708 (0.708), cls_loss: 12.624 (12.624), reg_loss: 4.028 (4.028), total_loss: 16.652 (16.652), eta: 2 days, 3:07:01, mem: 2645M
+2019-10-15 01:01:06,253 SSD.trainer INFO: iter: 000020, lr: 0.00036, time: 0.448 (0.578), cls_loss: 11.127 (11.875), reg_loss: 3.631 (3.829), total_loss: 14.758 (15.705), eta: 1 day, 17:43:06, mem: 2645M
+2019-10-15 01:01:10,962 SSD.trainer INFO: iter: 000030, lr: 0.00037, time: 0.471 (0.542), cls_loss: 10.486 (11.412), reg_loss: 3.514 (3.724), total_loss: 14.001 (15.137), eta: 1 day, 15:08:50, mem: 2645M
+2019-10-15 01:01:17,636 SSD.trainer INFO: iter: 000040, lr: 0.00039, time: 0.667 (0.573), cls_loss: 10.032 (11.067), reg_loss: 3.164 (3.584), total_loss: 13.196 (14.652), eta: 1 day, 17:24:29, mem: 2645M
+2019-10-15 01:01:32,617 SSD.trainer INFO: iter: 000050, lr: 0.00040, time: 1.498 (0.758), cls_loss: 9.728 (10.799), reg_loss: 3.007 (3.469), total_loss: 12.736 (14.268), eta: 2 days, 6:45:34, mem: 2645M
+2019-10-15 01:01:45,438 SSD.trainer INFO: iter: 000060, lr: 0.00041, time: 1.282 (0.846), cls_loss: 9.500 (10.583), reg_loss: 3.141 (3.414), total_loss: 12.640 (13.997), eta: 2 days, 13:03:39, mem: 2645M
+2019-10-15 01:01:58,504 SSD.trainer INFO: iter: 000070, lr: 0.00043, time: 1.307 (0.911), cls_loss: 9.048 (10.364), reg_loss: 3.266 (3.393), total_loss: 12.315 (13.757), eta: 2 days, 17:48:45, mem: 2645M
+2019-10-15 01:02:11,658 SSD.trainer INFO: iter: 000080, lr: 0.00044, time: 1.315 (0.962), cls_loss: 8.903 (10.181), reg_loss: 2.986 (3.342), total_loss: 11.889 (13.523), eta: 2 days, 21:27:21, mem: 2645M
+2019-10-15 01:02:24,423 SSD.trainer INFO: iter: 000090, lr: 0.00045, time: 1.276 (0.997), cls_loss: 8.695 (10.016), reg_loss: 3.000 (3.304), total_loss: 11.694 (13.320), eta: 2 days, 23:58:34, mem: 2645M
+2019-10-15 01:02:37,250 SSD.trainer INFO: iter: 000100, lr: 0.00047, time: 1.283 (1.026), cls_loss: 8.394 (9.854), reg_loss: 2.996 (3.273), total_loss: 11.390 (13.127), eta: 3 days, 2:02:09, mem: 2645M
+2019-10-15 01:02:50,267 SSD.trainer INFO: iter: 000110, lr: 0.00048, time: 1.302 (1.051), cls_loss: 8.267 (9.709), reg_loss: 2.909 (3.240), total_loss: 11.176 (12.950), eta: 3 days, 3:50:44, mem: 2645M
+2019-10-15 01:03:04,002 SSD.trainer INFO: iter: 000120, lr: 0.00049, time: 1.374 (1.078), cls_loss: 8.153 (9.580), reg_loss: 2.991 (3.219), total_loss: 11.143 (12.799), eta: 3 days, 5:47:07, mem: 2645M
+2019-10-15 01:03:15,503 SSD.trainer INFO: iter: 000130, lr: 0.00051, time: 1.150 (1.083), cls_loss: 7.944 (9.454), reg_loss: 2.708 (3.180), total_loss: 10.652 (12.634), eta: 3 days, 6:11:07, mem: 2645M
+2019-10-15 01:03:27,544 SSD.trainer INFO: iter: 000140, lr: 0.00052, time: 1.204 (1.092), cls_loss: 7.819 (9.337), reg_loss: 2.582 (3.137), total_loss: 10.401 (12.474), eta: 3 days, 6:48:22, mem: 2645M
+2019-10-15 01:03:39,791 SSD.trainer INFO: iter: 000150, lr: 0.00053, time: 1.225 (1.101), cls_loss: 7.618 (9.222), reg_loss: 2.586 (3.101), total_loss: 10.205 (12.323), eta: 3 days, 7:26:34, mem: 2645M
+2019-10-15 01:03:52,869 SSD.trainer INFO: iter: 000160, lr: 0.00055, time: 1.308 (1.114), cls_loss: 7.545 (9.118), reg_loss: 2.660 (3.073), total_loss: 10.206 (12.191), eta: 3 days, 8:22:28, mem: 2645M
+2019-10-15 01:04:03,438 SSD.trainer INFO: iter: 000170, lr: 0.00056, time: 1.057 (1.110), cls_loss: 7.353 (9.014), reg_loss: 2.455 (3.037), total_loss: 9.808 (12.051), eta: 3 days, 8:07:50, mem: 2645M
+2019-10-15 01:04:15,819 SSD.trainer INFO: iter: 000180, lr: 0.00057, time: 1.238 (1.117), cls_loss: 7.288 (8.918), reg_loss: 2.539 (3.009), total_loss: 9.827 (11.927), eta: 3 days, 8:38:25, mem: 2645M
+2019-10-15 01:04:23,904 SSD.trainer INFO: iter: 000190, lr: 0.00059, time: 0.808 (1.101), cls_loss: 7.123 (8.823), reg_loss: 2.310 (2.972), total_loss: 9.432 (11.796), eta: 3 days, 7:27:50, mem: 2645M
+2019-10-15 01:04:34,234 SSD.trainer INFO: iter: 000200, lr: 0.00060, time: 1.033 (1.098), cls_loss: 7.062 (8.735), reg_loss: 2.367 (2.942), total_loss: 9.429 (11.677), eta: 3 days, 7:12:55, mem: 2645M
+2019-10-15 01:04:48,331 SSD.trainer INFO: iter: 000210, lr: 0.00061, time: 1.410 (1.113), cls_loss: 6.855 (8.646), reg_loss: 2.226 (2.908), total_loss: 9.081 (11.554), eta: 3 days, 8:17:04, mem: 2645M
+2019-10-15 01:04:58,613 SSD.trainer INFO: iter: 000220, lr: 0.00063, time: 1.028 (1.109), cls_loss: 6.828 (8.563), reg_loss: 2.093 (2.871), total_loss: 8.920 (11.434), eta: 3 days, 8:00:18, mem: 2645M
+2019-10-15 01:05:10,922 SSD.trainer INFO: iter: 000230, lr: 0.00064, time: 1.231 (1.114), cls_loss: 6.672 (8.481), reg_loss: 2.020 (2.834), total_loss: 8.692 (11.315), eta: 3 days, 8:23:07, mem: 2645M
+2019-10-15 01:05:23,407 SSD.trainer INFO: iter: 000240, lr: 0.00065, time: 1.249 (1.120), cls_loss: 6.580 (8.402), reg_loss: 2.060 (2.802), total_loss: 8.640 (11.203), eta: 3 days, 8:47:11, mem: 2645M
+2019-10-15 01:05:35,923 SSD.trainer INFO: iter: 000250, lr: 0.00067, time: 1.252 (1.125), cls_loss: 6.471 (8.325), reg_loss: 2.369 (2.784), total_loss: 8.840 (11.109), eta: 3 days, 9:09:51, mem: 2645M
+2019-10-15 01:05:47,765 SSD.trainer INFO: iter: 000260, lr: 0.00068, time: 1.184 (1.127), cls_loss: 6.397 (8.250), reg_loss: 2.136 (2.759), total_loss: 8.533 (11.010), eta: 3 days, 9:19:33, mem: 2645M
+2019-10-15 01:06:01,513 SSD.trainer INFO: iter: 000270, lr: 0.00069, time: 1.375 (1.136), cls_loss: 6.257 (8.177), reg_loss: 2.036 (2.733), total_loss: 8.294 (10.909), eta: 3 days, 9:59:03, mem: 2645M
+2019-10-15 01:06:13,890 SSD.trainer INFO: iter: 000280, lr: 0.00071, time: 1.238 (1.140), cls_loss: 6.149 (8.104), reg_loss: 2.112 (2.710), total_loss: 8.261 (10.815), eta: 3 days, 10:14:31, mem: 2645M
+2019-10-15 01:06:25,991 SSD.trainer INFO: iter: 000290, lr: 0.00072, time: 1.210 (1.142), cls_loss: 6.102 (8.035), reg_loss: 1.855 (2.681), total_loss: 7.957 (10.716), eta: 3 days, 10:24:49, mem: 2645M
+2019-10-15 01:06:38,128 SSD.trainer INFO: iter: 000300, lr: 0.00073, time: 1.214 (1.145), cls_loss: 5.973 (7.966), reg_loss: 1.876 (2.654), total_loss: 7.849 (10.621), eta: 3 days, 10:34:54, mem: 2645M
+2019-10-15 01:06:50,053 SSD.trainer INFO: iter: 000310, lr: 0.00075, time: 1.193 (1.146), cls_loss: 5.991 (7.903), reg_loss: 1.815 (2.627), total_loss: 7.806 (10.530), eta: 3 days, 10:41:23, mem: 2645M
+2019-10-15 01:07:01,308 SSD.trainer INFO: iter: 000320, lr: 0.00076, time: 1.125 (1.146), cls_loss: 5.880 (7.839), reg_loss: 1.734 (2.599), total_loss: 7.614 (10.439), eta: 3 days, 10:38:23, mem: 2645M
+2019-10-15 01:07:13,556 SSD.trainer INFO: iter: 000330, lr: 0.00077, time: 1.225 (1.148), cls_loss: 5.749 (7.776), reg_loss: 1.671 (2.571), total_loss: 7.419 (10.347), eta: 3 days, 10:48:34, mem: 2645M
+2019-10-15 01:07:25,507 SSD.trainer INFO: iter: 000340, lr: 0.00079, time: 1.195 (1.149), cls_loss: 5.689 (7.715), reg_loss: 1.635 (2.543), total_loss: 7.324 (10.258), eta: 3 days, 10:54:22, mem: 2645M
+2019-10-15 01:07:37,305 SSD.trainer INFO: iter: 000350, lr: 0.00080, time: 1.180 (1.150), cls_loss: 5.637 (7.655), reg_loss: 1.786 (2.522), total_loss: 7.422 (10.177), eta: 3 days, 10:57:56, mem: 2645M
+2019-10-15 01:07:53,596 SSD.trainer INFO: iter: 000360, lr: 0.00081, time: 1.629 (1.164), cls_loss: 5.525 (7.596), reg_loss: 1.754 (2.501), total_loss: 7.279 (10.097), eta: 3 days, 11:55:17, mem: 2645M
+2019-10-15 01:08:05,282 SSD.trainer INFO: iter: 000370, lr: 0.00083, time: 1.169 (1.164), cls_loss: 5.495 (7.539), reg_loss: 1.546 (2.475), total_loss: 7.041 (10.014), eta: 3 days, 11:55:41, mem: 2645M
+2019-10-15 01:08:17,033 SSD.trainer INFO: iter: 000380, lr: 0.00084, time: 1.175 (1.164), cls_loss: 5.363 (7.482), reg_loss: 1.473 (2.448), total_loss: 6.836 (9.930), eta: 3 days, 11:56:46, mem: 2645M
+2019-10-15 01:08:28,418 SSD.trainer INFO: iter: 000390, lr: 0.00085, time: 1.138 (1.163), cls_loss: 5.312 (7.426), reg_loss: 1.466 (2.423), total_loss: 6.778 (9.850), eta: 3 days, 11:53:45, mem: 2645M
+2019-10-15 01:08:40,218 SSD.trainer INFO: iter: 000400, lr: 0.00087, time: 1.180 (1.164), cls_loss: 5.267 (7.372), reg_loss: 1.647 (2.404), total_loss: 6.913 (9.776), eta: 3 days, 11:55:21, mem: 2645M
+2019-10-15 01:08:53,259 SSD.trainer INFO: iter: 000410, lr: 0.00088, time: 1.304 (1.167), cls_loss: 5.206 (7.320), reg_loss: 1.750 (2.388), total_loss: 6.956 (9.707), eta: 3 days, 12:09:58, mem: 2645M
+2019-10-15 01:09:05,480 SSD.trainer INFO: iter: 000420, lr: 0.00089, time: 1.222 (1.169), cls_loss: 5.139 (7.268), reg_loss: 1.720 (2.372), total_loss: 6.858 (9.640), eta: 3 days, 12:15:25, mem: 2645M
+2019-10-15 01:09:18,489 SSD.trainer INFO: iter: 000430, lr: 0.00091, time: 1.301 (1.172), cls_loss: 5.042 (7.216), reg_loss: 1.430 (2.350), total_loss: 6.472 (9.566), eta: 3 days, 12:28:33, mem: 2645M
+2019-10-15 01:09:30,428 SSD.trainer INFO: iter: 000440, lr: 0.00092, time: 1.194 (1.172), cls_loss: 5.094 (7.168), reg_loss: 1.486 (2.330), total_loss: 6.580 (9.498), eta: 3 days, 12:30:32, mem: 2645M
+2019-10-15 01:09:42,235 SSD.trainer INFO: iter: 000450, lr: 0.00093, time: 1.181 (1.172), cls_loss: 4.944 (7.118), reg_loss: 1.501 (2.312), total_loss: 6.445 (9.430), eta: 3 days, 12:31:11, mem: 2645M
+2019-10-15 01:09:54,124 SSD.trainer INFO: iter: 000460, lr: 0.00095, time: 1.189 (1.173), cls_loss: 4.848 (7.069), reg_loss: 1.464 (2.293), total_loss: 6.312 (9.362), eta: 3 days, 12:32:32, mem: 2645M
+2019-10-15 01:10:06,554 SSD.trainer INFO: iter: 000470, lr: 0.00096, time: 1.243 (1.174), cls_loss: 4.878 (7.022), reg_loss: 1.363 (2.274), total_loss: 6.241 (9.296), eta: 3 days, 12:38:49, mem: 2645M
+2019-10-15 01:10:18,474 SSD.trainer INFO: iter: 000480, lr: 0.00097, time: 1.192 (1.175), cls_loss: 4.843 (6.977), reg_loss: 1.333 (2.254), total_loss: 6.176 (9.231), eta: 3 days, 12:40:14, mem: 2645M
+2019-10-15 01:10:30,935 SSD.trainer INFO: iter: 000490, lr: 0.00099, time: 1.246 (1.176), cls_loss: 4.775 (6.932), reg_loss: 1.306 (2.235), total_loss: 6.081 (9.167), eta: 3 days, 12:46:21, mem: 2645M
+2019-10-15 01:10:47,903 SSD.trainer INFO: iter: 000500, lr: 0.00100, time: 1.697 (1.186), cls_loss: 4.723 (6.888), reg_loss: 1.390 (2.218), total_loss: 6.113 (9.106), eta: 3 days, 13:31:12, mem: 2645M
+2019-10-15 01:11:00,271 SSD.trainer INFO: iter: 000510, lr: 0.00100, time: 1.237 (1.187), cls_loss: 4.630 (6.844), reg_loss: 1.269 (2.199), total_loss: 5.899 (9.043), eta: 3 days, 13:35:17, mem: 2645M
+2019-10-15 01:11:12,322 SSD.trainer INFO: iter: 000520, lr: 0.00100, time: 1.205 (1.188), cls_loss: 4.711 (6.803), reg_loss: 1.239 (2.181), total_loss: 5.950 (8.983), eta: 3 days, 13:36:33, mem: 2645M
+2019-10-15 01:11:24,150 SSD.trainer INFO: iter: 000530, lr: 0.00100, time: 1.183 (1.188), cls_loss: 4.563 (6.760), reg_loss: 1.257 (2.163), total_loss: 5.820 (8.924), eta: 3 days, 13:35:57, mem: 2645M
+2019-10-15 01:11:37,283 SSD.trainer INFO: iter: 000540, lr: 0.00100, time: 1.313 (1.190), cls_loss: 4.557 (6.720), reg_loss: 1.311 (2.148), total_loss: 5.869 (8.867), eta: 3 days, 13:45:49, mem: 2645M
+2019-10-15 01:11:48,647 SSD.trainer INFO: iter: 000550, lr: 0.00100, time: 1.136 (1.189), cls_loss: 4.574 (6.681), reg_loss: 1.373 (2.134), total_loss: 5.947 (8.814), eta: 3 days, 13:41:24, mem: 2645M
+2019-10-15 01:12:01,765 SSD.trainer INFO: iter: 000560, lr: 0.00100, time: 1.312 (1.191), cls_loss: 4.507 (6.642), reg_loss: 1.250 (2.118), total_loss: 5.757 (8.759), eta: 3 days, 13:50:41, mem: 2645M
+2019-10-15 01:12:13,858 SSD.trainer INFO: iter: 000570, lr: 0.00100, time: 1.209 (1.192), cls_loss: 4.420 (6.603), reg_loss: 1.208 (2.102), total_loss: 5.628 (8.704), eta: 3 days, 13:51:52, mem: 2645M
+2019-10-15 01:12:24,579 SSD.trainer INFO: iter: 000580, lr: 0.00100, time: 1.072 (1.189), cls_loss: 4.380 (6.564), reg_loss: 1.178 (2.086), total_loss: 5.558 (8.650), eta: 3 days, 13:42:46, mem: 2645M
+2019-10-15 01:12:37,828 SSD.trainer INFO: iter: 000590, lr: 0.00100, time: 1.325 (1.192), cls_loss: 4.417 (6.528), reg_loss: 1.025 (2.068), total_loss: 5.442 (8.596), eta: 3 days, 13:52:30, mem: 2645M
+2019-10-15 01:12:50,971 SSD.trainer INFO: iter: 000600, lr: 0.00100, time: 1.314 (1.194), cls_loss: 4.331 (6.491), reg_loss: 1.042 (2.051), total_loss: 5.373 (8.542), eta: 3 days, 14:01:08, mem: 2645M
+2019-10-15 01:13:04,136 SSD.trainer INFO: iter: 000610, lr: 0.00100, time: 1.316 (1.196), cls_loss: 4.230 (6.454), reg_loss: 1.107 (2.035), total_loss: 5.337 (8.490), eta: 3 days, 14:09:37, mem: 2645M
+2019-10-15 01:13:17,901 SSD.trainer INFO: iter: 000620, lr: 0.00100, time: 1.377 (1.199), cls_loss: 4.253 (6.419), reg_loss: 1.081 (2.020), total_loss: 5.334 (8.439), eta: 3 days, 14:22:02, mem: 2645M
+2019-10-15 01:13:30,448 SSD.trainer INFO: iter: 000630, lr: 0.00100, time: 1.255 (1.200), cls_loss: 4.198 (6.384), reg_loss: 1.110 (2.005), total_loss: 5.307 (8.389), eta: 3 days, 14:25:40, mem: 2645M
+2019-10-15 01:13:41,321 SSD.trainer INFO: iter: 000640, lr: 0.00100, time: 1.087 (1.198), cls_loss: 4.170 (6.349), reg_loss: 1.138 (1.992), total_loss: 5.308 (8.341), eta: 3 days, 14:17:53, mem: 2645M
+2019-10-15 01:13:54,718 SSD.trainer INFO: iter: 000650, lr: 0.00100, time: 1.340 (1.200), cls_loss: 4.214 (6.316), reg_loss: 1.204 (1.980), total_loss: 5.418 (8.296), eta: 3 days, 14:27:07, mem: 2645M
+2019-10-15 01:14:06,958 SSD.trainer INFO: iter: 000660, lr: 0.00100, time: 1.224 (1.200), cls_loss: 4.113 (6.283), reg_loss: 1.148 (1.967), total_loss: 5.261 (8.250), eta: 3 days, 14:28:29, mem: 2645M
+2019-10-15 01:14:18,056 SSD.trainer INFO: iter: 000670, lr: 0.00100, time: 1.110 (1.199), cls_loss: 4.145 (6.251), reg_loss: 1.213 (1.956), total_loss: 5.357 (8.207), eta: 3 days, 14:22:27, mem: 2645M
+2019-10-15 01:14:30,567 SSD.trainer INFO: iter: 000680, lr: 0.00100, time: 1.251 (1.200), cls_loss: 4.176 (6.220), reg_loss: 1.116 (1.944), total_loss: 5.292 (8.164), eta: 3 days, 14:25:33, mem: 2645M
+2019-10-15 01:14:42,695 SSD.trainer INFO: iter: 000690, lr: 0.00100, time: 1.213 (1.200), cls_loss: 4.145 (6.190), reg_loss: 1.136 (1.932), total_loss: 5.281 (8.122), eta: 3 days, 14:26:10, mem: 2645M
+2019-10-15 01:14:55,446 SSD.trainer INFO: iter: 000700, lr: 0.00100, time: 1.275 (1.201), cls_loss: 4.070 (6.160), reg_loss: 1.128 (1.920), total_loss: 5.198 (8.080), eta: 3 days, 14:30:36, mem: 2645M
+2019-10-15 01:15:07,947 SSD.trainer INFO: iter: 000710, lr: 0.00100, time: 1.250 (1.202), cls_loss: 4.045 (6.130), reg_loss: 1.169 (1.910), total_loss: 5.214 (8.040), eta: 3 days, 14:33:23, mem: 2645M
+2019-10-15 01:15:21,993 SSD.trainer INFO: iter: 000720, lr: 0.00100, time: 1.405 (1.205), cls_loss: 4.053 (6.101), reg_loss: 1.074 (1.898), total_loss: 5.127 (8.000), eta: 3 days, 14:45:22, mem: 2645M
+2019-10-15 01:15:36,666 SSD.trainer INFO: iter: 000730, lr: 0.00100, time: 1.467 (1.208), cls_loss: 4.058 (6.073), reg_loss: 0.966 (1.885), total_loss: 5.024 (7.959), eta: 3 days, 15:00:43, mem: 2645M
+2019-10-15 01:15:49,491 SSD.trainer INFO: iter: 000740, lr: 0.00100, time: 1.283 (1.209), cls_loss: 3.983 (6.045), reg_loss: 0.983 (1.873), total_loss: 4.966 (7.918), eta: 3 days, 15:04:51, mem: 2645M
+2019-10-15 01:16:02,564 SSD.trainer INFO: iter: 000750, lr: 0.00100, time: 1.307 (1.210), cls_loss: 4.058 (6.019), reg_loss: 1.224 (1.865), total_loss: 5.282 (7.883), eta: 3 days, 15:10:18, mem: 2645M
+2019-10-15 01:16:13,506 SSD.trainer INFO: iter: 000760, lr: 0.00100, time: 1.094 (1.209), cls_loss: 3.907 (5.991), reg_loss: 1.002 (1.853), total_loss: 4.909 (7.844), eta: 3 days, 15:03:29, mem: 2645M
+2019-10-15 01:16:25,875 SSD.trainer INFO: iter: 000770, lr: 0.00100, time: 1.237 (1.209), cls_loss: 3.915 (5.964), reg_loss: 0.912 (1.841), total_loss: 4.827 (7.805), eta: 3 days, 15:04:51, mem: 2645M
+2019-10-15 01:16:39,585 SSD.trainer INFO: iter: 000780, lr: 0.00100, time: 1.371 (1.211), cls_loss: 3.820 (5.936), reg_loss: 1.098 (1.831), total_loss: 4.918 (7.768), eta: 3 days, 15:13:37, mem: 2645M
+2019-10-15 01:16:52,023 SSD.trainer INFO: iter: 000790, lr: 0.00100, time: 1.244 (1.212), cls_loss: 3.860 (5.910), reg_loss: 0.975 (1.821), total_loss: 4.835 (7.731), eta: 3 days, 15:15:11, mem: 2645M
+2019-10-15 01:17:03,704 SSD.trainer INFO: iter: 000800, lr: 0.00100, time: 1.168 (1.211), cls_loss: 3.870 (5.885), reg_loss: 0.895 (1.809), total_loss: 4.765 (7.694), eta: 3 days, 15:12:37, mem: 2645M
+2019-10-15 01:17:15,132 SSD.trainer INFO: iter: 000810, lr: 0.00100, time: 1.143 (1.210), cls_loss: 3.722 (5.858), reg_loss: 0.854 (1.797), total_loss: 4.576 (7.655), eta: 3 days, 15:08:46, mem: 2645M
+2019-10-15 01:17:27,649 SSD.trainer INFO: iter: 000820, lr: 0.00100, time: 1.252 (1.211), cls_loss: 3.738 (5.832), reg_loss: 0.959 (1.787), total_loss: 4.696 (7.619), eta: 3 days, 15:10:44, mem: 2645M
+2019-10-15 01:17:41,163 SSD.trainer INFO: iter: 000830, lr: 0.00100, time: 1.351 (1.213), cls_loss: 3.733 (5.807), reg_loss: 1.064 (1.778), total_loss: 4.797 (7.585), eta: 3 days, 15:17:51, mem: 2645M
+2019-10-15 01:17:52,922 SSD.trainer INFO: iter: 000840, lr: 0.00100, time: 1.176 (1.212), cls_loss: 3.751 (5.782), reg_loss: 1.008 (1.769), total_loss: 4.760 (7.551), eta: 3 days, 15:15:45, mem: 2645M
+2019-10-15 01:18:04,100 SSD.trainer INFO: iter: 000850, lr: 0.00100, time: 1.118 (1.211), cls_loss: 3.759 (5.758), reg_loss: 1.057 (1.761), total_loss: 4.816 (7.519), eta: 3 days, 15:10:46, mem: 2645M
+2019-10-15 01:18:16,075 SSD.trainer INFO: iter: 000860, lr: 0.00100, time: 1.197 (1.211), cls_loss: 3.735 (5.735), reg_loss: 0.977 (1.752), total_loss: 4.712 (7.487), eta: 3 days, 15:09:53, mem: 2645M
+2019-10-15 01:18:26,378 SSD.trainer INFO: iter: 000870, lr: 0.00100, time: 1.030 (1.209), cls_loss: 3.697 (5.711), reg_loss: 0.978 (1.743), total_loss: 4.674 (7.454), eta: 3 days, 15:00:43, mem: 2645M
+2019-10-15 01:18:37,688 SSD.trainer INFO: iter: 000880, lr: 0.00100, time: 1.131 (1.208), cls_loss: 3.655 (5.688), reg_loss: 0.958 (1.734), total_loss: 4.613 (7.422), eta: 3 days, 14:56:41, mem: 2645M
+2019-10-15 01:18:50,019 SSD.trainer INFO: iter: 000890, lr: 0.00100, time: 1.233 (1.208), cls_loss: 3.589 (5.665), reg_loss: 0.906 (1.725), total_loss: 4.495 (7.389), eta: 3 days, 14:57:43, mem: 2645M
+2019-10-15 01:19:04,130 SSD.trainer INFO: iter: 000900, lr: 0.00100, time: 1.411 (1.210), cls_loss: 3.642 (5.642), reg_loss: 0.915 (1.716), total_loss: 4.556 (7.358), eta: 3 days, 15:07:14, mem: 2645M
+2019-10-15 01:19:16,814 SSD.trainer INFO: iter: 000910, lr: 0.00100, time: 1.268 (1.211), cls_loss: 3.658 (5.620), reg_loss: 0.928 (1.707), total_loss: 4.586 (7.327), eta: 3 days, 15:09:47, mem: 2645M
+2019-10-15 01:19:28,892 SSD.trainer INFO: iter: 000920, lr: 0.00100, time: 1.208 (1.211), cls_loss: 3.670 (5.599), reg_loss: 0.929 (1.698), total_loss: 4.599 (7.298), eta: 3 days, 15:09:26, mem: 2645M
+2019-10-15 01:19:42,591 SSD.trainer INFO: iter: 000930, lr: 0.00100, time: 1.370 (1.213), cls_loss: 3.589 (5.577), reg_loss: 0.834 (1.689), total_loss: 4.423 (7.267), eta: 3 days, 15:16:36, mem: 2645M
+2019-10-15 01:19:55,023 SSD.trainer INFO: iter: 000940, lr: 0.00100, time: 1.243 (1.213), cls_loss: 3.509 (5.555), reg_loss: 0.964 (1.681), total_loss: 4.472 (7.237), eta: 3 days, 15:17:48, mem: 2645M
+2019-10-15 01:20:07,027 SSD.trainer INFO: iter: 000950, lr: 0.00100, time: 1.200 (1.213), cls_loss: 3.699 (5.536), reg_loss: 1.016 (1.674), total_loss: 4.714 (7.210), eta: 3 days, 15:17:01, mem: 2645M
+2019-10-15 01:20:18,714 SSD.trainer INFO: iter: 000960, lr: 0.00100, time: 1.169 (1.213), cls_loss: 3.526 (5.515), reg_loss: 0.891 (1.666), total_loss: 4.417 (7.181), eta: 3 days, 15:14:49, mem: 2645M
+2019-10-15 01:20:31,830 SSD.trainer INFO: iter: 000970, lr: 0.00100, time: 1.312 (1.214), cls_loss: 3.522 (5.494), reg_loss: 0.918 (1.659), total_loss: 4.440 (7.153), eta: 3 days, 15:19:02, mem: 2645M
+2019-10-15 01:20:44,578 SSD.trainer INFO: iter: 000980, lr: 0.00100, time: 1.275 (1.214), cls_loss: 3.435 (5.473), reg_loss: 0.990 (1.652), total_loss: 4.425 (7.125), eta: 3 days, 15:21:32, mem: 2645M
+2019-10-15 01:20:56,861 SSD.trainer INFO: iter: 000990, lr: 0.00100, time: 1.228 (1.214), cls_loss: 3.506 (5.454), reg_loss: 0.891 (1.644), total_loss: 4.397 (7.098), eta: 3 days, 15:21:56, mem: 2645M
+2019-10-15 01:21:09,028 SSD.trainer INFO: iter: 001000, lr: 0.00100, time: 1.217 (1.214), cls_loss: 3.436 (5.433), reg_loss: 0.825 (1.636), total_loss: 4.261 (7.069), eta: 3 days, 15:21:51, mem: 2645M
+2019-10-15 01:21:22,094 SSD.trainer INFO: iter: 001010, lr: 0.00100, time: 1.307 (1.215), cls_loss: 3.591 (5.415), reg_loss: 0.902 (1.629), total_loss: 4.493 (7.044), eta: 3 days, 15:25:35, mem: 2645M
+2019-10-15 01:21:37,359 SSD.trainer INFO: iter: 001020, lr: 0.00100, time: 1.527 (1.218), cls_loss: 3.511 (5.396), reg_loss: 0.960 (1.622), total_loss: 4.470 (7.018), eta: 3 days, 15:38:33, mem: 2645M
+2019-10-15 01:21:49,509 SSD.trainer INFO: iter: 001030, lr: 0.00100, time: 1.215 (1.218), cls_loss: 3.537 (5.378), reg_loss: 0.857 (1.615), total_loss: 4.394 (6.993), eta: 3 days, 15:38:13, mem: 2645M
+2019-10-15 01:22:03,067 SSD.trainer INFO: iter: 001040, lr: 0.00100, time: 1.356 (1.220), cls_loss: 3.382 (5.359), reg_loss: 0.902 (1.608), total_loss: 4.283 (6.967), eta: 3 days, 15:43:43, mem: 2645M
+2019-10-15 01:22:15,884 SSD.trainer INFO: iter: 001050, lr: 0.00100, time: 1.282 (1.220), cls_loss: 3.481 (5.341), reg_loss: 0.991 (1.602), total_loss: 4.472 (6.943), eta: 3 days, 15:46:04, mem: 2645M
+2019-10-15 01:22:27,810 SSD.trainer INFO: iter: 001060, lr: 0.00100, time: 1.193 (1.220), cls_loss: 3.409 (5.323), reg_loss: 0.969 (1.596), total_loss: 4.378 (6.919), eta: 3 days, 15:44:44, mem: 2645M
+2019-10-15 01:22:40,220 SSD.trainer INFO: iter: 001070, lr: 0.00100, time: 1.241 (1.220), cls_loss: 3.457 (5.306), reg_loss: 0.898 (1.589), total_loss: 4.355 (6.895), eta: 3 days, 15:45:23, mem: 2645M
+2019-10-15 01:22:50,823 SSD.trainer INFO: iter: 001080, lr: 0.00100, time: 1.060 (1.219), cls_loss: 3.362 (5.288), reg_loss: 0.837 (1.582), total_loss: 4.199 (6.870), eta: 3 days, 15:38:48, mem: 2645M
+2019-10-15 01:23:04,098 SSD.trainer INFO: iter: 001090, lr: 0.00100, time: 1.327 (1.220), cls_loss: 3.366 (5.270), reg_loss: 0.932 (1.576), total_loss: 4.297 (6.846), eta: 3 days, 15:42:54, mem: 2645M
+2019-10-15 01:23:17,446 SSD.trainer INFO: iter: 001100, lr: 0.00100, time: 1.335 (1.221), cls_loss: 3.346 (5.253), reg_loss: 0.898 (1.570), total_loss: 4.243 (6.823), eta: 3 days, 15:47:13, mem: 2645M
+2019-10-15 01:23:31,590 SSD.trainer INFO: iter: 001110, lr: 0.00100, time: 1.414 (1.222), cls_loss: 3.409 (5.236), reg_loss: 0.817 (1.563), total_loss: 4.226 (6.799), eta: 3 days, 15:54:33, mem: 2645M
+2019-10-15 01:23:44,419 SSD.trainer INFO: iter: 001120, lr: 0.00100, time: 1.283 (1.223), cls_loss: 3.323 (5.219), reg_loss: 0.975 (1.558), total_loss: 4.298 (6.777), eta: 3 days, 15:56:40, mem: 2645M
+2019-10-15 01:23:57,562 SSD.trainer INFO: iter: 001130, lr: 0.00100, time: 1.314 (1.224), cls_loss: 3.342 (5.202), reg_loss: 0.906 (1.552), total_loss: 4.247 (6.755), eta: 3 days, 15:59:57, mem: 2645M
+2019-10-15 01:24:09,738 SSD.trainer INFO: iter: 001140, lr: 0.00100, time: 1.218 (1.224), cls_loss: 3.297 (5.185), reg_loss: 0.883 (1.547), total_loss: 4.180 (6.732), eta: 3 days, 15:59:31, mem: 2645M
+2019-10-15 01:24:22,394 SSD.trainer INFO: iter: 001150, lr: 0.00100, time: 1.266 (1.224), cls_loss: 3.352 (5.170), reg_loss: 0.909 (1.541), total_loss: 4.260 (6.711), eta: 3 days, 16:00:53, mem: 2645M
+2019-10-15 01:24:34,384 SSD.trainer INFO: iter: 001160, lr: 0.00100, time: 1.199 (1.224), cls_loss: 3.276 (5.153), reg_loss: 0.845 (1.535), total_loss: 4.121 (6.688), eta: 3 days, 15:59:45, mem: 2645M
+2019-10-15 01:24:45,817 SSD.trainer INFO: iter: 001170, lr: 0.00100, time: 1.143 (1.223), cls_loss: 3.380 (5.138), reg_loss: 0.898 (1.530), total_loss: 4.278 (6.668), eta: 3 days, 15:56:35, mem: 2645M
+2019-10-15 01:24:57,443 SSD.trainer INFO: iter: 001180, lr: 0.00100, time: 1.163 (1.223), cls_loss: 3.347 (5.123), reg_loss: 0.860 (1.524), total_loss: 4.207 (6.647), eta: 3 days, 15:54:09, mem: 2645M
+2019-10-15 01:25:11,903 SSD.trainer INFO: iter: 001190, lr: 0.00100, time: 1.446 (1.225), cls_loss: 3.257 (5.107), reg_loss: 0.804 (1.518), total_loss: 4.061 (6.625), eta: 3 days, 16:02:03, mem: 2645M
+2019-10-15 01:25:27,512 SSD.trainer INFO: iter: 001200, lr: 0.00100, time: 1.561 (1.227), cls_loss: 3.309 (5.092), reg_loss: 0.929 (1.513), total_loss: 4.238 (6.605), eta: 3 days, 16:13:56, mem: 2645M
+2019-10-15 01:25:40,703 SSD.trainer INFO: iter: 001210, lr: 0.00100, time: 1.319 (1.228), cls_loss: 3.300 (5.077), reg_loss: 0.852 (1.507), total_loss: 4.152 (6.585), eta: 3 days, 16:17:00, mem: 2645M
+2019-10-15 01:25:53,280 SSD.trainer INFO: iter: 001220, lr: 0.00100, time: 1.258 (1.228), cls_loss: 3.213 (5.062), reg_loss: 0.848 (1.502), total_loss: 4.061 (6.564), eta: 3 days, 16:17:50, mem: 2645M
+2019-10-15 01:26:05,034 SSD.trainer INFO: iter: 001230, lr: 0.00100, time: 1.175 (1.228), cls_loss: 3.227 (5.047), reg_loss: 0.884 (1.497), total_loss: 4.111 (6.544), eta: 3 days, 16:15:47, mem: 2645M
+2019-10-15 01:26:11,304 SSD.trainer INFO: iter: 001240, lr: 0.00100, time: 0.627 (1.223), cls_loss: 3.266 (5.033), reg_loss: 1.009 (1.493), total_loss: 4.275 (6.526), eta: 3 days, 15:54:40, mem: 2645M
+2019-10-15 01:26:15,465 SSD.trainer INFO: iter: 001250, lr: 0.00100, time: 0.416 (1.217), cls_loss: 3.232 (5.018), reg_loss: 0.888 (1.488), total_loss: 4.120 (6.507), eta: 3 days, 15:26:38, mem: 2645M
+2019-10-15 01:26:20,458 SSD.trainer INFO: iter: 001260, lr: 0.00100, time: 0.499 (1.211), cls_loss: 3.226 (5.004), reg_loss: 0.818 (1.483), total_loss: 4.043 (6.487), eta: 3 days, 15:01:53, mem: 2645M
+2019-10-15 01:26:25,855 SSD.trainer INFO: iter: 001270, lr: 0.00100, time: 0.540 (1.206), cls_loss: 3.219 (4.990), reg_loss: 0.774 (1.477), total_loss: 3.993 (6.468), eta: 3 days, 14:38:53, mem: 2645M
+2019-10-15 01:26:29,939 SSD.trainer INFO: iter: 001280, lr: 0.00100, time: 0.408 (1.199), cls_loss: 3.276 (4.977), reg_loss: 0.797 (1.472), total_loss: 4.073 (6.449), eta: 3 days, 14:11:50, mem: 2645M
+2019-10-15 01:26:35,918 SSD.trainer INFO: iter: 001290, lr: 0.00100, time: 0.598 (1.195), cls_loss: 3.302 (4.964), reg_loss: 0.872 (1.467), total_loss: 4.174 (6.431), eta: 3 days, 13:51:32, mem: 2645M
+2019-10-15 01:26:41,591 SSD.trainer INFO: iter: 001300, lr: 0.00100, time: 0.567 (1.190), cls_loss: 3.091 (4.949), reg_loss: 0.735 (1.462), total_loss: 3.826 (6.411), eta: 3 days, 13:30:31, mem: 2645M
+2019-10-15 01:26:48,054 SSD.trainer INFO: iter: 001310, lr: 0.00100, time: 0.646 (1.186), cls_loss: 3.127 (4.935), reg_loss: 0.826 (1.457), total_loss: 3.953 (6.392), eta: 3 days, 13:12:26, mem: 2645M
+2019-10-15 01:26:52,642 SSD.trainer INFO: iter: 001320, lr: 0.00100, time: 0.459 (1.180), cls_loss: 3.252 (4.923), reg_loss: 0.778 (1.452), total_loss: 4.030 (6.374), eta: 3 days, 12:48:29, mem: 2645M
+2019-10-15 01:26:56,715 SSD.trainer INFO: iter: 001330, lr: 0.00100, time: 0.407 (1.174), cls_loss: 3.094 (4.909), reg_loss: 0.760 (1.447), total_loss: 3.854 (6.356), eta: 3 days, 12:23:14, mem: 2645M
+2019-10-15 01:27:03,942 SSD.trainer INFO: iter: 001340, lr: 0.00100, time: 0.723 (1.171), cls_loss: 3.117 (4.896), reg_loss: 0.859 (1.442), total_loss: 3.976 (6.338), eta: 3 days, 12:08:30, mem: 2645M
+2019-10-15 01:27:08,802 SSD.trainer INFO: iter: 001350, lr: 0.00100, time: 0.486 (1.166), cls_loss: 2.979 (4.881), reg_loss: 0.858 (1.438), total_loss: 3.837 (6.319), eta: 3 days, 11:46:26, mem: 2645M
+2019-10-15 01:27:12,951 SSD.trainer INFO: iter: 001360, lr: 0.00100, time: 0.415 (1.160), cls_loss: 3.163 (4.869), reg_loss: 0.924 (1.434), total_loss: 4.086 (6.303), eta: 3 days, 11:22:26, mem: 2645M
+2019-10-15 01:27:18,480 SSD.trainer INFO: iter: 001370, lr: 0.00100, time: 0.553 (1.156), cls_loss: 3.048 (4.855), reg_loss: 0.820 (1.430), total_loss: 3.868 (6.285), eta: 3 days, 11:03:07, mem: 2645M
+2019-10-15 01:27:23,122 SSD.trainer INFO: iter: 001380, lr: 0.00100, time: 0.464 (1.151), cls_loss: 3.098 (4.843), reg_loss: 0.863 (1.426), total_loss: 3.960 (6.268), eta: 3 days, 10:41:19, mem: 2645M
+2019-10-15 01:27:28,469 SSD.trainer INFO: iter: 001390, lr: 0.00100, time: 0.535 (1.147), cls_loss: 3.080 (4.830), reg_loss: 0.930 (1.422), total_loss: 4.010 (6.252), eta: 3 days, 10:22:01, mem: 2645M
+2019-10-15 01:27:34,319 SSD.trainer INFO: iter: 001400, lr: 0.00100, time: 0.585 (1.143), cls_loss: 3.110 (4.818), reg_loss: 0.762 (1.417), total_loss: 3.872 (6.235), eta: 3 days, 10:04:32, mem: 2645M
+2019-10-15 01:27:39,328 SSD.trainer INFO: iter: 001410, lr: 0.00100, time: 0.501 (1.138), cls_loss: 3.190 (4.806), reg_loss: 0.798 (1.413), total_loss: 3.988 (6.219), eta: 3 days, 9:44:44, mem: 2645M
+2019-10-15 01:27:45,353 SSD.trainer INFO: iter: 001420, lr: 0.00100, time: 0.603 (1.134), cls_loss: 3.088 (4.794), reg_loss: 0.824 (1.409), total_loss: 3.912 (6.203), eta: 3 days, 9:28:17, mem: 2645M
+2019-10-15 01:27:50,758 SSD.trainer INFO: iter: 001430, lr: 0.00100, time: 0.540 (1.130), cls_loss: 3.107 (4.782), reg_loss: 0.785 (1.404), total_loss: 3.892 (6.187), eta: 3 days, 9:10:12, mem: 2645M
+2019-10-15 01:27:54,483 SSD.trainer INFO: iter: 001440, lr: 0.00100, time: 0.372 (1.125), cls_loss: 3.107 (4.771), reg_loss: 0.788 (1.400), total_loss: 3.895 (6.171), eta: 3 days, 8:47:21, mem: 2645M
+2019-10-15 01:27:59,707 SSD.trainer INFO: iter: 001450, lr: 0.00100, time: 0.522 (1.121), cls_loss: 3.047 (4.759), reg_loss: 0.672 (1.395), total_loss: 3.719 (6.154), eta: 3 days, 8:29:15, mem: 2645M
+2019-10-15 01:28:04,332 SSD.trainer INFO: iter: 001460, lr: 0.00100, time: 0.462 (1.116), cls_loss: 3.038 (4.747), reg_loss: 0.744 (1.391), total_loss: 3.782 (6.138), eta: 3 days, 8:09:38, mem: 2645M
+2019-10-15 01:28:08,422 SSD.trainer INFO: iter: 001470, lr: 0.00100, time: 0.409 (1.111), cls_loss: 3.180 (4.736), reg_loss: 0.698 (1.386), total_loss: 3.878 (6.122), eta: 3 days, 7:48:43, mem: 2645M
+2019-10-15 01:28:14,092 SSD.trainer INFO: iter: 001480, lr: 0.00100, time: 0.567 (1.108), cls_loss: 3.038 (4.725), reg_loss: 0.721 (1.381), total_loss: 3.759 (6.106), eta: 3 days, 7:32:41, mem: 2645M
+2019-10-15 01:28:18,790 SSD.trainer INFO: iter: 001490, lr: 0.00100, time: 0.470 (1.103), cls_loss: 2.910 (4.713), reg_loss: 0.735 (1.377), total_loss: 3.645 (6.090), eta: 3 days, 7:14:04, mem: 2645M
+2019-10-15 01:28:22,776 SSD.trainer INFO: iter: 001500, lr: 0.00100, time: 0.399 (1.099), cls_loss: 2.950 (4.701), reg_loss: 0.713 (1.373), total_loss: 3.662 (6.074), eta: 3 days, 6:53:38, mem: 2645M
+2019-10-15 01:28:27,667 SSD.trainer INFO: iter: 001510, lr: 0.00100, time: 0.489 (1.095), cls_loss: 2.894 (4.689), reg_loss: 0.692 (1.368), total_loss: 3.586 (6.057), eta: 3 days, 6:36:03, mem: 2645M
+2019-10-15 01:28:32,617 SSD.trainer INFO: iter: 001520, lr: 0.00100, time: 0.495 (1.091), cls_loss: 3.028 (4.678), reg_loss: 0.780 (1.364), total_loss: 3.808 (6.042), eta: 3 days, 6:18:53, mem: 2645M
+2019-10-15 01:28:37,944 SSD.trainer INFO: iter: 001530, lr: 0.00100, time: 0.533 (1.087), cls_loss: 3.113 (4.668), reg_loss: 0.957 (1.362), total_loss: 4.070 (6.029), eta: 3 days, 6:02:59, mem: 2645M
+2019-10-15 01:28:42,761 SSD.trainer INFO: iter: 001540, lr: 0.00100, time: 0.482 (1.083), cls_loss: 3.026 (4.657), reg_loss: 0.852 (1.358), total_loss: 3.878 (6.015), eta: 3 days, 5:45:52, mem: 2645M
+2019-10-15 01:28:48,733 SSD.trainer INFO: iter: 001550, lr: 0.00100, time: 0.597 (1.080), cls_loss: 3.094 (4.647), reg_loss: 0.796 (1.355), total_loss: 3.890 (6.002), eta: 3 days, 5:32:11, mem: 2645M
+2019-10-15 01:28:53,839 SSD.trainer INFO: iter: 001560, lr: 0.00100, time: 0.511 (1.076), cls_loss: 3.067 (4.637), reg_loss: 0.862 (1.351), total_loss: 3.929 (5.988), eta: 3 days, 5:16:17, mem: 2645M
+2019-10-15 01:28:59,654 SSD.trainer INFO: iter: 001570, lr: 0.00100, time: 0.582 (1.073), cls_loss: 2.991 (4.626), reg_loss: 0.714 (1.347), total_loss: 3.705 (5.974), eta: 3 days, 5:02:32, mem: 2645M
+2019-10-15 01:29:05,810 SSD.trainer INFO: iter: 001580, lr: 0.00100, time: 0.616 (1.070), cls_loss: 3.073 (4.617), reg_loss: 0.739 (1.344), total_loss: 3.812 (5.960), eta: 3 days, 4:49:52, mem: 2645M
+2019-10-15 01:29:11,093 SSD.trainer INFO: iter: 001590, lr: 0.00100, time: 0.528 (1.067), cls_loss: 3.000 (4.606), reg_loss: 0.764 (1.340), total_loss: 3.764 (5.946), eta: 3 days, 4:35:01, mem: 2645M
+2019-10-15 01:29:18,946 SSD.trainer INFO: iter: 001600, lr: 0.00100, time: 0.785 (1.065), cls_loss: 2.907 (4.596), reg_loss: 0.839 (1.337), total_loss: 3.746 (5.933), eta: 3 days, 4:27:15, mem: 2645M
+2019-10-15 01:29:23,624 SSD.trainer INFO: iter: 001610, lr: 0.00100, time: 0.468 (1.061), cls_loss: 2.922 (4.585), reg_loss: 0.692 (1.333), total_loss: 3.614 (5.918), eta: 3 days, 4:11:06, mem: 2645M
+2019-10-15 01:29:28,220 SSD.trainer INFO: iter: 001620, lr: 0.00100, time: 0.460 (1.058), cls_loss: 2.957 (4.575), reg_loss: 0.773 (1.329), total_loss: 3.730 (5.905), eta: 3 days, 3:54:55, mem: 2645M
+2019-10-15 01:29:34,269 SSD.trainer INFO: iter: 001630, lr: 0.00100, time: 0.605 (1.055), cls_loss: 2.931 (4.565), reg_loss: 0.726 (1.326), total_loss: 3.657 (5.891), eta: 3 days, 3:42:47, mem: 2645M
+2019-10-15 01:29:39,315 SSD.trainer INFO: iter: 001640, lr: 0.00100, time: 0.505 (1.052), cls_loss: 2.999 (4.556), reg_loss: 0.720 (1.322), total_loss: 3.719 (5.878), eta: 3 days, 3:28:10, mem: 2645M
+2019-10-15 01:29:44,879 SSD.trainer INFO: iter: 001650, lr: 0.00100, time: 0.556 (1.049), cls_loss: 2.982 (4.546), reg_loss: 0.758 (1.318), total_loss: 3.741 (5.865), eta: 3 days, 3:15:04, mem: 2645M
+2019-10-15 01:29:50,260 SSD.trainer INFO: iter: 001660, lr: 0.00100, time: 0.538 (1.046), cls_loss: 2.960 (4.537), reg_loss: 0.779 (1.315), total_loss: 3.739 (5.852), eta: 3 days, 3:01:39, mem: 2645M
+2019-10-15 01:29:54,955 SSD.trainer INFO: iter: 001670, lr: 0.00100, time: 0.470 (1.042), cls_loss: 2.884 (4.527), reg_loss: 0.764 (1.312), total_loss: 3.648 (5.839), eta: 3 days, 2:46:37, mem: 2645M
+2019-10-15 01:29:59,310 SSD.trainer INFO: iter: 001680, lr: 0.00100, time: 0.435 (1.038), cls_loss: 2.968 (4.517), reg_loss: 0.740 (1.309), total_loss: 3.709 (5.826), eta: 3 days, 2:30:54, mem: 2645M
+2019-10-15 01:30:04,802 SSD.trainer INFO: iter: 001690, lr: 0.00100, time: 0.549 (1.036), cls_loss: 3.054 (4.509), reg_loss: 0.775 (1.305), total_loss: 3.829 (5.814), eta: 3 days, 2:18:16, mem: 2645M
+2019-10-15 01:30:08,571 SSD.trainer INFO: iter: 001700, lr: 0.00100, time: 0.377 (1.032), cls_loss: 2.934 (4.500), reg_loss: 0.735 (1.302), total_loss: 3.669 (5.802), eta: 3 days, 2:01:25, mem: 2645M
+2019-10-15 01:30:13,001 SSD.trainer INFO: iter: 001710, lr: 0.00100, time: 0.443 (1.028), cls_loss: 2.843 (4.490), reg_loss: 0.629 (1.298), total_loss: 3.473 (5.788), eta: 3 days, 1:46:25, mem: 2645M
+2019-10-15 01:30:18,178 SSD.trainer INFO: iter: 001720, lr: 0.00100, time: 0.518 (1.025), cls_loss: 2.926 (4.481), reg_loss: 0.677 (1.294), total_loss: 3.603 (5.775), eta: 3 days, 1:33:28, mem: 2645M
+2019-10-15 01:30:23,487 SSD.trainer INFO: iter: 001730, lr: 0.00100, time: 0.531 (1.022), cls_loss: 2.942 (4.472), reg_loss: 0.831 (1.292), total_loss: 3.773 (5.764), eta: 3 days, 1:21:00, mem: 2645M
+2019-10-15 01:30:28,258 SSD.trainer INFO: iter: 001740, lr: 0.00100, time: 0.477 (1.019), cls_loss: 2.789 (4.462), reg_loss: 0.759 (1.289), total_loss: 3.548 (5.751), eta: 3 days, 1:07:20, mem: 2645M
+2019-10-15 01:30:33,569 SSD.trainer INFO: iter: 001750, lr: 0.00100, time: 0.531 (1.016), cls_loss: 2.936 (4.454), reg_loss: 0.680 (1.285), total_loss: 3.616 (5.739), eta: 3 days, 0:55:10, mem: 2645M
+2019-10-15 01:30:38,960 SSD.trainer INFO: iter: 001760, lr: 0.00100, time: 0.539 (1.014), cls_loss: 2.853 (4.444), reg_loss: 0.775 (1.282), total_loss: 3.628 (5.727), eta: 3 days, 0:43:19, mem: 2645M
+2019-10-15 01:30:43,580 SSD.trainer INFO: iter: 001770, lr: 0.00100, time: 0.462 (1.011), cls_loss: 2.846 (4.435), reg_loss: 0.737 (1.279), total_loss: 3.583 (5.715), eta: 3 days, 0:29:44, mem: 2645M
+2019-10-15 01:30:50,077 SSD.trainer INFO: iter: 001780, lr: 0.00100, time: 0.650 (1.009), cls_loss: 2.910 (4.427), reg_loss: 0.847 (1.277), total_loss: 3.758 (5.704), eta: 3 days, 0:20:50, mem: 2645M
+2019-10-15 01:30:54,873 SSD.trainer INFO: iter: 001790, lr: 0.00100, time: 0.480 (1.006), cls_loss: 2.684 (4.417), reg_loss: 0.686 (1.274), total_loss: 3.370 (5.691), eta: 3 days, 0:07:57, mem: 2645M
+2019-10-15 01:30:59,055 SSD.trainer INFO: iter: 001800, lr: 0.00100, time: 0.418 (1.002), cls_loss: 2.900 (4.409), reg_loss: 0.709 (1.270), total_loss: 3.609 (5.679), eta: 2 days, 23:53:44, mem: 2645M
+2019-10-15 01:31:05,101 SSD.trainer INFO: iter: 001810, lr: 0.00100, time: 0.605 (1.000), cls_loss: 2.972 (4.401), reg_loss: 0.788 (1.268), total_loss: 3.760 (5.668), eta: 2 days, 23:44:07, mem: 2645M
+2019-10-15 01:31:09,971 SSD.trainer INFO: iter: 001820, lr: 0.00100, time: 0.487 (0.997), cls_loss: 2.885 (4.392), reg_loss: 0.751 (1.265), total_loss: 3.636 (5.657), eta: 2 days, 23:31:49, mem: 2645M
+2019-10-15 01:31:14,420 SSD.trainer INFO: iter: 001830, lr: 0.00100, time: 0.445 (0.994), cls_loss: 2.879 (4.384), reg_loss: 0.714 (1.262), total_loss: 3.592 (5.646), eta: 2 days, 23:18:39, mem: 2645M
+2019-10-15 01:31:21,149 SSD.trainer INFO: iter: 001840, lr: 0.00100, time: 0.673 (0.993), cls_loss: 2.866 (4.376), reg_loss: 0.694 (1.259), total_loss: 3.559 (5.635), eta: 2 days, 23:10:58, mem: 2645M
+2019-10-15 01:31:26,527 SSD.trainer INFO: iter: 001850, lr: 0.00100, time: 0.538 (0.990), cls_loss: 2.826 (4.367), reg_loss: 0.762 (1.256), total_loss: 3.588 (5.624), eta: 2 days, 23:00:14, mem: 2645M
+2019-10-15 01:31:31,183 SSD.trainer INFO: iter: 001860, lr: 0.00100, time: 0.466 (0.987), cls_loss: 2.927 (4.360), reg_loss: 0.772 (1.254), total_loss: 3.699 (5.613), eta: 2 days, 22:47:56, mem: 2645M
+2019-10-15 01:31:36,038 SSD.trainer INFO: iter: 001870, lr: 0.00100, time: 0.486 (0.985), cls_loss: 2.985 (4.352), reg_loss: 0.765 (1.251), total_loss: 3.750 (5.603), eta: 2 days, 22:36:13, mem: 2645M
+2019-10-15 01:31:39,997 SSD.trainer INFO: iter: 001880, lr: 0.00100, time: 0.396 (0.982), cls_loss: 2.776 (4.344), reg_loss: 0.693 (1.248), total_loss: 3.469 (5.592), eta: 2 days, 22:22:35, mem: 2645M
+2019-10-15 01:31:43,704 SSD.trainer INFO: iter: 001890, lr: 0.00100, time: 0.371 (0.978), cls_loss: 3.061 (4.337), reg_loss: 0.724 (1.245), total_loss: 3.785 (5.582), eta: 2 days, 22:08:31, mem: 2645M
+2019-10-15 01:31:48,779 SSD.trainer INFO: iter: 001900, lr: 0.00100, time: 0.507 (0.976), cls_loss: 2.772 (4.329), reg_loss: 0.678 (1.242), total_loss: 3.451 (5.571), eta: 2 days, 21:57:41, mem: 2645M
+2019-10-15 01:31:53,671 SSD.trainer INFO: iter: 001910, lr: 0.00100, time: 0.489 (0.973), cls_loss: 2.863 (4.321), reg_loss: 0.744 (1.240), total_loss: 3.607 (5.561), eta: 2 days, 21:46:34, mem: 2645M
+2019-10-15 01:32:00,504 SSD.trainer INFO: iter: 001920, lr: 0.00100, time: 0.683 (0.972), cls_loss: 2.794 (4.313), reg_loss: 0.684 (1.237), total_loss: 3.478 (5.550), eta: 2 days, 21:39:55, mem: 2645M
+2019-10-15 01:32:04,743 SSD.trainer INFO: iter: 001930, lr: 0.00100, time: 0.424 (0.969), cls_loss: 2.831 (4.306), reg_loss: 0.747 (1.234), total_loss: 3.578 (5.540), eta: 2 days, 21:27:32, mem: 2645M
+2019-10-15 01:32:09,550 SSD.trainer INFO: iter: 001940, lr: 0.00100, time: 0.481 (0.966), cls_loss: 2.759 (4.298), reg_loss: 0.663 (1.231), total_loss: 3.422 (5.529), eta: 2 days, 21:16:33, mem: 2645M
+2019-10-15 01:32:13,813 SSD.trainer INFO: iter: 001950, lr: 0.00100, time: 0.426 (0.964), cls_loss: 2.789 (4.290), reg_loss: 0.635 (1.228), total_loss: 3.424 (5.518), eta: 2 days, 21:04:29, mem: 2645M
+2019-10-15 01:32:18,064 SSD.trainer INFO: iter: 001960, lr: 0.00100, time: 0.425 (0.961), cls_loss: 2.780 (4.282), reg_loss: 0.641 (1.225), total_loss: 3.421 (5.507), eta: 2 days, 20:52:30, mem: 2645M
+2019-10-15 01:32:22,695 SSD.trainer INFO: iter: 001970, lr: 0.00100, time: 0.463 (0.958), cls_loss: 2.827 (4.275), reg_loss: 0.701 (1.223), total_loss: 3.528 (5.497), eta: 2 days, 20:41:29, mem: 2645M
+2019-10-15 01:32:28,009 SSD.trainer INFO: iter: 001980, lr: 0.00100, time: 0.531 (0.956), cls_loss: 2.873 (4.268), reg_loss: 0.771 (1.220), total_loss: 3.644 (5.488), eta: 2 days, 20:32:02, mem: 2645M
+2019-10-15 01:32:35,808 SSD.trainer INFO: iter: 001990, lr: 0.00100, time: 0.780 (0.955), cls_loss: 2.736 (4.260), reg_loss: 0.742 (1.218), total_loss: 3.478 (5.478), eta: 2 days, 20:28:04, mem: 2645M
+2019-10-15 01:32:40,718 SSD.trainer INFO: iter: 002000, lr: 0.00100, time: 0.491 (0.953), cls_loss: 2.961 (4.254), reg_loss: 0.781 (1.216), total_loss: 3.742 (5.469), eta: 2 days, 20:17:56, mem: 2645M
+2019-10-15 01:32:45,361 SSD.trainer INFO: iter: 002010, lr: 0.00100, time: 0.464 (0.951), cls_loss: 2.759 (4.246), reg_loss: 0.809 (1.214), total_loss: 3.567 (5.460), eta: 2 days, 20:07:19, mem: 2645M
+2019-10-15 01:32:49,530 SSD.trainer INFO: iter: 002020, lr: 0.00100, time: 0.417 (0.948), cls_loss: 2.890 (4.239), reg_loss: 0.725 (1.211), total_loss: 3.615 (5.451), eta: 2 days, 19:55:48, mem: 2645M
+2019-10-15 01:32:54,192 SSD.trainer INFO: iter: 002030, lr: 0.00100, time: 0.466 (0.946), cls_loss: 2.712 (4.232), reg_loss: 0.653 (1.208), total_loss: 3.364 (5.440), eta: 2 days, 19:45:26, mem: 2645M
+2019-10-15 01:32:59,348 SSD.trainer INFO: iter: 002040, lr: 0.00100, time: 0.516 (0.943), cls_loss: 2.848 (4.225), reg_loss: 0.705 (1.206), total_loss: 3.553 (5.431), eta: 2 days, 19:36:13, mem: 2645M
+2019-10-15 01:33:05,549 SSD.trainer INFO: iter: 002050, lr: 0.00100, time: 0.620 (0.942), cls_loss: 2.837 (4.218), reg_loss: 0.749 (1.204), total_loss: 3.586 (5.422), eta: 2 days, 19:29:17, mem: 2645M
+2019-10-15 01:33:14,135 SSD.trainer INFO: iter: 002060, lr: 0.00100, time: 0.859 (0.941), cls_loss: 2.696 (4.211), reg_loss: 0.692 (1.201), total_loss: 3.388 (5.412), eta: 2 days, 19:27:23, mem: 2645M
+2019-10-15 01:33:19,720 SSD.trainer INFO: iter: 002070, lr: 0.00100, time: 0.558 (0.940), cls_loss: 2.839 (4.204), reg_loss: 0.780 (1.199), total_loss: 3.619 (5.404), eta: 2 days, 19:19:16, mem: 2645M
+2019-10-15 01:33:24,831 SSD.trainer INFO: iter: 002080, lr: 0.00100, time: 0.511 (0.938), cls_loss: 2.903 (4.198), reg_loss: 0.768 (1.197), total_loss: 3.671 (5.395), eta: 2 days, 19:10:16, mem: 2645M
+2019-10-15 01:33:29,143 SSD.trainer INFO: iter: 002090, lr: 0.00100, time: 0.431 (0.935), cls_loss: 2.764 (4.191), reg_loss: 0.765 (1.195), total_loss: 3.529 (5.386), eta: 2 days, 18:59:42, mem: 2645M
+2019-10-15 01:33:35,619 SSD.trainer INFO: iter: 002100, lr: 0.00100, time: 0.648 (0.934), cls_loss: 2.840 (4.185), reg_loss: 0.730 (1.193), total_loss: 3.571 (5.378), eta: 2 days, 18:53:39, mem: 2645M
+2019-10-15 01:33:39,974 SSD.trainer INFO: iter: 002110, lr: 0.00100, time: 0.435 (0.931), cls_loss: 2.498 (4.177), reg_loss: 0.578 (1.190), total_loss: 3.075 (5.367), eta: 2 days, 18:43:21, mem: 2645M
+2019-10-15 01:33:44,069 SSD.trainer INFO: iter: 002120, lr: 0.00100, time: 0.410 (0.929), cls_loss: 2.868 (4.171), reg_loss: 0.763 (1.188), total_loss: 3.631 (5.359), eta: 2 days, 18:32:37, mem: 2645M
+2019-10-15 01:33:48,151 SSD.trainer INFO: iter: 002130, lr: 0.00100, time: 0.408 (0.927), cls_loss: 2.703 (4.164), reg_loss: 0.622 (1.185), total_loss: 3.325 (5.349), eta: 2 days, 18:21:57, mem: 2645M
+2019-10-15 01:33:53,822 SSD.trainer INFO: iter: 002140, lr: 0.00100, time: 0.567 (0.925), cls_loss: 2.747 (4.157), reg_loss: 0.673 (1.183), total_loss: 3.420 (5.340), eta: 2 days, 18:14:34, mem: 2645M
+2019-10-15 01:33:59,627 SSD.trainer INFO: iter: 002150, lr: 0.00100, time: 0.581 (0.923), cls_loss: 2.707 (4.150), reg_loss: 0.694 (1.181), total_loss: 3.401 (5.331), eta: 2 days, 18:07:32, mem: 2645M
+2019-10-15 01:34:06,449 SSD.trainer INFO: iter: 002160, lr: 0.00100, time: 0.682 (0.922), cls_loss: 2.608 (4.143), reg_loss: 0.684 (1.178), total_loss: 3.291 (5.322), eta: 2 days, 18:02:35, mem: 2645M
+2019-10-15 01:34:11,594 SSD.trainer INFO: iter: 002170, lr: 0.00100, time: 0.514 (0.920), cls_loss: 2.690 (4.137), reg_loss: 0.722 (1.176), total_loss: 3.412 (5.313), eta: 2 days, 17:54:22, mem: 2645M
+2019-10-15 01:34:15,703 SSD.trainer INFO: iter: 002180, lr: 0.00100, time: 0.411 (0.918), cls_loss: 2.697 (4.130), reg_loss: 0.652 (1.174), total_loss: 3.350 (5.304), eta: 2 days, 17:44:10, mem: 2645M
+2019-10-15 01:34:20,131 SSD.trainer INFO: iter: 002190, lr: 0.00100, time: 0.443 (0.916), cls_loss: 2.616 (4.123), reg_loss: 0.695 (1.172), total_loss: 3.311 (5.295), eta: 2 days, 17:34:42, mem: 2645M
+2019-10-15 01:34:25,073 SSD.trainer INFO: iter: 002200, lr: 0.00100, time: 0.494 (0.914), cls_loss: 2.770 (4.117), reg_loss: 0.628 (1.169), total_loss: 3.398 (5.286), eta: 2 days, 17:26:19, mem: 2645M
+2019-10-15 01:34:29,561 SSD.trainer INFO: iter: 002210, lr: 0.00100, time: 0.449 (0.912), cls_loss: 2.726 (4.111), reg_loss: 0.667 (1.167), total_loss: 3.394 (5.277), eta: 2 days, 17:17:07, mem: 2645M
+2019-10-15 01:34:33,759 SSD.trainer INFO: iter: 002220, lr: 0.00100, time: 0.420 (0.909), cls_loss: 2.813 (4.105), reg_loss: 0.780 (1.165), total_loss: 3.592 (5.270), eta: 2 days, 17:07:27, mem: 2645M
+2019-10-15 01:34:39,338 SSD.trainer INFO: iter: 002230, lr: 0.00100, time: 0.558 (0.908), cls_loss: 2.724 (4.099), reg_loss: 0.645 (1.163), total_loss: 3.369 (5.261), eta: 2 days, 17:00:31, mem: 2645M
+2019-10-15 01:34:44,542 SSD.trainer INFO: iter: 002240, lr: 0.00100, time: 0.520 (0.906), cls_loss: 2.620 (4.092), reg_loss: 0.586 (1.160), total_loss: 3.207 (5.252), eta: 2 days, 16:52:56, mem: 2645M
+2019-10-15 01:34:49,303 SSD.trainer INFO: iter: 002250, lr: 0.00100, time: 0.476 (0.904), cls_loss: 2.794 (4.086), reg_loss: 0.680 (1.158), total_loss: 3.474 (5.244), eta: 2 days, 16:44:35, mem: 2645M
+2019-10-15 01:34:53,526 SSD.trainer INFO: iter: 002260, lr: 0.00100, time: 0.422 (0.902), cls_loss: 2.585 (4.080), reg_loss: 0.684 (1.156), total_loss: 3.269 (5.236), eta: 2 days, 16:35:16, mem: 2645M
+2019-10-15 01:34:58,001 SSD.trainer INFO: iter: 002270, lr: 0.00100, time: 0.448 (0.900), cls_loss: 2.634 (4.073), reg_loss: 0.664 (1.154), total_loss: 3.298 (5.227), eta: 2 days, 16:26:31, mem: 2645M
+2019-10-15 01:35:02,678 SSD.trainer INFO: iter: 002280, lr: 0.00100, time: 0.468 (0.898), cls_loss: 2.661 (4.067), reg_loss: 0.603 (1.151), total_loss: 3.264 (5.218), eta: 2 days, 16:18:13, mem: 2645M
+2019-10-15 01:35:08,384 SSD.trainer INFO: iter: 002290, lr: 0.00100, time: 0.571 (0.897), cls_loss: 2.791 (4.061), reg_loss: 0.718 (1.150), total_loss: 3.510 (5.211), eta: 2 days, 16:11:55, mem: 2645M
+2019-10-15 01:35:13,245 SSD.trainer INFO: iter: 002300, lr: 0.00100, time: 0.486 (0.895), cls_loss: 2.639 (4.055), reg_loss: 0.683 (1.148), total_loss: 3.322 (5.203), eta: 2 days, 16:04:06, mem: 2645M
+2019-10-15 01:35:18,569 SSD.trainer INFO: iter: 002310, lr: 0.00100, time: 0.532 (0.893), cls_loss: 2.789 (4.050), reg_loss: 0.657 (1.145), total_loss: 3.446 (5.195), eta: 2 days, 15:57:13, mem: 2645M
+2019-10-15 01:35:23,479 SSD.trainer INFO: iter: 002320, lr: 0.00100, time: 0.491 (0.892), cls_loss: 2.728 (4.044), reg_loss: 0.731 (1.144), total_loss: 3.458 (5.188), eta: 2 days, 15:49:37, mem: 2645M
+2019-10-15 01:35:27,936 SSD.trainer INFO: iter: 002330, lr: 0.00100, time: 0.446 (0.890), cls_loss: 2.723 (4.038), reg_loss: 0.631 (1.141), total_loss: 3.354 (5.180), eta: 2 days, 15:41:14, mem: 2645M
+2019-10-15 01:35:32,038 SSD.trainer INFO: iter: 002340, lr: 0.00100, time: 0.410 (0.888), cls_loss: 2.697 (4.033), reg_loss: 0.669 (1.139), total_loss: 3.365 (5.172), eta: 2 days, 15:32:17, mem: 2645M
+2019-10-15 01:35:36,487 SSD.trainer INFO: iter: 002350, lr: 0.00100, time: 0.445 (0.886), cls_loss: 2.631 (4.027), reg_loss: 0.646 (1.137), total_loss: 3.277 (5.164), eta: 2 days, 15:24:03, mem: 2645M
+2019-10-15 01:35:41,612 SSD.trainer INFO: iter: 002360, lr: 0.00100, time: 0.512 (0.884), cls_loss: 2.663 (4.021), reg_loss: 0.650 (1.135), total_loss: 3.313 (5.156), eta: 2 days, 15:17:07, mem: 2645M
+2019-10-15 01:35:45,692 SSD.trainer INFO: iter: 002370, lr: 0.00100, time: 0.408 (0.882), cls_loss: 2.764 (4.016), reg_loss: 0.735 (1.134), total_loss: 3.500 (5.149), eta: 2 days, 15:08:20, mem: 2645M
+2019-10-15 01:35:51,503 SSD.trainer INFO: iter: 002380, lr: 0.00100, time: 0.581 (0.881), cls_loss: 2.697 (4.010), reg_loss: 0.725 (1.132), total_loss: 3.422 (5.142), eta: 2 days, 15:02:45, mem: 2645M
+2019-10-15 01:35:57,061 SSD.trainer INFO: iter: 002390, lr: 0.00100, time: 0.556 (0.880), cls_loss: 2.688 (4.004), reg_loss: 0.685 (1.130), total_loss: 3.372 (5.134), eta: 2 days, 14:56:46, mem: 2645M
+2019-10-15 01:36:01,697 SSD.trainer INFO: iter: 002400, lr: 0.00100, time: 0.464 (0.878), cls_loss: 2.730 (3.999), reg_loss: 0.666 (1.128), total_loss: 3.396 (5.127), eta: 2 days, 14:49:11, mem: 2645M
+2019-10-15 01:36:06,269 SSD.trainer INFO: iter: 002410, lr: 0.00100, time: 0.457 (0.876), cls_loss: 2.566 (3.993), reg_loss: 0.697 (1.126), total_loss: 3.263 (5.119), eta: 2 days, 14:41:32, mem: 2645M
+2019-10-15 01:36:11,461 SSD.trainer INFO: iter: 002420, lr: 0.00100, time: 0.519 (0.875), cls_loss: 2.873 (3.989), reg_loss: 0.700 (1.124), total_loss: 3.573 (5.113), eta: 2 days, 14:35:03, mem: 2645M
+2019-10-15 01:36:16,060 SSD.trainer INFO: iter: 002430, lr: 0.00100, time: 0.460 (0.873), cls_loss: 2.655 (3.983), reg_loss: 0.657 (1.123), total_loss: 3.312 (5.106), eta: 2 days, 14:27:35, mem: 2645M
+2019-10-15 01:36:20,874 SSD.trainer INFO: iter: 002440, lr: 0.00100, time: 0.481 (0.871), cls_loss: 2.635 (3.978), reg_loss: 0.684 (1.121), total_loss: 3.318 (5.098), eta: 2 days, 14:20:33, mem: 2645M
+2019-10-15 01:36:26,348 SSD.trainer INFO: iter: 002450, lr: 0.00100, time: 0.547 (0.870), cls_loss: 2.675 (3.972), reg_loss: 0.597 (1.119), total_loss: 3.272 (5.091), eta: 2 days, 14:14:44, mem: 2645M
+2019-10-15 01:36:31,564 SSD.trainer INFO: iter: 002460, lr: 0.00100, time: 0.522 (0.869), cls_loss: 2.651 (3.967), reg_loss: 0.704 (1.117), total_loss: 3.355 (5.084), eta: 2 days, 14:08:30, mem: 2645M
+2019-10-15 01:36:35,734 SSD.trainer INFO: iter: 002470, lr: 0.00100, time: 0.417 (0.867), cls_loss: 2.676 (3.962), reg_loss: 0.655 (1.115), total_loss: 3.331 (5.077), eta: 2 days, 14:00:30, mem: 2645M
+2019-10-15 01:36:40,323 SSD.trainer INFO: iter: 002480, lr: 0.00100, time: 0.459 (0.865), cls_loss: 2.605 (3.956), reg_loss: 0.665 (1.113), total_loss: 3.271 (5.069), eta: 2 days, 13:53:18, mem: 2645M
+2019-10-15 01:36:46,182 SSD.trainer INFO: iter: 002490, lr: 0.00100, time: 0.586 (0.864), cls_loss: 2.596 (3.951), reg_loss: 0.636 (1.111), total_loss: 3.232 (5.062), eta: 2 days, 13:48:21, mem: 2645M
+2019-10-15 01:36:50,664 SSD.trainer INFO: iter: 002500, lr: 0.00100, time: 0.448 (0.862), cls_loss: 2.479 (3.945), reg_loss: 0.590 (1.109), total_loss: 3.069 (5.054), eta: 2 days, 13:41:04, mem: 2645M
+2019-10-15 01:36:50,670 SSD.trainer INFO: Saving checkpoint to outputs/mobilenet_v2_ssd320_custom/model_002500.pth
+2019-10-15 01:36:50,722 SSD.inference INFO: Evaluating custom_test dataset(184 images):
+2019-10-15 01:36:54,335 SSD.inference INFO: mAP: 0.6054
+neutral         : 0.6587
+anger           : 0.5524
+surprise        : 0.6243
+smile           : 0.6197
+sad             : 0.5720
+
+2019-10-15 01:36:59,887 SSD.trainer INFO: iter: 002510, lr: 0.00100, time: 0.922 (0.863), cls_loss: 2.652 (3.940), reg_loss: 0.628 (1.107), total_loss: 3.280 (5.047), eta: 2 days, 13:41:57, mem: 2645M
+2019-10-15 01:37:05,538 SSD.trainer INFO: iter: 002520, lr: 0.00100, time: 0.565 (0.861), cls_loss: 2.675 (3.935), reg_loss: 0.635 (1.105), total_loss: 3.310 (5.040), eta: 2 days, 13:36:44, mem: 2645M
+2019-10-15 01:37:11,833 SSD.trainer INFO: iter: 002530, lr: 0.00100, time: 0.630 (0.861), cls_loss: 2.495 (3.929), reg_loss: 0.647 (1.104), total_loss: 3.142 (5.033), eta: 2 days, 13:32:39, mem: 2645M
+2019-10-15 01:37:16,474 SSD.trainer INFO: iter: 002540, lr: 0.00100, time: 0.464 (0.859), cls_loss: 2.567 (3.924), reg_loss: 0.696 (1.102), total_loss: 3.263 (5.026), eta: 2 days, 13:25:49, mem: 2645M
+2019-10-15 01:37:20,772 SSD.trainer INFO: iter: 002550, lr: 0.00100, time: 0.430 (0.857), cls_loss: 2.609 (3.918), reg_loss: 0.599 (1.100), total_loss: 3.208 (5.019), eta: 2 days, 13:18:27, mem: 2645M
+2019-10-15 01:37:24,815 SSD.trainer INFO: iter: 002560, lr: 0.00100, time: 0.404 (0.856), cls_loss: 2.705 (3.914), reg_loss: 0.605 (1.098), total_loss: 3.310 (5.012), eta: 2 days, 13:10:43, mem: 2645M
+2019-10-15 01:37:30,912 SSD.trainer INFO: iter: 002570, lr: 0.00100, time: 0.610 (0.855), cls_loss: 2.472 (3.908), reg_loss: 0.688 (1.097), total_loss: 3.159 (5.005), eta: 2 days, 13:06:28, mem: 2645M
+2019-10-15 01:37:36,281 SSD.trainer INFO: iter: 002580, lr: 0.00100, time: 0.537 (0.853), cls_loss: 2.811 (3.904), reg_loss: 0.756 (1.095), total_loss: 3.567 (4.999), eta: 2 days, 13:01:03, mem: 2645M
+2019-10-15 01:37:43,956 SSD.trainer INFO: iter: 002590, lr: 0.00100, time: 0.767 (0.853), cls_loss: 2.632 (3.899), reg_loss: 0.724 (1.094), total_loss: 3.356 (4.993), eta: 2 days, 12:59:29, mem: 2645M
+2019-10-15 01:37:48,444 SSD.trainer INFO: iter: 002600, lr: 0.00100, time: 0.449 (0.851), cls_loss: 2.676 (3.894), reg_loss: 0.743 (1.092), total_loss: 3.419 (4.987), eta: 2 days, 12:52:40, mem: 2645M
+2019-10-15 01:37:53,084 SSD.trainer INFO: iter: 002610, lr: 0.00100, time: 0.464 (0.850), cls_loss: 2.576 (3.889), reg_loss: 0.623 (1.091), total_loss: 3.200 (4.980), eta: 2 days, 12:46:09, mem: 2645M
+2019-10-15 01:37:58,272 SSD.trainer INFO: iter: 002620, lr: 0.00100, time: 0.519 (0.849), cls_loss: 2.502 (3.884), reg_loss: 0.552 (1.089), total_loss: 3.054 (4.972), eta: 2 days, 12:40:36, mem: 2645M
+2019-10-15 01:38:04,496 SSD.trainer INFO: iter: 002630, lr: 0.00100, time: 0.622 (0.848), cls_loss: 2.641 (3.879), reg_loss: 0.693 (1.087), total_loss: 3.334 (4.966), eta: 2 days, 12:36:46, mem: 2645M
+2019-10-15 01:38:09,545 SSD.trainer INFO: iter: 002640, lr: 0.00100, time: 0.505 (0.847), cls_loss: 2.493 (3.874), reg_loss: 0.596 (1.085), total_loss: 3.089 (4.959), eta: 2 days, 12:31:03, mem: 2645M
+2019-10-15 01:38:14,040 SSD.trainer INFO: iter: 002650, lr: 0.00100, time: 0.449 (0.845), cls_loss: 2.591 (3.869), reg_loss: 0.681 (1.084), total_loss: 3.272 (4.953), eta: 2 days, 12:24:29, mem: 2645M
+2019-10-15 01:38:19,049 SSD.trainer INFO: iter: 002660, lr: 0.00100, time: 0.501 (0.844), cls_loss: 2.440 (3.864), reg_loss: 0.581 (1.082), total_loss: 3.021 (4.946), eta: 2 days, 12:18:48, mem: 2645M
+2019-10-15 01:38:23,157 SSD.trainer INFO: iter: 002670, lr: 0.00100, time: 0.411 (0.842), cls_loss: 2.481 (3.859), reg_loss: 0.615 (1.080), total_loss: 3.096 (4.939), eta: 2 days, 12:11:42, mem: 2645M
+2019-10-15 01:38:28,369 SSD.trainer INFO: iter: 002680, lr: 0.00100, time: 0.521 (0.841), cls_loss: 2.439 (3.853), reg_loss: 0.691 (1.079), total_loss: 3.130 (4.932), eta: 2 days, 12:06:25, mem: 2645M
+2019-10-15 01:38:32,902 SSD.trainer INFO: iter: 002690, lr: 0.00100, time: 0.453 (0.839), cls_loss: 2.595 (3.849), reg_loss: 0.666 (1.077), total_loss: 3.261 (4.926), eta: 2 days, 12:00:06, mem: 2645M
+2019-10-15 01:38:38,064 SSD.trainer INFO: iter: 002700, lr: 0.00100, time: 0.516 (0.838), cls_loss: 2.610 (3.844), reg_loss: 0.628 (1.075), total_loss: 3.238 (4.919), eta: 2 days, 11:54:50, mem: 2645M
+2019-10-15 01:38:42,159 SSD.trainer INFO: iter: 002710, lr: 0.00100, time: 0.410 (0.837), cls_loss: 2.507 (3.839), reg_loss: 0.652 (1.074), total_loss: 3.160 (4.913), eta: 2 days, 11:47:54, mem: 2645M
+2019-10-15 01:38:49,771 SSD.trainer INFO: iter: 002720, lr: 0.00100, time: 0.761 (0.836), cls_loss: 2.666 (3.835), reg_loss: 0.661 (1.072), total_loss: 3.327 (4.907), eta: 2 days, 11:46:34, mem: 2645M
+2019-10-15 01:38:55,762 SSD.trainer INFO: iter: 002730, lr: 0.00100, time: 0.599 (0.836), cls_loss: 2.603 (3.830), reg_loss: 0.621 (1.071), total_loss: 3.224 (4.901), eta: 2 days, 11:42:42, mem: 2645M
+2019-10-15 01:39:00,994 SSD.trainer INFO: iter: 002740, lr: 0.00100, time: 0.523 (0.834), cls_loss: 2.433 (3.825), reg_loss: 0.554 (1.069), total_loss: 2.987 (4.894), eta: 2 days, 11:37:41, mem: 2645M
+2019-10-15 01:39:05,551 SSD.trainer INFO: iter: 002750, lr: 0.00100, time: 0.456 (0.833), cls_loss: 2.514 (3.820), reg_loss: 0.660 (1.067), total_loss: 3.174 (4.888), eta: 2 days, 11:31:38, mem: 2645M
+2019-10-15 01:39:09,715 SSD.trainer INFO: iter: 002760, lr: 0.00100, time: 0.416 (0.832), cls_loss: 2.465 (3.815), reg_loss: 0.592 (1.066), total_loss: 3.056 (4.881), eta: 2 days, 11:25:02, mem: 2645M
+2019-10-15 01:39:14,794 SSD.trainer INFO: iter: 002770, lr: 0.00100, time: 0.508 (0.830), cls_loss: 2.425 (3.810), reg_loss: 0.653 (1.064), total_loss: 3.078 (4.874), eta: 2 days, 11:19:53, mem: 2645M
+2019-10-15 01:39:19,252 SSD.trainer INFO: iter: 002780, lr: 0.00100, time: 0.446 (0.829), cls_loss: 2.585 (3.806), reg_loss: 0.650 (1.063), total_loss: 3.235 (4.869), eta: 2 days, 11:13:49, mem: 2645M
+2019-10-15 01:39:23,719 SSD.trainer INFO: iter: 002790, lr: 0.00100, time: 0.447 (0.828), cls_loss: 2.596 (3.802), reg_loss: 0.675 (1.061), total_loss: 3.271 (4.863), eta: 2 days, 11:07:48, mem: 2645M
+2019-10-15 01:39:28,726 SSD.trainer INFO: iter: 002800, lr: 0.00100, time: 0.501 (0.826), cls_loss: 2.579 (3.797), reg_loss: 0.689 (1.060), total_loss: 3.268 (4.857), eta: 2 days, 11:02:39, mem: 2645M
+2019-10-15 01:39:33,962 SSD.trainer INFO: iter: 002810, lr: 0.00100, time: 0.524 (0.825), cls_loss: 2.549 (3.793), reg_loss: 0.628 (1.058), total_loss: 3.178 (4.851), eta: 2 days, 10:57:54, mem: 2645M
+2019-10-15 01:39:42,645 SSD.trainer INFO: iter: 002820, lr: 0.00100, time: 0.868 (0.826), cls_loss: 2.733 (3.789), reg_loss: 0.781 (1.057), total_loss: 3.514 (4.846), eta: 2 days, 10:58:25, mem: 2645M
+2019-10-15 01:39:47,969 SSD.trainer INFO: iter: 002830, lr: 0.00100, time: 0.532 (0.824), cls_loss: 2.499 (3.785), reg_loss: 0.628 (1.056), total_loss: 3.127 (4.840), eta: 2 days, 10:53:50, mem: 2645M
+2019-10-15 01:39:52,454 SSD.trainer INFO: iter: 002840, lr: 0.00100, time: 0.448 (0.823), cls_loss: 2.532 (3.780), reg_loss: 0.668 (1.054), total_loss: 3.199 (4.835), eta: 2 days, 10:48:01, mem: 2645M
+2019-10-15 01:39:58,834 SSD.trainer INFO: iter: 002850, lr: 0.00100, time: 0.638 (0.823), cls_loss: 2.551 (3.776), reg_loss: 0.654 (1.053), total_loss: 3.206 (4.829), eta: 2 days, 10:45:06, mem: 2645M
+2019-10-15 01:40:03,378 SSD.trainer INFO: iter: 002860, lr: 0.00100, time: 0.454 (0.821), cls_loss: 2.473 (3.771), reg_loss: 0.551 (1.051), total_loss: 3.024 (4.823), eta: 2 days, 10:39:27, mem: 2645M
+2019-10-15 01:40:08,914 SSD.trainer INFO: iter: 002870, lr: 0.00100, time: 0.554 (0.820), cls_loss: 2.490 (3.767), reg_loss: 0.612 (1.050), total_loss: 3.101 (4.817), eta: 2 days, 10:35:19, mem: 2645M
+2019-10-15 01:40:13,253 SSD.trainer INFO: iter: 002880, lr: 0.00100, time: 0.434 (0.819), cls_loss: 2.483 (3.762), reg_loss: 0.638 (1.048), total_loss: 3.121 (4.811), eta: 2 days, 10:29:26, mem: 2645M
+2019-10-15 01:40:17,698 SSD.trainer INFO: iter: 002890, lr: 0.00100, time: 0.445 (0.818), cls_loss: 2.393 (3.758), reg_loss: 0.662 (1.047), total_loss: 3.055 (4.805), eta: 2 days, 10:23:45, mem: 2645M
+2019-10-15 01:40:22,676 SSD.trainer INFO: iter: 002900, lr: 0.00100, time: 0.498 (0.817), cls_loss: 2.555 (3.753), reg_loss: 0.594 (1.045), total_loss: 3.148 (4.799), eta: 2 days, 10:18:53, mem: 2645M
+2019-10-15 01:40:27,502 SSD.trainer INFO: iter: 002910, lr: 0.00100, time: 0.483 (0.815), cls_loss: 2.608 (3.750), reg_loss: 0.619 (1.044), total_loss: 3.227 (4.794), eta: 2 days, 10:13:50, mem: 2645M
+2019-10-15 01:40:31,400 SSD.trainer INFO: iter: 002920, lr: 0.00100, time: 0.390 (0.814), cls_loss: 2.507 (3.745), reg_loss: 0.600 (1.042), total_loss: 3.107 (4.788), eta: 2 days, 10:07:27, mem: 2645M
+2019-10-15 01:40:41,823 SSD.trainer INFO: iter: 002930, lr: 0.00100, time: 1.042 (0.815), cls_loss: 2.541 (3.741), reg_loss: 0.553 (1.041), total_loss: 3.094 (4.782), eta: 2 days, 10:10:39, mem: 2645M
+2019-10-15 01:40:46,091 SSD.trainer INFO: iter: 002940, lr: 0.00100, time: 0.427 (0.813), cls_loss: 2.427 (3.737), reg_loss: 0.592 (1.039), total_loss: 3.019 (4.776), eta: 2 days, 10:04:52, mem: 2645M
+2019-10-15 01:40:51,265 SSD.trainer INFO: iter: 002950, lr: 0.00100, time: 0.517 (0.812), cls_loss: 2.564 (3.733), reg_loss: 0.604 (1.038), total_loss: 3.168 (4.770), eta: 2 days, 10:00:26, mem: 2645M
+2019-10-15 01:40:55,957 SSD.trainer INFO: iter: 002960, lr: 0.00100, time: 0.469 (0.811), cls_loss: 2.373 (3.728), reg_loss: 0.600 (1.036), total_loss: 2.973 (4.764), eta: 2 days, 9:55:19, mem: 2645M
+2019-10-15 01:41:01,171 SSD.trainer INFO: iter: 002970, lr: 0.00100, time: 0.521 (0.810), cls_loss: 2.577 (3.724), reg_loss: 0.663 (1.035), total_loss: 3.239 (4.759), eta: 2 days, 9:51:00, mem: 2645M
+2019-10-15 01:41:05,241 SSD.trainer INFO: iter: 002980, lr: 0.00100, time: 0.407 (0.809), cls_loss: 2.364 (3.720), reg_loss: 0.625 (1.034), total_loss: 2.989 (4.753), eta: 2 days, 9:45:05, mem: 2645M
+2019-10-15 01:41:09,267 SSD.trainer INFO: iter: 002990, lr: 0.00100, time: 0.403 (0.808), cls_loss: 2.634 (3.716), reg_loss: 0.630 (1.032), total_loss: 3.265 (4.748), eta: 2 days, 9:39:07, mem: 2645M
+2019-10-15 01:41:14,528 SSD.trainer INFO: iter: 003000, lr: 0.00100, time: 0.526 (0.807), cls_loss: 2.567 (3.712), reg_loss: 0.669 (1.031), total_loss: 3.236 (4.743), eta: 2 days, 9:34:58, mem: 2645M
+2019-10-15 01:41:19,650 SSD.trainer INFO: iter: 003010, lr: 0.00100, time: 0.512 (0.806), cls_loss: 2.458 (3.708), reg_loss: 0.623 (1.030), total_loss: 3.081 (4.738), eta: 2 days, 9:30:39, mem: 2645M
+2019-10-15 01:41:25,031 SSD.trainer INFO: iter: 003020, lr: 0.00100, time: 0.538 (0.805), cls_loss: 2.483 (3.704), reg_loss: 0.630 (1.028), total_loss: 3.112 (4.732), eta: 2 days, 9:26:43, mem: 2645M
+2019-10-15 01:41:36,101 SSD.trainer INFO: iter: 003030, lr: 0.00100, time: 1.107 (0.806), cls_loss: 2.381 (3.700), reg_loss: 0.625 (1.027), total_loss: 3.006 (4.727), eta: 2 days, 9:30:51, mem: 2645M
+2019-10-15 01:41:41,364 SSD.trainer INFO: iter: 003040, lr: 0.00100, time: 0.526 (0.805), cls_loss: 2.458 (3.696), reg_loss: 0.601 (1.026), total_loss: 3.059 (4.721), eta: 2 days, 9:26:47, mem: 2645M
+2019-10-15 01:41:46,397 SSD.trainer INFO: iter: 003050, lr: 0.00100, time: 0.503 (0.804), cls_loss: 2.646 (3.692), reg_loss: 0.674 (1.025), total_loss: 3.320 (4.717), eta: 2 days, 9:22:25, mem: 2645M
+2019-10-15 01:41:52,029 SSD.trainer INFO: iter: 003060, lr: 0.00100, time: 0.563 (0.803), cls_loss: 2.581 (3.688), reg_loss: 0.629 (1.023), total_loss: 3.209 (4.712), eta: 2 days, 9:18:55, mem: 2645M
+2019-10-15 01:41:56,592 SSD.trainer INFO: iter: 003070, lr: 0.00100, time: 0.456 (0.802), cls_loss: 2.510 (3.685), reg_loss: 0.641 (1.022), total_loss: 3.151 (4.707), eta: 2 days, 9:13:57, mem: 2645M
+2019-10-15 01:42:02,309 SSD.trainer INFO: iter: 003080, lr: 0.00100, time: 0.572 (0.801), cls_loss: 2.361 (3.680), reg_loss: 0.573 (1.021), total_loss: 2.934 (4.701), eta: 2 days, 9:10:36, mem: 2645M
+2019-10-15 01:42:06,400 SSD.trainer INFO: iter: 003090, lr: 0.00100, time: 0.409 (0.800), cls_loss: 2.542 (3.677), reg_loss: 0.660 (1.019), total_loss: 3.202 (4.696), eta: 2 days, 9:05:03, mem: 2645M
+2019-10-15 01:42:12,348 SSD.trainer INFO: iter: 003100, lr: 0.00100, time: 0.595 (0.799), cls_loss: 2.508 (3.673), reg_loss: 0.603 (1.018), total_loss: 3.111 (4.691), eta: 2 days, 9:02:05, mem: 2645M
+2019-10-15 01:42:17,336 SSD.trainer INFO: iter: 003110, lr: 0.00100, time: 0.499 (0.798), cls_loss: 2.570 (3.669), reg_loss: 0.691 (1.017), total_loss: 3.260 (4.686), eta: 2 days, 8:57:48, mem: 2645M
+2019-10-15 01:42:21,729 SSD.trainer INFO: iter: 003120, lr: 0.00100, time: 0.439 (0.797), cls_loss: 2.417 (3.665), reg_loss: 0.640 (1.016), total_loss: 3.057 (4.681), eta: 2 days, 8:52:45, mem: 2645M
+2019-10-15 01:42:26,924 SSD.trainer INFO: iter: 003130, lr: 0.00100, time: 0.519 (0.796), cls_loss: 2.389 (3.661), reg_loss: 0.602 (1.014), total_loss: 2.991 (4.676), eta: 2 days, 8:48:49, mem: 2645M
+2019-10-15 01:42:32,357 SSD.trainer INFO: iter: 003140, lr: 0.00100, time: 0.543 (0.795), cls_loss: 2.408 (3.657), reg_loss: 0.693 (1.013), total_loss: 3.100 (4.671), eta: 2 days, 8:45:14, mem: 2645M
+2019-10-15 01:42:37,865 SSD.trainer INFO: iter: 003150, lr: 0.00100, time: 0.551 (0.795), cls_loss: 2.360 (3.653), reg_loss: 0.561 (1.012), total_loss: 2.921 (4.665), eta: 2 days, 8:41:47, mem: 2645M
+2019-10-15 01:42:42,155 SSD.trainer INFO: iter: 003160, lr: 0.00100, time: 0.429 (0.793), cls_loss: 2.645 (3.650), reg_loss: 0.570 (1.011), total_loss: 3.214 (4.661), eta: 2 days, 8:36:42, mem: 2645M
+2019-10-15 01:42:47,874 SSD.trainer INFO: iter: 003170, lr: 0.00100, time: 0.572 (0.793), cls_loss: 2.536 (3.646), reg_loss: 0.666 (1.009), total_loss: 3.202 (4.656), eta: 2 days, 8:33:34, mem: 2645M
+2019-10-15 01:42:53,469 SSD.trainer INFO: iter: 003180, lr: 0.00100, time: 0.559 (0.792), cls_loss: 2.222 (3.642), reg_loss: 0.503 (1.008), total_loss: 2.725 (4.650), eta: 2 days, 8:30:18, mem: 2645M
+2019-10-15 01:42:58,068 SSD.trainer INFO: iter: 003190, lr: 0.00100, time: 0.460 (0.791), cls_loss: 2.427 (3.638), reg_loss: 0.539 (1.006), total_loss: 2.966 (4.645), eta: 2 days, 8:25:42, mem: 2645M
+2019-10-15 01:43:02,347 SSD.trainer INFO: iter: 003200, lr: 0.00100, time: 0.428 (0.790), cls_loss: 2.298 (3.634), reg_loss: 0.533 (1.005), total_loss: 2.831 (4.639), eta: 2 days, 8:20:43, mem: 2645M
+2019-10-15 01:43:08,118 SSD.trainer INFO: iter: 003210, lr: 0.00100, time: 0.577 (0.789), cls_loss: 2.507 (3.630), reg_loss: 0.640 (1.004), total_loss: 3.147 (4.634), eta: 2 days, 8:17:45, mem: 2645M
+2019-10-15 01:43:12,802 SSD.trainer INFO: iter: 003220, lr: 0.00100, time: 0.468 (0.788), cls_loss: 2.452 (3.627), reg_loss: 0.589 (1.003), total_loss: 3.041 (4.629), eta: 2 days, 8:13:21, mem: 2645M
+2019-10-15 01:43:18,861 SSD.trainer INFO: iter: 003230, lr: 0.00100, time: 0.606 (0.788), cls_loss: 2.414 (3.623), reg_loss: 0.550 (1.001), total_loss: 2.964 (4.624), eta: 2 days, 8:10:48, mem: 2645M
+2019-10-15 01:43:24,716 SSD.trainer INFO: iter: 003240, lr: 0.00100, time: 0.585 (0.787), cls_loss: 2.291 (3.619), reg_loss: 0.588 (1.000), total_loss: 2.880 (4.619), eta: 2 days, 8:08:00, mem: 2645M
+2019-10-15 01:43:30,524 SSD.trainer INFO: iter: 003250, lr: 0.00100, time: 0.581 (0.786), cls_loss: 2.360 (3.615), reg_loss: 0.597 (0.999), total_loss: 2.957 (4.614), eta: 2 days, 8:05:10, mem: 2645M
+2019-10-15 01:43:35,487 SSD.trainer INFO: iter: 003260, lr: 0.00100, time: 0.496 (0.786), cls_loss: 2.628 (3.612), reg_loss: 0.661 (0.998), total_loss: 3.289 (4.610), eta: 2 days, 8:01:13, mem: 2645M
+2019-10-15 01:43:40,310 SSD.trainer INFO: iter: 003270, lr: 0.00100, time: 0.482 (0.785), cls_loss: 2.613 (3.609), reg_loss: 0.585 (0.996), total_loss: 3.197 (4.605), eta: 2 days, 7:57:07, mem: 2645M
+2019-10-15 01:43:44,874 SSD.trainer INFO: iter: 003280, lr: 0.00100, time: 0.456 (0.784), cls_loss: 2.570 (3.606), reg_loss: 0.680 (0.995), total_loss: 3.250 (4.601), eta: 2 days, 7:52:43, mem: 2645M
+2019-10-15 01:43:50,177 SSD.trainer INFO: iter: 003290, lr: 0.00100, time: 0.530 (0.783), cls_loss: 2.422 (3.602), reg_loss: 0.595 (0.994), total_loss: 3.017 (4.596), eta: 2 days, 7:49:17, mem: 2645M
+2019-10-15 01:43:54,389 SSD.trainer INFO: iter: 003300, lr: 0.00100, time: 0.421 (0.782), cls_loss: 2.351 (3.598), reg_loss: 0.587 (0.993), total_loss: 2.938 (4.591), eta: 2 days, 7:44:28, mem: 2645M
+2019-10-15 01:43:58,686 SSD.trainer INFO: iter: 003310, lr: 0.00100, time: 0.430 (0.781), cls_loss: 2.460 (3.595), reg_loss: 0.582 (0.992), total_loss: 3.042 (4.587), eta: 2 days, 7:39:47, mem: 2645M
+2019-10-15 01:44:03,179 SSD.trainer INFO: iter: 003320, lr: 0.00100, time: 0.449 (0.780), cls_loss: 2.433 (3.591), reg_loss: 0.532 (0.990), total_loss: 2.964 (4.582), eta: 2 days, 7:35:23, mem: 2645M
+2019-10-15 01:44:07,911 SSD.trainer INFO: iter: 003330, lr: 0.00100, time: 0.473 (0.779), cls_loss: 2.329 (3.588), reg_loss: 0.562 (0.989), total_loss: 2.891 (4.577), eta: 2 days, 7:31:19, mem: 2645M
+2019-10-15 01:44:12,993 SSD.trainer INFO: iter: 003340, lr: 0.00100, time: 0.508 (0.778), cls_loss: 2.569 (3.585), reg_loss: 0.621 (0.988), total_loss: 3.190 (4.573), eta: 2 days, 7:27:43, mem: 2645M
+2019-10-15 01:44:18,684 SSD.trainer INFO: iter: 003350, lr: 0.00100, time: 0.569 (0.777), cls_loss: 2.333 (3.581), reg_loss: 0.570 (0.987), total_loss: 2.903 (4.568), eta: 2 days, 7:24:56, mem: 2645M
+2019-10-15 01:44:22,765 SSD.trainer INFO: iter: 003360, lr: 0.00100, time: 0.408 (0.776), cls_loss: 2.266 (3.577), reg_loss: 0.476 (0.985), total_loss: 2.742 (4.562), eta: 2 days, 7:20:06, mem: 2645M
+2019-10-15 01:44:27,811 SSD.trainer INFO: iter: 003370, lr: 0.00100, time: 0.505 (0.775), cls_loss: 2.447 (3.574), reg_loss: 0.619 (0.984), total_loss: 3.067 (4.558), eta: 2 days, 7:16:31, mem: 2645M
+2019-10-15 01:44:33,451 SSD.trainer INFO: iter: 003380, lr: 0.00100, time: 0.564 (0.775), cls_loss: 2.484 (3.570), reg_loss: 0.583 (0.983), total_loss: 3.067 (4.553), eta: 2 days, 7:13:43, mem: 2645M
+2019-10-15 01:44:39,473 SSD.trainer INFO: iter: 003390, lr: 0.00100, time: 0.602 (0.774), cls_loss: 2.416 (3.567), reg_loss: 0.620 (0.982), total_loss: 3.036 (4.549), eta: 2 days, 7:11:25, mem: 2645M
+2019-10-15 01:44:44,713 SSD.trainer INFO: iter: 003400, lr: 0.00100, time: 0.524 (0.774), cls_loss: 2.710 (3.564), reg_loss: 0.704 (0.981), total_loss: 3.414 (4.545), eta: 2 days, 7:08:08, mem: 2645M
+2019-10-15 01:44:49,319 SSD.trainer INFO: iter: 003410, lr: 0.00100, time: 0.461 (0.773), cls_loss: 2.440 (3.561), reg_loss: 0.601 (0.980), total_loss: 3.041 (4.541), eta: 2 days, 7:04:05, mem: 2645M
+2019-10-15 01:44:53,989 SSD.trainer INFO: iter: 003420, lr: 0.00100, time: 0.467 (0.772), cls_loss: 2.614 (3.558), reg_loss: 0.596 (0.979), total_loss: 3.210 (4.537), eta: 2 days, 7:00:08, mem: 2645M
+2019-10-15 01:45:00,705 SSD.trainer INFO: iter: 003430, lr: 0.00100, time: 0.672 (0.771), cls_loss: 2.345 (3.555), reg_loss: 0.569 (0.978), total_loss: 2.914 (4.532), eta: 2 days, 6:58:45, mem: 2645M
+2019-10-15 01:45:05,787 SSD.trainer INFO: iter: 003440, lr: 0.00100, time: 0.508 (0.771), cls_loss: 2.431 (3.552), reg_loss: 0.599 (0.976), total_loss: 3.030 (4.528), eta: 2 days, 6:55:21, mem: 2645M
+2019-10-15 01:45:14,042 SSD.trainer INFO: iter: 003450, lr: 0.00100, time: 0.825 (0.771), cls_loss: 2.460 (3.548), reg_loss: 0.604 (0.975), total_loss: 3.065 (4.524), eta: 2 days, 6:55:54, mem: 2645M
+2019-10-15 01:45:19,031 SSD.trainer INFO: iter: 003460, lr: 0.00100, time: 0.499 (0.770), cls_loss: 2.383 (3.545), reg_loss: 0.644 (0.974), total_loss: 3.026 (4.519), eta: 2 days, 6:52:25, mem: 2645M
+2019-10-15 01:45:24,260 SSD.trainer INFO: iter: 003470, lr: 0.00100, time: 0.523 (0.769), cls_loss: 2.535 (3.542), reg_loss: 0.612 (0.973), total_loss: 3.147 (4.516), eta: 2 days, 6:49:15, mem: 2645M
+2019-10-15 01:45:28,930 SSD.trainer INFO: iter: 003480, lr: 0.00100, time: 0.467 (0.768), cls_loss: 2.451 (3.539), reg_loss: 0.670 (0.972), total_loss: 3.121 (4.512), eta: 2 days, 6:45:24, mem: 2645M
+2019-10-15 01:45:34,357 SSD.trainer INFO: iter: 003490, lr: 0.00100, time: 0.543 (0.768), cls_loss: 2.312 (3.536), reg_loss: 0.635 (0.972), total_loss: 2.947 (4.507), eta: 2 days, 6:42:30, mem: 2645M
+2019-10-15 01:45:38,274 SSD.trainer INFO: iter: 003500, lr: 0.00100, time: 0.392 (0.767), cls_loss: 2.495 (3.533), reg_loss: 0.581 (0.970), total_loss: 3.076 (4.503), eta: 2 days, 6:37:47, mem: 2645M
+2019-10-15 01:45:43,421 SSD.trainer INFO: iter: 003510, lr: 0.00100, time: 0.515 (0.766), cls_loss: 2.398 (3.529), reg_loss: 0.579 (0.969), total_loss: 2.978 (4.499), eta: 2 days, 6:34:35, mem: 2645M
+2019-10-15 01:45:48,081 SSD.trainer INFO: iter: 003520, lr: 0.00100, time: 0.466 (0.765), cls_loss: 2.356 (3.526), reg_loss: 0.573 (0.968), total_loss: 2.929 (4.494), eta: 2 days, 6:30:49, mem: 2645M
+2019-10-15 01:45:54,540 SSD.trainer INFO: iter: 003530, lr: 0.00100, time: 0.646 (0.765), cls_loss: 2.173 (3.522), reg_loss: 0.557 (0.967), total_loss: 2.729 (4.489), eta: 2 days, 6:29:15, mem: 2645M
+2019-10-15 01:46:01,217 SSD.trainer INFO: iter: 003540, lr: 0.00100, time: 0.668 (0.765), cls_loss: 2.498 (3.519), reg_loss: 0.616 (0.966), total_loss: 3.114 (4.485), eta: 2 days, 6:27:57, mem: 2645M
+2019-10-15 01:46:05,885 SSD.trainer INFO: iter: 003550, lr: 0.00100, time: 0.467 (0.764), cls_loss: 2.448 (3.516), reg_loss: 0.571 (0.965), total_loss: 3.019 (4.481), eta: 2 days, 6:24:14, mem: 2645M
+2019-10-15 01:46:11,504 SSD.trainer INFO: iter: 003560, lr: 0.00100, time: 0.562 (0.763), cls_loss: 2.510 (3.513), reg_loss: 0.621 (0.964), total_loss: 3.131 (4.477), eta: 2 days, 6:21:41, mem: 2645M
+2019-10-15 01:46:16,142 SSD.trainer INFO: iter: 003570, lr: 0.00100, time: 0.464 (0.762), cls_loss: 2.398 (3.510), reg_loss: 0.616 (0.963), total_loss: 3.014 (4.473), eta: 2 days, 6:17:58, mem: 2645M
+2019-10-15 01:46:22,487 SSD.trainer INFO: iter: 003580, lr: 0.00100, time: 0.635 (0.762), cls_loss: 2.563 (3.508), reg_loss: 0.618 (0.962), total_loss: 3.181 (4.470), eta: 2 days, 6:16:19, mem: 2645M
+2019-10-15 01:46:26,955 SSD.trainer INFO: iter: 003590, lr: 0.00100, time: 0.447 (0.761), cls_loss: 2.389 (3.505), reg_loss: 0.562 (0.961), total_loss: 2.950 (4.465), eta: 2 days, 6:12:26, mem: 2645M
+2019-10-15 01:46:31,367 SSD.trainer INFO: iter: 003600, lr: 0.00100, time: 0.441 (0.760), cls_loss: 2.384 (3.501), reg_loss: 0.521 (0.960), total_loss: 2.905 (4.461), eta: 2 days, 6:08:31, mem: 2645M
+2019-10-15 01:46:35,639 SSD.trainer INFO: iter: 003610, lr: 0.00100, time: 0.427 (0.759), cls_loss: 2.378 (3.498), reg_loss: 0.590 (0.959), total_loss: 2.968 (4.457), eta: 2 days, 6:04:27, mem: 2645M
+2019-10-15 01:46:40,559 SSD.trainer INFO: iter: 003620, lr: 0.00100, time: 0.492 (0.759), cls_loss: 2.364 (3.495), reg_loss: 0.560 (0.958), total_loss: 2.924 (4.453), eta: 2 days, 6:01:10, mem: 2645M
+2019-10-15 01:46:45,305 SSD.trainer INFO: iter: 003630, lr: 0.00100, time: 0.475 (0.758), cls_loss: 2.544 (3.493), reg_loss: 0.626 (0.957), total_loss: 3.170 (4.449), eta: 2 days, 5:57:42, mem: 2645M
+2019-10-15 01:46:49,960 SSD.trainer INFO: iter: 003640, lr: 0.00100, time: 0.466 (0.757), cls_loss: 2.410 (3.490), reg_loss: 0.604 (0.956), total_loss: 3.014 (4.445), eta: 2 days, 5:54:08, mem: 2645M
+2019-10-15 01:46:58,307 SSD.trainer INFO: iter: 003650, lr: 0.00100, time: 0.835 (0.757), cls_loss: 2.360 (3.486), reg_loss: 0.535 (0.954), total_loss: 2.896 (4.441), eta: 2 days, 5:54:56, mem: 2645M
+2019-10-15 01:47:02,623 SSD.trainer INFO: iter: 003660, lr: 0.00100, time: 0.432 (0.756), cls_loss: 2.394 (3.483), reg_loss: 0.597 (0.953), total_loss: 2.991 (4.437), eta: 2 days, 5:51:00, mem: 2645M
+2019-10-15 01:47:07,252 SSD.trainer INFO: iter: 003670, lr: 0.00100, time: 0.463 (0.755), cls_loss: 2.206 (3.480), reg_loss: 0.531 (0.952), total_loss: 2.737 (4.432), eta: 2 days, 5:47:27, mem: 2645M
+2019-10-15 01:47:12,289 SSD.trainer INFO: iter: 003680, lr: 0.00100, time: 0.504 (0.755), cls_loss: 2.631 (3.478), reg_loss: 0.715 (0.952), total_loss: 3.346 (4.429), eta: 2 days, 5:44:25, mem: 2645M
+2019-10-15 01:47:17,460 SSD.trainer INFO: iter: 003690, lr: 0.00100, time: 0.517 (0.754), cls_loss: 2.362 (3.475), reg_loss: 0.565 (0.951), total_loss: 2.927 (4.425), eta: 2 days, 5:41:32, mem: 2645M
+2019-10-15 01:47:22,325 SSD.trainer INFO: iter: 003700, lr: 0.00100, time: 0.487 (0.753), cls_loss: 2.380 (3.472), reg_loss: 0.550 (0.950), total_loss: 2.930 (4.421), eta: 2 days, 5:38:19, mem: 2645M
+2019-10-15 01:47:27,275 SSD.trainer INFO: iter: 003710, lr: 0.00100, time: 0.495 (0.753), cls_loss: 2.210 (3.468), reg_loss: 0.576 (0.949), total_loss: 2.785 (4.417), eta: 2 days, 5:35:13, mem: 2645M
+2019-10-15 01:47:32,270 SSD.trainer INFO: iter: 003720, lr: 0.00100, time: 0.499 (0.752), cls_loss: 2.474 (3.466), reg_loss: 0.608 (0.948), total_loss: 3.082 (4.413), eta: 2 days, 5:32:11, mem: 2645M
+2019-10-15 01:47:36,699 SSD.trainer INFO: iter: 003730, lr: 0.00100, time: 0.443 (0.751), cls_loss: 2.311 (3.463), reg_loss: 0.558 (0.947), total_loss: 2.869 (4.409), eta: 2 days, 5:28:31, mem: 2645M
+2019-10-15 01:47:40,796 SSD.trainer INFO: iter: 003740, lr: 0.00100, time: 0.410 (0.750), cls_loss: 2.327 (3.460), reg_loss: 0.507 (0.945), total_loss: 2.834 (4.405), eta: 2 days, 5:24:30, mem: 2645M
+2019-10-15 01:47:45,278 SSD.trainer INFO: iter: 003750, lr: 0.00100, time: 0.448 (0.749), cls_loss: 2.326 (3.456), reg_loss: 0.560 (0.944), total_loss: 2.886 (4.401), eta: 2 days, 5:20:56, mem: 2645M
+2019-10-15 01:47:50,670 SSD.trainer INFO: iter: 003760, lr: 0.00100, time: 0.539 (0.749), cls_loss: 2.322 (3.453), reg_loss: 0.529 (0.943), total_loss: 2.851 (4.397), eta: 2 days, 5:18:25, mem: 2645M
+2019-10-15 01:47:55,623 SSD.trainer INFO: iter: 003770, lr: 0.00100, time: 0.495 (0.748), cls_loss: 2.335 (3.451), reg_loss: 0.613 (0.942), total_loss: 2.948 (4.393), eta: 2 days, 5:15:25, mem: 2645M
+2019-10-15 01:48:00,146 SSD.trainer INFO: iter: 003780, lr: 0.00100, time: 0.452 (0.747), cls_loss: 2.334 (3.448), reg_loss: 0.552 (0.941), total_loss: 2.886 (4.389), eta: 2 days, 5:11:57, mem: 2645M
+2019-10-15 01:48:07,470 SSD.trainer INFO: iter: 003790, lr: 0.00100, time: 0.732 (0.747), cls_loss: 2.387 (3.445), reg_loss: 0.604 (0.940), total_loss: 2.991 (4.385), eta: 2 days, 5:11:39, mem: 2645M
+2019-10-15 01:48:12,815 SSD.trainer INFO: iter: 003800, lr: 0.00100, time: 0.535 (0.747), cls_loss: 2.429 (3.442), reg_loss: 0.639 (0.940), total_loss: 3.069 (4.382), eta: 2 days, 5:09:08, mem: 2645M
+2019-10-15 01:48:18,404 SSD.trainer INFO: iter: 003810, lr: 0.00100, time: 0.559 (0.746), cls_loss: 2.324 (3.439), reg_loss: 0.565 (0.939), total_loss: 2.888 (4.378), eta: 2 days, 5:06:54, mem: 2645M
+2019-10-15 01:48:22,717 SSD.trainer INFO: iter: 003820, lr: 0.00100, time: 0.431 (0.746), cls_loss: 2.280 (3.436), reg_loss: 0.563 (0.938), total_loss: 2.843 (4.374), eta: 2 days, 5:03:15, mem: 2645M
+2019-10-15 01:48:28,945 SSD.trainer INFO: iter: 003830, lr: 0.00100, time: 0.623 (0.745), cls_loss: 2.451 (3.434), reg_loss: 0.594 (0.937), total_loss: 3.045 (4.370), eta: 2 days, 5:01:46, mem: 2645M
+2019-10-15 01:48:34,031 SSD.trainer INFO: iter: 003840, lr: 0.00100, time: 0.509 (0.745), cls_loss: 2.246 (3.430), reg_loss: 0.505 (0.936), total_loss: 2.751 (4.366), eta: 2 days, 4:59:01, mem: 2645M
+2019-10-15 01:48:38,167 SSD.trainer INFO: iter: 003850, lr: 0.00100, time: 0.414 (0.744), cls_loss: 2.441 (3.428), reg_loss: 0.573 (0.935), total_loss: 3.014 (4.363), eta: 2 days, 4:55:13, mem: 2645M
+2019-10-15 01:48:43,138 SSD.trainer INFO: iter: 003860, lr: 0.00100, time: 0.497 (0.743), cls_loss: 2.397 (3.425), reg_loss: 0.594 (0.934), total_loss: 2.991 (4.359), eta: 2 days, 4:52:22, mem: 2645M
+2019-10-15 01:48:49,251 SSD.trainer INFO: iter: 003870, lr: 0.00100, time: 0.611 (0.743), cls_loss: 2.232 (3.422), reg_loss: 0.551 (0.933), total_loss: 2.783 (4.355), eta: 2 days, 4:50:47, mem: 2645M
+2019-10-15 01:48:54,861 SSD.trainer INFO: iter: 003880, lr: 0.00100, time: 0.561 (0.742), cls_loss: 2.414 (3.420), reg_loss: 0.538 (0.932), total_loss: 2.952 (4.351), eta: 2 days, 4:48:40, mem: 2645M
+2019-10-15 01:49:00,382 SSD.trainer INFO: iter: 003890, lr: 0.00100, time: 0.552 (0.742), cls_loss: 2.285 (3.417), reg_loss: 0.547 (0.931), total_loss: 2.832 (4.348), eta: 2 days, 4:46:27, mem: 2645M
+2019-10-15 01:49:05,495 SSD.trainer INFO: iter: 003900, lr: 0.00100, time: 0.511 (0.741), cls_loss: 2.266 (3.414), reg_loss: 0.597 (0.930), total_loss: 2.862 (4.344), eta: 2 days, 4:43:48, mem: 2645M
+2019-10-15 01:49:10,053 SSD.trainer INFO: iter: 003910, lr: 0.00100, time: 0.456 (0.740), cls_loss: 2.356 (3.411), reg_loss: 0.567 (0.929), total_loss: 2.924 (4.340), eta: 2 days, 4:40:34, mem: 2645M
+2019-10-15 01:49:16,084 SSD.trainer INFO: iter: 003920, lr: 0.00100, time: 0.603 (0.740), cls_loss: 2.213 (3.408), reg_loss: 0.553 (0.928), total_loss: 2.766 (4.336), eta: 2 days, 4:38:57, mem: 2645M
+2019-10-15 01:49:21,103 SSD.trainer INFO: iter: 003930, lr: 0.00100, time: 0.502 (0.740), cls_loss: 2.266 (3.405), reg_loss: 0.582 (0.927), total_loss: 2.847 (4.332), eta: 2 days, 4:36:14, mem: 2645M
+2019-10-15 01:49:26,756 SSD.trainer INFO: iter: 003940, lr: 0.00100, time: 0.565 (0.739), cls_loss: 2.418 (3.402), reg_loss: 0.597 (0.926), total_loss: 3.015 (4.329), eta: 2 days, 4:34:13, mem: 2645M
+2019-10-15 01:49:31,722 SSD.trainer INFO: iter: 003950, lr: 0.00100, time: 0.497 (0.738), cls_loss: 2.347 (3.400), reg_loss: 0.565 (0.926), total_loss: 2.912 (4.325), eta: 2 days, 4:31:29, mem: 2645M
+2019-10-15 01:49:36,229 SSD.trainer INFO: iter: 003960, lr: 0.00100, time: 0.451 (0.738), cls_loss: 2.270 (3.397), reg_loss: 0.548 (0.925), total_loss: 2.818 (4.322), eta: 2 days, 4:28:15, mem: 2645M
+2019-10-15 01:49:40,905 SSD.trainer INFO: iter: 003970, lr: 0.00100, time: 0.468 (0.737), cls_loss: 2.157 (3.394), reg_loss: 0.576 (0.924), total_loss: 2.733 (4.318), eta: 2 days, 4:25:14, mem: 2645M
+2019-10-15 01:49:46,406 SSD.trainer INFO: iter: 003980, lr: 0.00100, time: 0.550 (0.737), cls_loss: 2.447 (3.391), reg_loss: 0.522 (0.923), total_loss: 2.969 (4.314), eta: 2 days, 4:23:06, mem: 2645M
+2019-10-15 01:49:51,695 SSD.trainer INFO: iter: 003990, lr: 0.00100, time: 0.529 (0.736), cls_loss: 2.345 (3.389), reg_loss: 0.519 (0.922), total_loss: 2.864 (4.310), eta: 2 days, 4:20:46, mem: 2645M
+2019-10-15 01:49:56,775 SSD.trainer INFO: iter: 004000, lr: 0.00100, time: 0.508 (0.736), cls_loss: 2.188 (3.386), reg_loss: 0.609 (0.921), total_loss: 2.797 (4.307), eta: 2 days, 4:18:12, mem: 2645M
+2019-10-15 01:50:01,440 SSD.trainer INFO: iter: 004010, lr: 0.00100, time: 0.466 (0.735), cls_loss: 2.267 (3.383), reg_loss: 0.547 (0.920), total_loss: 2.814 (4.303), eta: 2 days, 4:15:13, mem: 2645M
+2019-10-15 01:50:06,930 SSD.trainer INFO: iter: 004020, lr: 0.00100, time: 0.549 (0.734), cls_loss: 2.420 (3.381), reg_loss: 0.555 (0.919), total_loss: 2.975 (4.300), eta: 2 days, 4:13:07, mem: 2645M
+2019-10-15 01:50:11,114 SSD.trainer INFO: iter: 004030, lr: 0.00100, time: 0.418 (0.734), cls_loss: 2.191 (3.378), reg_loss: 0.584 (0.918), total_loss: 2.775 (4.296), eta: 2 days, 4:09:39, mem: 2645M
+2019-10-15 01:50:16,148 SSD.trainer INFO: iter: 004040, lr: 0.00100, time: 0.503 (0.733), cls_loss: 2.318 (3.375), reg_loss: 0.626 (0.917), total_loss: 2.944 (4.293), eta: 2 days, 4:07:06, mem: 2645M
+2019-10-15 01:50:21,600 SSD.trainer INFO: iter: 004050, lr: 0.00100, time: 0.545 (0.733), cls_loss: 2.472 (3.373), reg_loss: 0.687 (0.917), total_loss: 3.158 (4.290), eta: 2 days, 4:05:00, mem: 2645M
+2019-10-15 01:50:26,572 SSD.trainer INFO: iter: 004060, lr: 0.00100, time: 0.497 (0.732), cls_loss: 2.233 (3.370), reg_loss: 0.558 (0.916), total_loss: 2.791 (4.286), eta: 2 days, 4:02:24, mem: 2645M
+2019-10-15 01:50:32,382 SSD.trainer INFO: iter: 004070, lr: 0.00100, time: 0.581 (0.732), cls_loss: 2.254 (3.367), reg_loss: 0.476 (0.915), total_loss: 2.729 (4.282), eta: 2 days, 4:00:42, mem: 2645M
+2019-10-15 01:50:37,283 SSD.trainer INFO: iter: 004080, lr: 0.00100, time: 0.490 (0.731), cls_loss: 2.048 (3.364), reg_loss: 0.497 (0.914), total_loss: 2.546 (4.278), eta: 2 days, 3:58:03, mem: 2645M
+2019-10-15 01:50:42,448 SSD.trainer INFO: iter: 004090, lr: 0.00100, time: 0.516 (0.731), cls_loss: 2.222 (3.361), reg_loss: 0.555 (0.913), total_loss: 2.778 (4.274), eta: 2 days, 3:55:42, mem: 2645M
+2019-10-15 01:50:46,888 SSD.trainer INFO: iter: 004100, lr: 0.00100, time: 0.444 (0.730), cls_loss: 2.317 (3.359), reg_loss: 0.574 (0.912), total_loss: 2.892 (4.271), eta: 2 days, 3:52:36, mem: 2645M
+2019-10-15 01:50:54,550 SSD.trainer INFO: iter: 004110, lr: 0.00100, time: 0.766 (0.730), cls_loss: 2.250 (3.356), reg_loss: 0.523 (0.911), total_loss: 2.774 (4.267), eta: 2 days, 3:52:51, mem: 2645M
+2019-10-15 01:50:58,924 SSD.trainer INFO: iter: 004120, lr: 0.00100, time: 0.437 (0.729), cls_loss: 2.247 (3.353), reg_loss: 0.532 (0.910), total_loss: 2.779 (4.264), eta: 2 days, 3:49:42, mem: 2645M
+2019-10-15 01:51:03,706 SSD.trainer INFO: iter: 004130, lr: 0.00100, time: 0.478 (0.729), cls_loss: 2.169 (3.350), reg_loss: 0.599 (0.910), total_loss: 2.768 (4.260), eta: 2 days, 3:46:59, mem: 2645M
+2019-10-15 01:51:08,221 SSD.trainer INFO: iter: 004140, lr: 0.00100, time: 0.451 (0.728), cls_loss: 2.540 (3.349), reg_loss: 0.641 (0.909), total_loss: 3.181 (4.257), eta: 2 days, 3:44:01, mem: 2645M
+2019-10-15 01:51:14,914 SSD.trainer INFO: iter: 004150, lr: 0.00100, time: 0.669 (0.728), cls_loss: 2.507 (3.346), reg_loss: 0.695 (0.908), total_loss: 3.202 (4.255), eta: 2 days, 3:43:17, mem: 2645M
+2019-10-15 01:51:19,779 SSD.trainer INFO: iter: 004160, lr: 0.00100, time: 0.486 (0.727), cls_loss: 2.337 (3.344), reg_loss: 0.527 (0.908), total_loss: 2.864 (4.252), eta: 2 days, 3:40:42, mem: 2645M
+2019-10-15 01:51:24,647 SSD.trainer INFO: iter: 004170, lr: 0.00100, time: 0.487 (0.727), cls_loss: 2.390 (3.342), reg_loss: 0.589 (0.907), total_loss: 2.979 (4.249), eta: 2 days, 3:38:07, mem: 2645M
+2019-10-15 01:51:28,853 SSD.trainer INFO: iter: 004180, lr: 0.00100, time: 0.421 (0.726), cls_loss: 2.392 (3.339), reg_loss: 0.528 (0.906), total_loss: 2.920 (4.245), eta: 2 days, 3:34:53, mem: 2645M
+2019-10-15 01:51:34,129 SSD.trainer INFO: iter: 004190, lr: 0.00100, time: 0.528 (0.725), cls_loss: 2.261 (3.337), reg_loss: 0.516 (0.905), total_loss: 2.778 (4.242), eta: 2 days, 3:32:44, mem: 2645M
+2019-10-15 01:51:38,420 SSD.trainer INFO: iter: 004200, lr: 0.00100, time: 0.429 (0.725), cls_loss: 2.429 (3.335), reg_loss: 0.569 (0.904), total_loss: 2.999 (4.239), eta: 2 days, 3:29:36, mem: 2645M
+2019-10-15 01:51:43,316 SSD.trainer INFO: iter: 004210, lr: 0.00100, time: 0.490 (0.724), cls_loss: 2.184 (3.332), reg_loss: 0.573 (0.903), total_loss: 2.757 (4.235), eta: 2 days, 3:27:06, mem: 2645M
+2019-10-15 01:51:49,011 SSD.trainer INFO: iter: 004220, lr: 0.00100, time: 0.570 (0.724), cls_loss: 2.165 (3.329), reg_loss: 0.517 (0.902), total_loss: 2.682 (4.232), eta: 2 days, 3:25:25, mem: 2645M
+2019-10-15 01:51:53,585 SSD.trainer INFO: iter: 004230, lr: 0.00100, time: 0.457 (0.723), cls_loss: 2.330 (3.327), reg_loss: 0.557 (0.902), total_loss: 2.887 (4.229), eta: 2 days, 3:22:37, mem: 2645M
+2019-10-15 01:51:58,928 SSD.trainer INFO: iter: 004240, lr: 0.00100, time: 0.534 (0.723), cls_loss: 2.235 (3.324), reg_loss: 0.563 (0.901), total_loss: 2.798 (4.225), eta: 2 days, 3:20:36, mem: 2645M
+2019-10-15 01:52:03,962 SSD.trainer INFO: iter: 004250, lr: 0.00100, time: 0.503 (0.722), cls_loss: 2.295 (3.322), reg_loss: 0.570 (0.900), total_loss: 2.865 (4.222), eta: 2 days, 3:18:17, mem: 2645M
+2019-10-15 01:52:10,897 SSD.trainer INFO: iter: 004260, lr: 0.00100, time: 0.693 (0.722), cls_loss: 2.257 (3.319), reg_loss: 0.531 (0.899), total_loss: 2.788 (4.219), eta: 2 days, 3:17:52, mem: 2645M
+2019-10-15 01:52:17,473 SSD.trainer INFO: iter: 004270, lr: 0.00100, time: 0.658 (0.722), cls_loss: 2.356 (3.317), reg_loss: 0.568 (0.898), total_loss: 2.925 (4.216), eta: 2 days, 3:17:06, mem: 2645M
+2019-10-15 01:52:21,986 SSD.trainer INFO: iter: 004280, lr: 0.00100, time: 0.451 (0.721), cls_loss: 2.309 (3.315), reg_loss: 0.524 (0.898), total_loss: 2.833 (4.212), eta: 2 days, 3:14:18, mem: 2645M
+2019-10-15 01:52:25,934 SSD.trainer INFO: iter: 004290, lr: 0.00100, time: 0.395 (0.721), cls_loss: 2.256 (3.312), reg_loss: 0.479 (0.897), total_loss: 2.735 (4.209), eta: 2 days, 3:10:56, mem: 2645M
+2019-10-15 01:52:30,695 SSD.trainer INFO: iter: 004300, lr: 0.00100, time: 0.476 (0.720), cls_loss: 2.220 (3.310), reg_loss: 0.506 (0.896), total_loss: 2.725 (4.205), eta: 2 days, 3:08:23, mem: 2645M
+2019-10-15 01:52:34,677 SSD.trainer INFO: iter: 004310, lr: 0.00100, time: 0.398 (0.719), cls_loss: 2.265 (3.307), reg_loss: 0.510 (0.895), total_loss: 2.775 (4.202), eta: 2 days, 3:05:05, mem: 2645M
+2019-10-15 01:52:39,817 SSD.trainer INFO: iter: 004320, lr: 0.00100, time: 0.514 (0.719), cls_loss: 2.177 (3.305), reg_loss: 0.549 (0.894), total_loss: 2.727 (4.199), eta: 2 days, 3:02:56, mem: 2645M
+2019-10-15 01:52:44,365 SSD.trainer INFO: iter: 004330, lr: 0.00100, time: 0.455 (0.718), cls_loss: 2.126 (3.302), reg_loss: 0.525 (0.893), total_loss: 2.651 (4.195), eta: 2 days, 3:00:13, mem: 2645M
+2019-10-15 01:52:49,302 SSD.trainer INFO: iter: 004340, lr: 0.00100, time: 0.494 (0.718), cls_loss: 2.258 (3.300), reg_loss: 0.477 (0.892), total_loss: 2.735 (4.192), eta: 2 days, 2:57:54, mem: 2645M
+2019-10-15 01:52:53,351 SSD.trainer INFO: iter: 004350, lr: 0.00100, time: 0.405 (0.717), cls_loss: 2.277 (3.297), reg_loss: 0.599 (0.891), total_loss: 2.876 (4.189), eta: 2 days, 2:54:43, mem: 2645M
+2019-10-15 01:52:59,427 SSD.trainer INFO: iter: 004360, lr: 0.00100, time: 0.608 (0.717), cls_loss: 2.276 (3.295), reg_loss: 0.552 (0.891), total_loss: 2.828 (4.186), eta: 2 days, 2:53:32, mem: 2645M
+2019-10-15 01:53:03,422 SSD.trainer INFO: iter: 004370, lr: 0.00100, time: 0.399 (0.716), cls_loss: 2.155 (3.292), reg_loss: 0.531 (0.890), total_loss: 2.686 (4.182), eta: 2 days, 2:50:19, mem: 2645M
+2019-10-15 01:53:07,546 SSD.trainer INFO: iter: 004380, lr: 0.00100, time: 0.412 (0.715), cls_loss: 2.226 (3.290), reg_loss: 0.524 (0.889), total_loss: 2.750 (4.179), eta: 2 days, 2:47:15, mem: 2645M
+2019-10-15 01:53:13,089 SSD.trainer INFO: iter: 004390, lr: 0.00100, time: 0.554 (0.715), cls_loss: 2.213 (3.287), reg_loss: 0.541 (0.888), total_loss: 2.754 (4.176), eta: 2 days, 2:45:34, mem: 2645M
+2019-10-15 01:53:18,882 SSD.trainer INFO: iter: 004400, lr: 0.00100, time: 0.579 (0.715), cls_loss: 2.308 (3.285), reg_loss: 0.597 (0.888), total_loss: 2.905 (4.173), eta: 2 days, 2:44:08, mem: 2645M
+2019-10-15 01:53:24,113 SSD.trainer INFO: iter: 004410, lr: 0.00100, time: 0.523 (0.714), cls_loss: 2.070 (3.282), reg_loss: 0.476 (0.887), total_loss: 2.546 (4.169), eta: 2 days, 2:42:10, mem: 2645M
+2019-10-15 01:53:28,149 SSD.trainer INFO: iter: 004420, lr: 0.00100, time: 0.404 (0.713), cls_loss: 2.239 (3.280), reg_loss: 0.514 (0.886), total_loss: 2.752 (4.166), eta: 2 days, 2:39:03, mem: 2645M
+2019-10-15 01:53:33,541 SSD.trainer INFO: iter: 004430, lr: 0.00100, time: 0.539 (0.713), cls_loss: 2.281 (3.278), reg_loss: 0.517 (0.885), total_loss: 2.798 (4.163), eta: 2 days, 2:37:15, mem: 2645M
+2019-10-15 01:53:43,023 SSD.trainer INFO: iter: 004440, lr: 0.00100, time: 0.948 (0.714), cls_loss: 2.198 (3.275), reg_loss: 0.467 (0.884), total_loss: 2.665 (4.159), eta: 2 days, 2:39:24, mem: 2645M
+2019-10-15 01:53:47,269 SSD.trainer INFO: iter: 004450, lr: 0.00100, time: 0.425 (0.713), cls_loss: 2.363 (3.273), reg_loss: 0.553 (0.883), total_loss: 2.915 (4.157), eta: 2 days, 2:36:30, mem: 2645M
+2019-10-15 01:53:51,996 SSD.trainer INFO: iter: 004460, lr: 0.00100, time: 0.473 (0.712), cls_loss: 2.223 (3.271), reg_loss: 0.578 (0.883), total_loss: 2.801 (4.154), eta: 2 days, 2:34:06, mem: 2645M
+2019-10-15 01:53:56,772 SSD.trainer INFO: iter: 004470, lr: 0.00100, time: 0.478 (0.712), cls_loss: 2.174 (3.269), reg_loss: 0.620 (0.882), total_loss: 2.794 (4.151), eta: 2 days, 2:31:44, mem: 2645M
+2019-10-15 01:54:01,833 SSD.trainer INFO: iter: 004480, lr: 0.00100, time: 0.506 (0.711), cls_loss: 2.224 (3.266), reg_loss: 0.529 (0.881), total_loss: 2.753 (4.147), eta: 2 days, 2:29:40, mem: 2645M
+2019-10-15 01:54:06,441 SSD.trainer INFO: iter: 004490, lr: 0.00100, time: 0.461 (0.711), cls_loss: 2.141 (3.264), reg_loss: 0.452 (0.880), total_loss: 2.593 (4.144), eta: 2 days, 2:27:10, mem: 2645M
+2019-10-15 01:54:12,806 SSD.trainer INFO: iter: 004500, lr: 0.00100, time: 0.637 (0.711), cls_loss: 2.287 (3.262), reg_loss: 0.570 (0.880), total_loss: 2.857 (4.141), eta: 2 days, 2:26:21, mem: 2645M
+2019-10-15 01:54:17,241 SSD.trainer INFO: iter: 004510, lr: 0.00100, time: 0.444 (0.710), cls_loss: 2.400 (3.260), reg_loss: 0.592 (0.879), total_loss: 2.992 (4.139), eta: 2 days, 2:23:42, mem: 2645M
+2019-10-15 01:54:22,436 SSD.trainer INFO: iter: 004520, lr: 0.00100, time: 0.519 (0.710), cls_loss: 2.077 (3.257), reg_loss: 0.485 (0.878), total_loss: 2.562 (4.135), eta: 2 days, 2:21:47, mem: 2645M
+2019-10-15 01:54:27,523 SSD.trainer INFO: iter: 004530, lr: 0.00100, time: 0.509 (0.709), cls_loss: 2.307 (3.255), reg_loss: 0.546 (0.877), total_loss: 2.853 (4.132), eta: 2 days, 2:19:47, mem: 2645M
+2019-10-15 01:54:31,844 SSD.trainer INFO: iter: 004540, lr: 0.00100, time: 0.432 (0.709), cls_loss: 2.155 (3.252), reg_loss: 0.527 (0.877), total_loss: 2.682 (4.129), eta: 2 days, 2:17:04, mem: 2645M
+2019-10-15 01:54:38,166 SSD.trainer INFO: iter: 004550, lr: 0.00100, time: 0.632 (0.708), cls_loss: 2.080 (3.250), reg_loss: 0.462 (0.876), total_loss: 2.542 (4.126), eta: 2 days, 2:16:14, mem: 2645M
+2019-10-15 01:54:43,362 SSD.trainer INFO: iter: 004560, lr: 0.00100, time: 0.520 (0.708), cls_loss: 2.316 (3.248), reg_loss: 0.516 (0.875), total_loss: 2.832 (4.123), eta: 2 days, 2:14:21, mem: 2645M
+2019-10-15 01:54:48,052 SSD.trainer INFO: iter: 004570, lr: 0.00100, time: 0.469 (0.708), cls_loss: 2.184 (3.246), reg_loss: 0.505 (0.874), total_loss: 2.690 (4.120), eta: 2 days, 2:12:00, mem: 2645M
+2019-10-15 01:54:52,785 SSD.trainer INFO: iter: 004580, lr: 0.00100, time: 0.473 (0.707), cls_loss: 2.145 (3.243), reg_loss: 0.548 (0.873), total_loss: 2.693 (4.116), eta: 2 days, 2:09:43, mem: 2645M
+2019-10-15 01:54:56,961 SSD.trainer INFO: iter: 004590, lr: 0.00100, time: 0.418 (0.706), cls_loss: 2.090 (3.241), reg_loss: 0.475 (0.872), total_loss: 2.565 (4.113), eta: 2 days, 2:06:55, mem: 2645M
+2019-10-15 01:55:01,415 SSD.trainer INFO: iter: 004600, lr: 0.00100, time: 0.445 (0.706), cls_loss: 2.195 (3.238), reg_loss: 0.524 (0.872), total_loss: 2.718 (4.110), eta: 2 days, 2:04:23, mem: 2645M
+2019-10-15 01:55:06,114 SSD.trainer INFO: iter: 004610, lr: 0.00100, time: 0.470 (0.705), cls_loss: 2.262 (3.236), reg_loss: 0.493 (0.871), total_loss: 2.755 (4.107), eta: 2 days, 2:02:05, mem: 2645M
+2019-10-15 01:55:12,256 SSD.trainer INFO: iter: 004620, lr: 0.00100, time: 0.614 (0.705), cls_loss: 2.176 (3.234), reg_loss: 0.526 (0.870), total_loss: 2.702 (4.104), eta: 2 days, 2:01:08, mem: 2645M
+2019-10-15 01:55:17,743 SSD.trainer INFO: iter: 004630, lr: 0.00100, time: 0.549 (0.705), cls_loss: 2.384 (3.232), reg_loss: 0.544 (0.869), total_loss: 2.929 (4.102), eta: 2 days, 1:59:34, mem: 2645M
+2019-10-15 01:55:24,480 SSD.trainer INFO: iter: 004640, lr: 0.00100, time: 0.674 (0.705), cls_loss: 2.153 (3.230), reg_loss: 0.524 (0.869), total_loss: 2.677 (4.098), eta: 2 days, 1:59:10, mem: 2645M
+2019-10-15 01:55:29,270 SSD.trainer INFO: iter: 004650, lr: 0.00100, time: 0.479 (0.704), cls_loss: 2.285 (3.228), reg_loss: 0.501 (0.868), total_loss: 2.786 (4.096), eta: 2 days, 1:56:59, mem: 2645M
+2019-10-15 01:55:34,337 SSD.trainer INFO: iter: 004660, lr: 0.00100, time: 0.507 (0.704), cls_loss: 2.146 (3.225), reg_loss: 0.556 (0.867), total_loss: 2.702 (4.093), eta: 2 days, 1:55:04, mem: 2645M
+2019-10-15 01:55:38,855 SSD.trainer INFO: iter: 004670, lr: 0.00100, time: 0.452 (0.703), cls_loss: 2.180 (3.223), reg_loss: 0.539 (0.867), total_loss: 2.718 (4.090), eta: 2 days, 1:52:39, mem: 2645M
+2019-10-15 01:55:43,595 SSD.trainer INFO: iter: 004680, lr: 0.00100, time: 0.474 (0.703), cls_loss: 2.189 (3.221), reg_loss: 0.552 (0.866), total_loss: 2.740 (4.087), eta: 2 days, 1:50:27, mem: 2645M
+2019-10-15 01:55:49,302 SSD.trainer INFO: iter: 004690, lr: 0.00100, time: 0.571 (0.702), cls_loss: 2.223 (3.219), reg_loss: 0.543 (0.865), total_loss: 2.766 (4.084), eta: 2 days, 1:49:08, mem: 2645M
+2019-10-15 01:55:53,908 SSD.trainer INFO: iter: 004700, lr: 0.00100, time: 0.461 (0.702), cls_loss: 2.267 (3.217), reg_loss: 0.512 (0.864), total_loss: 2.779 (4.081), eta: 2 days, 1:46:50, mem: 2645M
+2019-10-15 01:55:58,458 SSD.trainer INFO: iter: 004710, lr: 0.00100, time: 0.455 (0.701), cls_loss: 2.226 (3.215), reg_loss: 0.504 (0.864), total_loss: 2.730 (4.078), eta: 2 days, 1:44:29, mem: 2645M
+2019-10-15 01:56:02,956 SSD.trainer INFO: iter: 004720, lr: 0.00100, time: 0.450 (0.701), cls_loss: 2.249 (3.213), reg_loss: 0.502 (0.863), total_loss: 2.751 (4.076), eta: 2 days, 1:42:06, mem: 2645M
+2019-10-15 01:56:09,427 SSD.trainer INFO: iter: 004730, lr: 0.00100, time: 0.647 (0.701), cls_loss: 2.143 (3.210), reg_loss: 0.589 (0.862), total_loss: 2.731 (4.073), eta: 2 days, 1:41:30, mem: 2645M
+2019-10-15 01:56:14,599 SSD.trainer INFO: iter: 004740, lr: 0.00100, time: 0.517 (0.700), cls_loss: 2.364 (3.209), reg_loss: 0.591 (0.862), total_loss: 2.954 (4.070), eta: 2 days, 1:39:44, mem: 2645M
+2019-10-15 01:56:19,864 SSD.trainer INFO: iter: 004750, lr: 0.00100, time: 0.526 (0.700), cls_loss: 2.050 (3.206), reg_loss: 0.485 (0.861), total_loss: 2.535 (4.067), eta: 2 days, 1:38:03, mem: 2645M
+2019-10-15 01:56:24,158 SSD.trainer INFO: iter: 004760, lr: 0.00100, time: 0.429 (0.699), cls_loss: 2.075 (3.204), reg_loss: 0.469 (0.860), total_loss: 2.544 (4.064), eta: 2 days, 1:35:31, mem: 2645M
+2019-10-15 01:56:28,823 SSD.trainer INFO: iter: 004770, lr: 0.00100, time: 0.467 (0.699), cls_loss: 2.237 (3.202), reg_loss: 0.484 (0.859), total_loss: 2.721 (4.061), eta: 2 days, 1:33:19, mem: 2645M
+2019-10-15 01:56:33,628 SSD.trainer INFO: iter: 004780, lr: 0.00100, time: 0.481 (0.699), cls_loss: 2.182 (3.200), reg_loss: 0.477 (0.859), total_loss: 2.659 (4.058), eta: 2 days, 1:31:16, mem: 2645M
+2019-10-15 01:56:38,379 SSD.trainer INFO: iter: 004790, lr: 0.00100, time: 0.475 (0.698), cls_loss: 2.196 (3.198), reg_loss: 0.549 (0.858), total_loss: 2.746 (4.055), eta: 2 days, 1:29:10, mem: 2645M
+2019-10-15 01:56:42,694 SSD.trainer INFO: iter: 004800, lr: 0.00100, time: 0.432 (0.697), cls_loss: 2.084 (3.195), reg_loss: 0.486 (0.857), total_loss: 2.569 (4.052), eta: 2 days, 1:26:41, mem: 2645M
+2019-10-15 01:56:47,847 SSD.trainer INFO: iter: 004810, lr: 0.00100, time: 0.515 (0.697), cls_loss: 2.082 (3.193), reg_loss: 0.521 (0.856), total_loss: 2.603 (4.049), eta: 2 days, 1:24:57, mem: 2645M
+2019-10-15 01:56:54,029 SSD.trainer INFO: iter: 004820, lr: 0.00100, time: 0.618 (0.697), cls_loss: 2.323 (3.191), reg_loss: 0.580 (0.856), total_loss: 2.903 (4.047), eta: 2 days, 1:24:09, mem: 2645M
+2019-10-15 01:57:00,140 SSD.trainer INFO: iter: 004830, lr: 0.00100, time: 0.611 (0.697), cls_loss: 2.167 (3.189), reg_loss: 0.507 (0.855), total_loss: 2.673 (4.044), eta: 2 days, 1:23:16, mem: 2645M
+2019-10-15 01:57:04,506 SSD.trainer INFO: iter: 004840, lr: 0.00100, time: 0.437 (0.696), cls_loss: 2.304 (3.187), reg_loss: 0.543 (0.854), total_loss: 2.847 (4.042), eta: 2 days, 1:20:52, mem: 2645M
+2019-10-15 01:57:10,395 SSD.trainer INFO: iter: 004850, lr: 0.00100, time: 0.589 (0.696), cls_loss: 2.071 (3.185), reg_loss: 0.530 (0.854), total_loss: 2.600 (4.039), eta: 2 days, 1:19:49, mem: 2645M
+2019-10-15 01:57:14,699 SSD.trainer INFO: iter: 004860, lr: 0.00100, time: 0.430 (0.695), cls_loss: 2.237 (3.183), reg_loss: 0.540 (0.853), total_loss: 2.777 (4.036), eta: 2 days, 1:17:22, mem: 2645M
+2019-10-15 01:57:20,310 SSD.trainer INFO: iter: 004870, lr: 0.00100, time: 0.561 (0.695), cls_loss: 2.178 (3.181), reg_loss: 0.530 (0.852), total_loss: 2.708 (4.033), eta: 2 days, 1:16:05, mem: 2645M
+2019-10-15 01:57:26,034 SSD.trainer INFO: iter: 004880, lr: 0.00100, time: 0.572 (0.695), cls_loss: 2.135 (3.179), reg_loss: 0.542 (0.852), total_loss: 2.677 (4.031), eta: 2 days, 1:14:54, mem: 2645M
+2019-10-15 01:57:30,085 SSD.trainer INFO: iter: 004890, lr: 0.00100, time: 0.405 (0.694), cls_loss: 2.169 (3.177), reg_loss: 0.525 (0.851), total_loss: 2.693 (4.028), eta: 2 days, 1:12:16, mem: 2645M
+2019-10-15 01:57:34,667 SSD.trainer INFO: iter: 004900, lr: 0.00100, time: 0.458 (0.694), cls_loss: 2.192 (3.175), reg_loss: 0.539 (0.851), total_loss: 2.731 (4.025), eta: 2 days, 1:10:06, mem: 2645M
+2019-10-15 01:57:39,234 SSD.trainer INFO: iter: 004910, lr: 0.00100, time: 0.457 (0.693), cls_loss: 2.365 (3.173), reg_loss: 0.532 (0.850), total_loss: 2.897 (4.023), eta: 2 days, 1:07:56, mem: 2645M
+2019-10-15 01:57:44,337 SSD.trainer INFO: iter: 004920, lr: 0.00100, time: 0.510 (0.693), cls_loss: 2.185 (3.171), reg_loss: 0.488 (0.849), total_loss: 2.673 (4.020), eta: 2 days, 1:06:14, mem: 2645M
+2019-10-15 01:57:50,798 SSD.trainer INFO: iter: 004930, lr: 0.00100, time: 0.646 (0.693), cls_loss: 2.350 (3.169), reg_loss: 0.566 (0.849), total_loss: 2.916 (4.018), eta: 2 days, 1:05:43, mem: 2645M
+2019-10-15 01:57:55,702 SSD.trainer INFO: iter: 004940, lr: 0.00100, time: 0.490 (0.693), cls_loss: 2.297 (3.168), reg_loss: 0.522 (0.848), total_loss: 2.819 (4.015), eta: 2 days, 1:03:51, mem: 2645M
+2019-10-15 01:58:00,262 SSD.trainer INFO: iter: 004950, lr: 0.00100, time: 0.456 (0.692), cls_loss: 2.349 (3.166), reg_loss: 0.580 (0.847), total_loss: 2.930 (4.013), eta: 2 days, 1:01:42, mem: 2645M
+2019-10-15 01:58:05,101 SSD.trainer INFO: iter: 004960, lr: 0.00100, time: 0.484 (0.692), cls_loss: 2.239 (3.164), reg_loss: 0.504 (0.847), total_loss: 2.743 (4.011), eta: 2 days, 0:59:48, mem: 2645M
+2019-10-15 01:58:09,517 SSD.trainer INFO: iter: 004970, lr: 0.00100, time: 0.442 (0.691), cls_loss: 2.155 (3.162), reg_loss: 0.515 (0.846), total_loss: 2.670 (4.008), eta: 2 days, 0:57:33, mem: 2645M
+2019-10-15 01:58:15,390 SSD.trainer INFO: iter: 004980, lr: 0.00100, time: 0.587 (0.691), cls_loss: 2.101 (3.160), reg_loss: 0.530 (0.845), total_loss: 2.631 (4.005), eta: 2 days, 0:56:33, mem: 2645M
+2019-10-15 01:58:19,287 SSD.trainer INFO: iter: 004990, lr: 0.00100, time: 0.390 (0.690), cls_loss: 2.259 (3.158), reg_loss: 0.493 (0.845), total_loss: 2.751 (4.003), eta: 2 days, 0:53:52, mem: 2645M
+2019-10-15 01:58:24,087 SSD.trainer INFO: iter: 005000, lr: 0.00100, time: 0.480 (0.690), cls_loss: 2.192 (3.156), reg_loss: 0.529 (0.844), total_loss: 2.721 (4.000), eta: 2 days, 0:51:58, mem: 2645M
+2019-10-15 01:58:24,093 SSD.trainer INFO: Saving checkpoint to outputs/mobilenet_v2_ssd320_custom/model_005000.pth
+2019-10-15 01:58:24,134 SSD.inference INFO: Evaluating custom_test dataset(184 images):
+2019-10-15 01:58:26,182 SSD.inference INFO: mAP: 0.6689
+neutral         : 0.6053
+anger           : 0.6641
+surprise        : 0.7866
+smile           : 0.7215
+sad             : 0.5672
+
+2019-10-15 01:58:31,735 SSD.trainer INFO: iter: 005010, lr: 0.00100, time: 0.765 (0.690), cls_loss: 2.178 (3.154), reg_loss: 0.547 (0.843), total_loss: 2.726 (3.998), eta: 2 days, 0:52:29, mem: 2645M
+2019-10-15 01:58:38,123 SSD.trainer INFO: iter: 005020, lr: 0.00100, time: 0.639 (0.690), cls_loss: 2.098 (3.152), reg_loss: 0.475 (0.843), total_loss: 2.573 (3.995), eta: 2 days, 0:51:56, mem: 2645M
+2019-10-15 01:58:44,396 SSD.trainer INFO: iter: 005030, lr: 0.00100, time: 0.627 (0.690), cls_loss: 2.034 (3.150), reg_loss: 0.424 (0.842), total_loss: 2.458 (3.992), eta: 2 days, 0:51:18, mem: 2645M
+2019-10-15 01:58:51,756 SSD.trainer INFO: iter: 005040, lr: 0.00100, time: 0.736 (0.690), cls_loss: 2.130 (3.148), reg_loss: 0.543 (0.841), total_loss: 2.673 (3.989), eta: 2 days, 0:51:34, mem: 2645M
+2019-10-15 01:58:56,155 SSD.trainer INFO: iter: 005050, lr: 0.00100, time: 0.440 (0.689), cls_loss: 2.186 (3.146), reg_loss: 0.498 (0.841), total_loss: 2.684 (3.987), eta: 2 days, 0:49:21, mem: 2645M
+2019-10-15 01:59:00,442 SSD.trainer INFO: iter: 005060, lr: 0.00100, time: 0.429 (0.689), cls_loss: 2.163 (3.144), reg_loss: 0.535 (0.840), total_loss: 2.698 (3.984), eta: 2 days, 0:47:03, mem: 2645M
+2019-10-15 01:59:06,518 SSD.trainer INFO: iter: 005070, lr: 0.00100, time: 0.608 (0.689), cls_loss: 2.292 (3.142), reg_loss: 0.547 (0.839), total_loss: 2.839 (3.982), eta: 2 days, 0:46:15, mem: 2645M
+2019-10-15 01:59:12,386 SSD.trainer INFO: iter: 005080, lr: 0.00100, time: 0.587 (0.689), cls_loss: 2.105 (3.140), reg_loss: 0.464 (0.839), total_loss: 2.569 (3.979), eta: 2 days, 0:45:17, mem: 2645M
+2019-10-15 01:59:16,488 SSD.trainer INFO: iter: 005090, lr: 0.00100, time: 0.410 (0.688), cls_loss: 2.160 (3.138), reg_loss: 0.545 (0.838), total_loss: 2.705 (3.976), eta: 2 days, 0:42:51, mem: 2645M
+2019-10-15 01:59:21,108 SSD.trainer INFO: iter: 005100, lr: 0.00100, time: 0.462 (0.688), cls_loss: 2.039 (3.136), reg_loss: 0.453 (0.837), total_loss: 2.492 (3.974), eta: 2 days, 0:40:51, mem: 2645M
+2019-10-15 01:59:26,356 SSD.trainer INFO: iter: 005110, lr: 0.00100, time: 0.525 (0.687), cls_loss: 2.042 (3.134), reg_loss: 0.543 (0.837), total_loss: 2.585 (3.971), eta: 2 days, 0:39:23, mem: 2645M
+2019-10-15 01:59:30,816 SSD.trainer INFO: iter: 005120, lr: 0.00100, time: 0.446 (0.687), cls_loss: 2.192 (3.132), reg_loss: 0.525 (0.836), total_loss: 2.717 (3.968), eta: 2 days, 0:37:16, mem: 2645M
+2019-10-15 01:59:37,743 SSD.trainer INFO: iter: 005130, lr: 0.00100, time: 0.693 (0.687), cls_loss: 2.331 (3.131), reg_loss: 0.588 (0.836), total_loss: 2.918 (3.966), eta: 2 days, 0:37:12, mem: 2645M
+2019-10-15 01:59:44,058 SSD.trainer INFO: iter: 005140, lr: 0.00100, time: 0.632 (0.687), cls_loss: 2.122 (3.129), reg_loss: 0.474 (0.835), total_loss: 2.596 (3.964), eta: 2 days, 0:36:38, mem: 2645M
+2019-10-15 01:59:48,972 SSD.trainer INFO: iter: 005150, lr: 0.00100, time: 0.491 (0.686), cls_loss: 2.125 (3.127), reg_loss: 0.503 (0.834), total_loss: 2.627 (3.961), eta: 2 days, 0:34:54, mem: 2645M
+2019-10-15 01:59:53,223 SSD.trainer INFO: iter: 005160, lr: 0.00100, time: 0.425 (0.686), cls_loss: 1.980 (3.124), reg_loss: 0.509 (0.834), total_loss: 2.490 (3.958), eta: 2 days, 0:32:39, mem: 2645M
+2019-10-15 01:59:57,784 SSD.trainer INFO: iter: 005170, lr: 0.00100, time: 0.456 (0.685), cls_loss: 2.096 (3.122), reg_loss: 0.530 (0.833), total_loss: 2.627 (3.956), eta: 2 days, 0:30:38, mem: 2645M
+2019-10-15 02:00:03,014 SSD.trainer INFO: iter: 005180, lr: 0.00100, time: 0.523 (0.685), cls_loss: 2.428 (3.121), reg_loss: 0.590 (0.833), total_loss: 3.018 (3.954), eta: 2 days, 0:29:12, mem: 2645M
+2019-10-15 02:00:07,769 SSD.trainer INFO: iter: 005190, lr: 0.00100, time: 0.476 (0.685), cls_loss: 2.221 (3.119), reg_loss: 0.570 (0.832), total_loss: 2.791 (3.952), eta: 2 days, 0:27:22, mem: 2645M
+2019-10-15 02:00:11,771 SSD.trainer INFO: iter: 005200, lr: 0.00100, time: 0.400 (0.684), cls_loss: 2.362 (3.118), reg_loss: 0.571 (0.832), total_loss: 2.933 (3.950), eta: 2 days, 0:24:56, mem: 2645M
+2019-10-15 02:00:17,277 SSD.trainer INFO: iter: 005210, lr: 0.00100, time: 0.551 (0.684), cls_loss: 2.325 (3.116), reg_loss: 0.533 (0.831), total_loss: 2.858 (3.948), eta: 2 days, 0:23:44, mem: 2645M
+2019-10-15 02:00:22,441 SSD.trainer INFO: iter: 005220, lr: 0.00100, time: 0.516 (0.683), cls_loss: 2.223 (3.115), reg_loss: 0.566 (0.831), total_loss: 2.789 (3.945), eta: 2 days, 0:22:15, mem: 2645M
+2019-10-15 02:00:27,398 SSD.trainer INFO: iter: 005230, lr: 0.00100, time: 0.496 (0.683), cls_loss: 2.138 (3.113), reg_loss: 0.513 (0.830), total_loss: 2.651 (3.943), eta: 2 days, 0:20:37, mem: 2645M
+2019-10-15 02:00:31,351 SSD.trainer INFO: iter: 005240, lr: 0.00100, time: 0.395 (0.683), cls_loss: 2.143 (3.111), reg_loss: 0.484 (0.829), total_loss: 2.627 (3.940), eta: 2 days, 0:18:10, mem: 2645M
+2019-10-15 02:00:37,513 SSD.trainer INFO: iter: 005250, lr: 0.00100, time: 0.616 (0.682), cls_loss: 2.245 (3.109), reg_loss: 0.514 (0.829), total_loss: 2.758 (3.938), eta: 2 days, 0:17:31, mem: 2645M
+2019-10-15 02:00:44,020 SSD.trainer INFO: iter: 005260, lr: 0.00100, time: 0.651 (0.682), cls_loss: 2.059 (3.107), reg_loss: 0.468 (0.828), total_loss: 2.526 (3.935), eta: 2 days, 0:17:09, mem: 2645M
+2019-10-15 02:00:48,834 SSD.trainer INFO: iter: 005270, lr: 0.00100, time: 0.481 (0.682), cls_loss: 2.100 (3.105), reg_loss: 0.493 (0.827), total_loss: 2.593 (3.933), eta: 2 days, 0:15:25, mem: 2645M
+2019-10-15 02:00:55,045 SSD.trainer INFO: iter: 005280, lr: 0.00100, time: 0.621 (0.682), cls_loss: 2.113 (3.104), reg_loss: 0.513 (0.827), total_loss: 2.625 (3.930), eta: 2 days, 0:14:49, mem: 2645M
+2019-10-15 02:00:59,614 SSD.trainer INFO: iter: 005290, lr: 0.00100, time: 0.457 (0.681), cls_loss: 2.230 (3.102), reg_loss: 0.543 (0.826), total_loss: 2.772 (3.928), eta: 2 days, 0:12:54, mem: 2645M
+2019-10-15 02:01:04,243 SSD.trainer INFO: iter: 005300, lr: 0.00100, time: 0.463 (0.681), cls_loss: 2.090 (3.100), reg_loss: 0.670 (0.826), total_loss: 2.760 (3.926), eta: 2 days, 0:11:02, mem: 2645M
+2019-10-15 02:01:09,530 SSD.trainer INFO: iter: 005310, lr: 0.00100, time: 0.529 (0.681), cls_loss: 2.008 (3.098), reg_loss: 0.493 (0.825), total_loss: 2.502 (3.923), eta: 2 days, 0:09:42, mem: 2645M
+2019-10-15 02:01:15,067 SSD.trainer INFO: iter: 005320, lr: 0.00100, time: 0.554 (0.681), cls_loss: 2.050 (3.096), reg_loss: 0.464 (0.825), total_loss: 2.514 (3.921), eta: 2 days, 0:08:34, mem: 2645M
+2019-10-15 02:01:20,336 SSD.trainer INFO: iter: 005330, lr: 0.00100, time: 0.527 (0.680), cls_loss: 2.028 (3.094), reg_loss: 0.557 (0.824), total_loss: 2.584 (3.918), eta: 2 days, 0:07:14, mem: 2645M
+2019-10-15 02:01:24,621 SSD.trainer INFO: iter: 005340, lr: 0.00100, time: 0.429 (0.680), cls_loss: 2.126 (3.092), reg_loss: 0.509 (0.824), total_loss: 2.635 (3.916), eta: 2 days, 0:05:07, mem: 2645M
+2019-10-15 02:01:31,824 SSD.trainer INFO: iter: 005350, lr: 0.00100, time: 0.720 (0.680), cls_loss: 2.169 (3.090), reg_loss: 0.486 (0.823), total_loss: 2.655 (3.913), eta: 2 days, 0:05:20, mem: 2645M
+2019-10-15 02:01:36,647 SSD.trainer INFO: iter: 005360, lr: 0.00100, time: 0.482 (0.679), cls_loss: 2.180 (3.089), reg_loss: 0.517 (0.822), total_loss: 2.697 (3.911), eta: 2 days, 0:03:39, mem: 2645M
+2019-10-15 02:01:40,643 SSD.trainer INFO: iter: 005370, lr: 0.00100, time: 0.400 (0.679), cls_loss: 1.992 (3.087), reg_loss: 0.539 (0.822), total_loss: 2.531 (3.909), eta: 2 days, 0:01:20, mem: 2645M
+2019-10-15 02:01:45,017 SSD.trainer INFO: iter: 005380, lr: 0.00100, time: 0.437 (0.678), cls_loss: 1.899 (3.084), reg_loss: 0.459 (0.821), total_loss: 2.358 (3.906), eta: 1 day, 23:59:18, mem: 2645M
+2019-10-15 02:01:50,076 SSD.trainer INFO: iter: 005390, lr: 0.00100, time: 0.506 (0.678), cls_loss: 2.074 (3.083), reg_loss: 0.473 (0.820), total_loss: 2.546 (3.903), eta: 1 day, 23:57:50, mem: 2645M
+2019-10-15 02:01:58,275 SSD.trainer INFO: iter: 005400, lr: 0.00100, time: 0.820 (0.678), cls_loss: 2.234 (3.081), reg_loss: 0.597 (0.820), total_loss: 2.831 (3.901), eta: 1 day, 23:58:50, mem: 2645M
+2019-10-15 02:02:02,692 SSD.trainer INFO: iter: 005410, lr: 0.00100, time: 0.442 (0.678), cls_loss: 2.135 (3.079), reg_loss: 0.539 (0.820), total_loss: 2.674 (3.899), eta: 1 day, 23:56:52, mem: 2645M
+2019-10-15 02:02:09,469 SSD.trainer INFO: iter: 005420, lr: 0.00100, time: 0.678 (0.678), cls_loss: 2.208 (3.078), reg_loss: 0.507 (0.819), total_loss: 2.715 (3.897), eta: 1 day, 23:56:45, mem: 2645M
+2019-10-15 02:02:14,005 SSD.trainer INFO: iter: 005430, lr: 0.00100, time: 0.454 (0.678), cls_loss: 2.036 (3.076), reg_loss: 0.570 (0.819), total_loss: 2.606 (3.894), eta: 1 day, 23:54:53, mem: 2645M
+2019-10-15 02:02:18,698 SSD.trainer INFO: iter: 005440, lr: 0.00100, time: 0.469 (0.677), cls_loss: 2.081 (3.074), reg_loss: 0.478 (0.818), total_loss: 2.559 (3.892), eta: 1 day, 23:53:09, mem: 2645M
+2019-10-15 02:02:23,319 SSD.trainer INFO: iter: 005450, lr: 0.00100, time: 0.462 (0.677), cls_loss: 2.082 (3.072), reg_loss: 0.457 (0.817), total_loss: 2.538 (3.889), eta: 1 day, 23:51:22, mem: 2645M
+2019-10-15 02:02:27,651 SSD.trainer INFO: iter: 005460, lr: 0.00100, time: 0.433 (0.676), cls_loss: 2.268 (3.071), reg_loss: 0.545 (0.817), total_loss: 2.813 (3.887), eta: 1 day, 23:49:21, mem: 2645M
+2019-10-15 02:02:32,109 SSD.trainer INFO: iter: 005470, lr: 0.00100, time: 0.446 (0.676), cls_loss: 2.131 (3.069), reg_loss: 0.543 (0.816), total_loss: 2.674 (3.885), eta: 1 day, 23:47:27, mem: 2645M
+2019-10-15 02:02:38,391 SSD.trainer INFO: iter: 005480, lr: 0.00100, time: 0.628 (0.676), cls_loss: 2.098 (3.067), reg_loss: 0.491 (0.816), total_loss: 2.589 (3.883), eta: 1 day, 23:46:58, mem: 2645M
+2019-10-15 02:02:43,228 SSD.trainer INFO: iter: 005490, lr: 0.00100, time: 0.484 (0.676), cls_loss: 2.159 (3.066), reg_loss: 0.520 (0.815), total_loss: 2.679 (3.881), eta: 1 day, 23:45:22, mem: 2645M
+2019-10-15 02:02:48,321 SSD.trainer INFO: iter: 005500, lr: 0.00100, time: 0.509 (0.675), cls_loss: 2.105 (3.064), reg_loss: 0.439 (0.814), total_loss: 2.544 (3.878), eta: 1 day, 23:43:59, mem: 2645M
+2019-10-15 02:02:52,547 SSD.trainer INFO: iter: 005510, lr: 0.00100, time: 0.423 (0.675), cls_loss: 2.058 (3.062), reg_loss: 0.493 (0.814), total_loss: 2.551 (3.876), eta: 1 day, 23:41:55, mem: 2645M
+2019-10-15 02:02:57,882 SSD.trainer INFO: iter: 005520, lr: 0.00100, time: 0.534 (0.674), cls_loss: 2.061 (3.060), reg_loss: 0.530 (0.813), total_loss: 2.591 (3.873), eta: 1 day, 23:40:44, mem: 2645M
+2019-10-15 02:03:02,966 SSD.trainer INFO: iter: 005530, lr: 0.00100, time: 0.508 (0.674), cls_loss: 2.054 (3.058), reg_loss: 0.506 (0.813), total_loss: 2.560 (3.871), eta: 1 day, 23:39:20, mem: 2645M
+2019-10-15 02:03:08,851 SSD.trainer INFO: iter: 005540, lr: 0.00100, time: 0.589 (0.674), cls_loss: 2.072 (3.057), reg_loss: 0.505 (0.812), total_loss: 2.578 (3.869), eta: 1 day, 23:38:34, mem: 2645M
+2019-10-15 02:03:14,217 SSD.trainer INFO: iter: 005550, lr: 0.00100, time: 0.537 (0.674), cls_loss: 2.367 (3.055), reg_loss: 0.526 (0.812), total_loss: 2.892 (3.867), eta: 1 day, 23:37:24, mem: 2645M
+2019-10-15 02:03:19,106 SSD.trainer INFO: iter: 005560, lr: 0.00100, time: 0.489 (0.673), cls_loss: 2.124 (3.054), reg_loss: 0.495 (0.811), total_loss: 2.619 (3.865), eta: 1 day, 23:35:53, mem: 2645M
+2019-10-15 02:03:23,655 SSD.trainer INFO: iter: 005570, lr: 0.00100, time: 0.455 (0.673), cls_loss: 1.924 (3.052), reg_loss: 0.423 (0.810), total_loss: 2.347 (3.862), eta: 1 day, 23:34:07, mem: 2645M
+2019-10-15 02:03:28,068 SSD.trainer INFO: iter: 005580, lr: 0.00100, time: 0.441 (0.673), cls_loss: 2.216 (3.050), reg_loss: 0.527 (0.810), total_loss: 2.743 (3.860), eta: 1 day, 23:32:14, mem: 2645M
+2019-10-15 02:03:34,752 SSD.trainer INFO: iter: 005590, lr: 0.00100, time: 0.668 (0.673), cls_loss: 2.234 (3.049), reg_loss: 0.549 (0.809), total_loss: 2.784 (3.858), eta: 1 day, 23:32:05, mem: 2645M
+2019-10-15 02:03:39,273 SSD.trainer INFO: iter: 005600, lr: 0.00100, time: 0.452 (0.672), cls_loss: 2.110 (3.047), reg_loss: 0.486 (0.809), total_loss: 2.596 (3.856), eta: 1 day, 23:30:19, mem: 2645M
+2019-10-15 02:03:44,208 SSD.trainer INFO: iter: 005610, lr: 0.00100, time: 0.493 (0.672), cls_loss: 1.953 (3.045), reg_loss: 0.517 (0.808), total_loss: 2.469 (3.853), eta: 1 day, 23:28:51, mem: 2645M
+2019-10-15 02:03:48,910 SSD.trainer INFO: iter: 005620, lr: 0.00100, time: 0.470 (0.672), cls_loss: 1.961 (3.043), reg_loss: 0.451 (0.808), total_loss: 2.412 (3.851), eta: 1 day, 23:27:13, mem: 2645M
+2019-10-15 02:03:54,304 SSD.trainer INFO: iter: 005630, lr: 0.00100, time: 0.539 (0.671), cls_loss: 2.259 (3.042), reg_loss: 0.578 (0.807), total_loss: 2.836 (3.849), eta: 1 day, 23:26:06, mem: 2645M
+2019-10-15 02:03:59,849 SSD.trainer INFO: iter: 005640, lr: 0.00100, time: 0.555 (0.671), cls_loss: 2.091 (3.040), reg_loss: 0.496 (0.807), total_loss: 2.587 (3.847), eta: 1 day, 23:25:07, mem: 2645M
+2019-10-15 02:04:10,768 SSD.trainer INFO: iter: 005650, lr: 0.00100, time: 1.092 (0.672), cls_loss: 2.119 (3.038), reg_loss: 0.541 (0.806), total_loss: 2.660 (3.845), eta: 1 day, 23:28:10, mem: 2645M
+2019-10-15 02:04:15,469 SSD.trainer INFO: iter: 005660, lr: 0.00100, time: 0.470 (0.672), cls_loss: 2.193 (3.037), reg_loss: 0.543 (0.806), total_loss: 2.736 (3.843), eta: 1 day, 23:26:32, mem: 2645M
+2019-10-15 02:04:19,767 SSD.trainer INFO: iter: 005670, lr: 0.00100, time: 0.430 (0.671), cls_loss: 2.054 (3.035), reg_loss: 0.465 (0.805), total_loss: 2.518 (3.840), eta: 1 day, 23:24:37, mem: 2645M
+2019-10-15 02:04:25,634 SSD.trainer INFO: iter: 005680, lr: 0.00100, time: 0.587 (0.671), cls_loss: 2.165 (3.034), reg_loss: 0.494 (0.805), total_loss: 2.659 (3.838), eta: 1 day, 23:23:53, mem: 2645M
+2019-10-15 02:04:30,054 SSD.trainer INFO: iter: 005690, lr: 0.00100, time: 0.442 (0.671), cls_loss: 2.202 (3.032), reg_loss: 0.556 (0.804), total_loss: 2.758 (3.836), eta: 1 day, 23:22:04, mem: 2645M
+2019-10-15 02:04:34,553 SSD.trainer INFO: iter: 005700, lr: 0.00100, time: 0.450 (0.670), cls_loss: 2.072 (3.030), reg_loss: 0.449 (0.804), total_loss: 2.521 (3.834), eta: 1 day, 23:20:18, mem: 2645M
+2019-10-15 02:04:39,353 SSD.trainer INFO: iter: 005710, lr: 0.00100, time: 0.480 (0.670), cls_loss: 2.191 (3.029), reg_loss: 0.505 (0.803), total_loss: 2.696 (3.832), eta: 1 day, 23:18:47, mem: 2645M
+2019-10-15 02:04:44,001 SSD.trainer INFO: iter: 005720, lr: 0.00100, time: 0.465 (0.669), cls_loss: 2.087 (3.027), reg_loss: 0.503 (0.803), total_loss: 2.591 (3.830), eta: 1 day, 23:17:09, mem: 2645M
+2019-10-15 02:04:48,096 SSD.trainer INFO: iter: 005730, lr: 0.00100, time: 0.409 (0.669), cls_loss: 2.120 (3.026), reg_loss: 0.475 (0.802), total_loss: 2.595 (3.828), eta: 1 day, 23:15:07, mem: 2645M
+2019-10-15 02:04:53,567 SSD.trainer INFO: iter: 005740, lr: 0.00100, time: 0.547 (0.669), cls_loss: 2.095 (3.024), reg_loss: 0.474 (0.801), total_loss: 2.570 (3.826), eta: 1 day, 23:14:06, mem: 2645M
+2019-10-15 02:04:58,109 SSD.trainer INFO: iter: 005750, lr: 0.00100, time: 0.454 (0.668), cls_loss: 1.940 (3.022), reg_loss: 0.482 (0.801), total_loss: 2.423 (3.823), eta: 1 day, 23:12:25, mem: 2645M
+2019-10-15 02:05:03,505 SSD.trainer INFO: iter: 005760, lr: 0.00100, time: 0.540 (0.668), cls_loss: 2.016 (3.021), reg_loss: 0.517 (0.800), total_loss: 2.534 (3.821), eta: 1 day, 23:11:21, mem: 2645M
+2019-10-15 02:05:08,424 SSD.trainer INFO: iter: 005770, lr: 0.00100, time: 0.492 (0.668), cls_loss: 1.985 (3.019), reg_loss: 0.476 (0.800), total_loss: 2.461 (3.819), eta: 1 day, 23:09:57, mem: 2645M
+2019-10-15 02:05:13,439 SSD.trainer INFO: iter: 005780, lr: 0.00100, time: 0.502 (0.668), cls_loss: 2.142 (3.017), reg_loss: 0.446 (0.799), total_loss: 2.588 (3.816), eta: 1 day, 23:08:37, mem: 2645M
+2019-10-15 02:05:18,891 SSD.trainer INFO: iter: 005790, lr: 0.00100, time: 0.545 (0.667), cls_loss: 2.205 (3.016), reg_loss: 0.517 (0.799), total_loss: 2.722 (3.815), eta: 1 day, 23:07:37, mem: 2645M
+2019-10-15 02:05:24,990 SSD.trainer INFO: iter: 005800, lr: 0.00100, time: 0.610 (0.667), cls_loss: 2.180 (3.014), reg_loss: 0.543 (0.798), total_loss: 2.723 (3.813), eta: 1 day, 23:07:05, mem: 2645M
+2019-10-15 02:05:29,775 SSD.trainer INFO: iter: 005810, lr: 0.00100, time: 0.478 (0.667), cls_loss: 1.938 (3.012), reg_loss: 0.462 (0.798), total_loss: 2.400 (3.810), eta: 1 day, 23:05:36, mem: 2645M
+2019-10-15 02:05:34,281 SSD.trainer INFO: iter: 005820, lr: 0.00100, time: 0.451 (0.667), cls_loss: 2.040 (3.011), reg_loss: 0.463 (0.797), total_loss: 2.503 (3.808), eta: 1 day, 23:03:54, mem: 2645M
+2019-10-15 02:05:40,505 SSD.trainer INFO: iter: 005830, lr: 0.00100, time: 0.622 (0.667), cls_loss: 2.218 (3.009), reg_loss: 0.515 (0.797), total_loss: 2.734 (3.806), eta: 1 day, 23:03:28, mem: 2645M
+2019-10-15 02:05:45,911 SSD.trainer INFO: iter: 005840, lr: 0.00100, time: 0.541 (0.666), cls_loss: 2.019 (3.008), reg_loss: 0.507 (0.796), total_loss: 2.526 (3.804), eta: 1 day, 23:02:27, mem: 2645M
+2019-10-15 02:05:50,727 SSD.trainer INFO: iter: 005850, lr: 0.00100, time: 0.482 (0.666), cls_loss: 1.971 (3.006), reg_loss: 0.487 (0.796), total_loss: 2.458 (3.802), eta: 1 day, 23:01:00, mem: 2645M
+2019-10-15 02:05:55,399 SSD.trainer INFO: iter: 005860, lr: 0.00100, time: 0.467 (0.666), cls_loss: 2.153 (3.005), reg_loss: 0.483 (0.795), total_loss: 2.636 (3.800), eta: 1 day, 22:59:27, mem: 2645M
+2019-10-15 02:05:59,629 SSD.trainer INFO: iter: 005870, lr: 0.00100, time: 0.423 (0.665), cls_loss: 2.001 (3.003), reg_loss: 0.468 (0.795), total_loss: 2.469 (3.797), eta: 1 day, 22:57:36, mem: 2645M
+2019-10-15 02:06:04,369 SSD.trainer INFO: iter: 005880, lr: 0.00100, time: 0.474 (0.665), cls_loss: 2.274 (3.002), reg_loss: 0.470 (0.794), total_loss: 2.744 (3.796), eta: 1 day, 22:56:06, mem: 2645M
+2019-10-15 02:06:08,823 SSD.trainer INFO: iter: 005890, lr: 0.00100, time: 0.445 (0.665), cls_loss: 2.036 (3.000), reg_loss: 0.481 (0.793), total_loss: 2.516 (3.793), eta: 1 day, 22:54:25, mem: 2645M
+2019-10-15 02:06:14,182 SSD.trainer INFO: iter: 005900, lr: 0.00100, time: 0.536 (0.664), cls_loss: 2.184 (2.999), reg_loss: 0.523 (0.793), total_loss: 2.707 (3.792), eta: 1 day, 22:53:23, mem: 2645M
+2019-10-15 02:06:18,353 SSD.trainer INFO: iter: 005910, lr: 0.00100, time: 0.417 (0.664), cls_loss: 1.914 (2.997), reg_loss: 0.435 (0.792), total_loss: 2.349 (3.789), eta: 1 day, 22:51:30, mem: 2645M
+2019-10-15 02:06:25,684 SSD.trainer INFO: iter: 005920, lr: 0.00100, time: 0.733 (0.664), cls_loss: 2.065 (2.995), reg_loss: 0.550 (0.792), total_loss: 2.615 (3.787), eta: 1 day, 22:51:53, mem: 2645M
+2019-10-15 02:06:30,485 SSD.trainer INFO: iter: 005930, lr: 0.00100, time: 0.480 (0.664), cls_loss: 2.185 (2.994), reg_loss: 0.533 (0.792), total_loss: 2.718 (3.785), eta: 1 day, 22:50:28, mem: 2645M
+2019-10-15 02:06:37,109 SSD.trainer INFO: iter: 005940, lr: 0.00100, time: 0.662 (0.664), cls_loss: 2.016 (2.992), reg_loss: 0.487 (0.791), total_loss: 2.503 (3.783), eta: 1 day, 22:50:20, mem: 2645M
+2019-10-15 02:06:41,889 SSD.trainer INFO: iter: 005950, lr: 0.00100, time: 0.478 (0.663), cls_loss: 1.925 (2.990), reg_loss: 0.448 (0.790), total_loss: 2.374 (3.781), eta: 1 day, 22:48:54, mem: 2645M
+2019-10-15 02:06:46,112 SSD.trainer INFO: iter: 005960, lr: 0.00100, time: 0.422 (0.663), cls_loss: 2.291 (2.989), reg_loss: 0.531 (0.790), total_loss: 2.822 (3.779), eta: 1 day, 22:47:05, mem: 2645M
+2019-10-15 02:06:50,336 SSD.trainer INFO: iter: 005970, lr: 0.00100, time: 0.422 (0.663), cls_loss: 2.132 (2.988), reg_loss: 0.542 (0.790), total_loss: 2.673 (3.777), eta: 1 day, 22:45:16, mem: 2645M
+2019-10-15 02:06:55,061 SSD.trainer INFO: iter: 005980, lr: 0.00100, time: 0.473 (0.662), cls_loss: 1.905 (2.986), reg_loss: 0.469 (0.789), total_loss: 2.374 (3.775), eta: 1 day, 22:43:49, mem: 2645M
+2019-10-15 02:07:00,301 SSD.trainer INFO: iter: 005990, lr: 0.00100, time: 0.524 (0.662), cls_loss: 2.008 (2.984), reg_loss: 0.466 (0.789), total_loss: 2.474 (3.773), eta: 1 day, 22:42:43, mem: 2645M
+2019-10-15 02:07:05,696 SSD.trainer INFO: iter: 006000, lr: 0.00100, time: 0.539 (0.662), cls_loss: 2.032 (2.983), reg_loss: 0.480 (0.788), total_loss: 2.512 (3.771), eta: 1 day, 22:41:45, mem: 2645M
+2019-10-15 02:07:09,776 SSD.trainer INFO: iter: 006010, lr: 0.00100, time: 0.408 (0.661), cls_loss: 2.075 (2.981), reg_loss: 0.462 (0.787), total_loss: 2.536 (3.769), eta: 1 day, 22:39:51, mem: 2645M
+2019-10-15 02:07:16,903 SSD.trainer INFO: iter: 006020, lr: 0.00100, time: 0.713 (0.661), cls_loss: 2.003 (2.980), reg_loss: 0.415 (0.787), total_loss: 2.418 (3.766), eta: 1 day, 22:40:06, mem: 2645M
+2019-10-15 02:07:21,148 SSD.trainer INFO: iter: 006030, lr: 0.00100, time: 0.425 (0.661), cls_loss: 2.101 (2.978), reg_loss: 0.458 (0.786), total_loss: 2.559 (3.764), eta: 1 day, 22:38:20, mem: 2645M
+2019-10-15 02:07:27,926 SSD.trainer INFO: iter: 006040, lr: 0.00100, time: 0.678 (0.661), cls_loss: 2.012 (2.977), reg_loss: 0.544 (0.786), total_loss: 2.556 (3.762), eta: 1 day, 22:38:20, mem: 2645M
+2019-10-15 02:07:34,297 SSD.trainer INFO: iter: 006050, lr: 0.00100, time: 0.637 (0.661), cls_loss: 2.141 (2.975), reg_loss: 0.490 (0.785), total_loss: 2.632 (3.761), eta: 1 day, 22:38:03, mem: 2645M
+2019-10-15 02:07:38,601 SSD.trainer INFO: iter: 006060, lr: 0.00100, time: 0.430 (0.661), cls_loss: 2.090 (2.974), reg_loss: 0.439 (0.785), total_loss: 2.529 (3.759), eta: 1 day, 22:36:20, mem: 2645M
+2019-10-15 02:07:43,590 SSD.trainer INFO: iter: 006070, lr: 0.00100, time: 0.499 (0.660), cls_loss: 1.859 (2.972), reg_loss: 0.425 (0.784), total_loss: 2.284 (3.756), eta: 1 day, 22:35:06, mem: 2645M
+2019-10-15 02:07:49,538 SSD.trainer INFO: iter: 006080, lr: 0.00100, time: 0.595 (0.660), cls_loss: 1.938 (2.970), reg_loss: 0.469 (0.784), total_loss: 2.407 (3.754), eta: 1 day, 22:34:32, mem: 2645M
+2019-10-15 02:07:54,258 SSD.trainer INFO: iter: 006090, lr: 0.00100, time: 0.472 (0.660), cls_loss: 2.167 (2.969), reg_loss: 0.533 (0.783), total_loss: 2.700 (3.752), eta: 1 day, 22:33:07, mem: 2645M
+2019-10-15 02:08:00,026 SSD.trainer INFO: iter: 006100, lr: 0.00100, time: 0.577 (0.660), cls_loss: 2.009 (2.967), reg_loss: 0.484 (0.783), total_loss: 2.493 (3.750), eta: 1 day, 22:32:25, mem: 2645M
+2019-10-15 02:08:05,786 SSD.trainer INFO: iter: 006110, lr: 0.00100, time: 0.576 (0.660), cls_loss: 2.054 (2.966), reg_loss: 0.473 (0.782), total_loss: 2.526 (3.748), eta: 1 day, 22:31:44, mem: 2645M
+2019-10-15 02:08:10,305 SSD.trainer INFO: iter: 006120, lr: 0.00100, time: 0.452 (0.659), cls_loss: 2.147 (2.964), reg_loss: 0.432 (0.782), total_loss: 2.579 (3.746), eta: 1 day, 22:30:11, mem: 2645M
+2019-10-15 02:08:15,061 SSD.trainer INFO: iter: 006130, lr: 0.00100, time: 0.476 (0.659), cls_loss: 1.940 (2.963), reg_loss: 0.437 (0.781), total_loss: 2.378 (3.744), eta: 1 day, 22:28:48, mem: 2645M
+2019-10-15 02:08:19,584 SSD.trainer INFO: iter: 006140, lr: 0.00100, time: 0.452 (0.659), cls_loss: 2.090 (2.961), reg_loss: 0.411 (0.781), total_loss: 2.501 (3.742), eta: 1 day, 22:27:16, mem: 2645M
+2019-10-15 02:08:24,850 SSD.trainer INFO: iter: 006150, lr: 0.00100, time: 0.527 (0.659), cls_loss: 2.165 (2.960), reg_loss: 0.507 (0.780), total_loss: 2.672 (3.740), eta: 1 day, 22:26:15, mem: 2645M
+2019-10-15 02:08:29,968 SSD.trainer INFO: iter: 006160, lr: 0.00100, time: 0.512 (0.658), cls_loss: 2.060 (2.959), reg_loss: 0.513 (0.780), total_loss: 2.573 (3.738), eta: 1 day, 22:25:08, mem: 2645M
+2019-10-15 02:08:34,798 SSD.trainer INFO: iter: 006170, lr: 0.00100, time: 0.483 (0.658), cls_loss: 2.052 (2.957), reg_loss: 0.563 (0.779), total_loss: 2.616 (3.736), eta: 1 day, 22:23:49, mem: 2645M
+2019-10-15 02:08:39,421 SSD.trainer INFO: iter: 006180, lr: 0.00100, time: 0.462 (0.658), cls_loss: 2.187 (2.956), reg_loss: 0.484 (0.779), total_loss: 2.671 (3.735), eta: 1 day, 22:22:22, mem: 2645M
+2019-10-15 02:08:43,740 SSD.trainer INFO: iter: 006190, lr: 0.00100, time: 0.432 (0.657), cls_loss: 1.926 (2.954), reg_loss: 0.474 (0.778), total_loss: 2.400 (3.733), eta: 1 day, 22:20:43, mem: 2645M
+2019-10-15 02:08:48,613 SSD.trainer INFO: iter: 006200, lr: 0.00100, time: 0.487 (0.657), cls_loss: 2.156 (2.953), reg_loss: 0.486 (0.778), total_loss: 2.642 (3.731), eta: 1 day, 22:19:27, mem: 2645M
+2019-10-15 02:08:53,475 SSD.trainer INFO: iter: 006210, lr: 0.00100, time: 0.486 (0.657), cls_loss: 1.832 (2.951), reg_loss: 0.421 (0.777), total_loss: 2.253 (3.728), eta: 1 day, 22:18:11, mem: 2645M
+2019-10-15 02:08:59,416 SSD.trainer INFO: iter: 006220, lr: 0.00100, time: 0.594 (0.657), cls_loss: 2.103 (2.950), reg_loss: 0.478 (0.777), total_loss: 2.580 (3.727), eta: 1 day, 22:17:38, mem: 2645M
+2019-10-15 02:09:04,299 SSD.trainer INFO: iter: 006230, lr: 0.00100, time: 0.488 (0.656), cls_loss: 2.091 (2.948), reg_loss: 0.511 (0.776), total_loss: 2.602 (3.725), eta: 1 day, 22:16:23, mem: 2645M
+2019-10-15 02:09:09,512 SSD.trainer INFO: iter: 006240, lr: 0.00100, time: 0.521 (0.656), cls_loss: 2.044 (2.947), reg_loss: 0.497 (0.776), total_loss: 2.541 (3.723), eta: 1 day, 22:15:22, mem: 2645M
+2019-10-15 02:09:15,083 SSD.trainer INFO: iter: 006250, lr: 0.00100, time: 0.557 (0.656), cls_loss: 2.212 (2.946), reg_loss: 0.469 (0.775), total_loss: 2.681 (3.721), eta: 1 day, 22:14:35, mem: 2645M
+2019-10-15 02:09:20,792 SSD.trainer INFO: iter: 006260, lr: 0.00100, time: 0.571 (0.656), cls_loss: 2.184 (2.945), reg_loss: 0.518 (0.775), total_loss: 2.702 (3.720), eta: 1 day, 22:13:54, mem: 2645M
+2019-10-15 02:09:25,532 SSD.trainer INFO: iter: 006270, lr: 0.00100, time: 0.474 (0.656), cls_loss: 2.077 (2.943), reg_loss: 0.469 (0.775), total_loss: 2.546 (3.718), eta: 1 day, 22:12:34, mem: 2645M
+2019-10-15 02:09:30,247 SSD.trainer INFO: iter: 006280, lr: 0.00100, time: 0.472 (0.655), cls_loss: 2.033 (2.942), reg_loss: 0.471 (0.774), total_loss: 2.504 (3.716), eta: 1 day, 22:11:13, mem: 2645M
+2019-10-15 02:09:34,726 SSD.trainer INFO: iter: 006290, lr: 0.00100, time: 0.448 (0.655), cls_loss: 2.013 (2.940), reg_loss: 0.436 (0.774), total_loss: 2.449 (3.714), eta: 1 day, 22:09:43, mem: 2645M
+2019-10-15 02:09:40,257 SSD.trainer INFO: iter: 006300, lr: 0.00100, time: 0.553 (0.655), cls_loss: 2.138 (2.939), reg_loss: 0.624 (0.773), total_loss: 2.761 (3.712), eta: 1 day, 22:08:55, mem: 2645M
+2019-10-15 02:09:44,434 SSD.trainer INFO: iter: 006310, lr: 0.00100, time: 0.418 (0.654), cls_loss: 1.991 (2.937), reg_loss: 0.477 (0.773), total_loss: 2.469 (3.710), eta: 1 day, 22:07:13, mem: 2645M
+2019-10-15 02:09:50,443 SSD.trainer INFO: iter: 006320, lr: 0.00100, time: 0.601 (0.654), cls_loss: 2.019 (2.936), reg_loss: 0.477 (0.772), total_loss: 2.496 (3.708), eta: 1 day, 22:06:45, mem: 2645M
+2019-10-15 02:09:55,735 SSD.trainer INFO: iter: 006330, lr: 0.00100, time: 0.529 (0.654), cls_loss: 2.042 (2.935), reg_loss: 0.503 (0.772), total_loss: 2.545 (3.707), eta: 1 day, 22:05:48, mem: 2645M
+2019-10-15 02:09:59,930 SSD.trainer INFO: iter: 006340, lr: 0.00100, time: 0.420 (0.654), cls_loss: 2.037 (2.933), reg_loss: 0.458 (0.771), total_loss: 2.496 (3.705), eta: 1 day, 22:04:08, mem: 2645M
+2019-10-15 02:10:04,916 SSD.trainer INFO: iter: 006350, lr: 0.00100, time: 0.499 (0.654), cls_loss: 2.034 (2.932), reg_loss: 0.547 (0.771), total_loss: 2.581 (3.703), eta: 1 day, 22:02:59, mem: 2645M
+2019-10-15 02:10:09,995 SSD.trainer INFO: iter: 006360, lr: 0.00100, time: 0.508 (0.653), cls_loss: 2.103 (2.930), reg_loss: 0.666 (0.771), total_loss: 2.769 (3.701), eta: 1 day, 22:01:55, mem: 2645M
+2019-10-15 02:10:15,464 SSD.trainer INFO: iter: 006370, lr: 0.00100, time: 0.547 (0.653), cls_loss: 2.000 (2.929), reg_loss: 0.459 (0.770), total_loss: 2.458 (3.699), eta: 1 day, 22:01:06, mem: 2645M
+2019-10-15 02:10:20,473 SSD.trainer INFO: iter: 006380, lr: 0.00100, time: 0.501 (0.653), cls_loss: 2.042 (2.928), reg_loss: 0.442 (0.770), total_loss: 2.484 (3.698), eta: 1 day, 21:59:59, mem: 2645M
+2019-10-15 02:10:24,946 SSD.trainer INFO: iter: 006390, lr: 0.00100, time: 0.447 (0.653), cls_loss: 2.019 (2.926), reg_loss: 0.504 (0.770), total_loss: 2.523 (3.696), eta: 1 day, 21:58:31, mem: 2645M
+2019-10-15 02:10:28,990 SSD.trainer INFO: iter: 006400, lr: 0.00100, time: 0.404 (0.652), cls_loss: 1.844 (2.924), reg_loss: 0.409 (0.769), total_loss: 2.254 (3.693), eta: 1 day, 21:56:46, mem: 2645M
+2019-10-15 02:10:35,006 SSD.trainer INFO: iter: 006410, lr: 0.00100, time: 0.602 (0.652), cls_loss: 1.989 (2.923), reg_loss: 0.575 (0.769), total_loss: 2.564 (3.692), eta: 1 day, 21:56:19, mem: 2645M
+2019-10-15 02:10:39,453 SSD.trainer INFO: iter: 006420, lr: 0.00100, time: 0.445 (0.652), cls_loss: 1.935 (2.921), reg_loss: 0.465 (0.768), total_loss: 2.400 (3.690), eta: 1 day, 21:54:51, mem: 2645M
+2019-10-15 02:10:44,173 SSD.trainer INFO: iter: 006430, lr: 0.00100, time: 0.472 (0.652), cls_loss: 2.205 (2.920), reg_loss: 0.521 (0.768), total_loss: 2.726 (3.688), eta: 1 day, 21:53:33, mem: 2645M
+2019-10-15 02:10:49,625 SSD.trainer INFO: iter: 006440, lr: 0.00100, time: 0.545 (0.651), cls_loss: 2.058 (2.919), reg_loss: 0.476 (0.767), total_loss: 2.535 (3.686), eta: 1 day, 21:52:45, mem: 2645M
+2019-10-15 02:10:53,655 SSD.trainer INFO: iter: 006450, lr: 0.00100, time: 0.403 (0.651), cls_loss: 1.873 (2.917), reg_loss: 0.399 (0.767), total_loss: 2.272 (3.684), eta: 1 day, 21:51:01, mem: 2645M
+2019-10-15 02:10:58,939 SSD.trainer INFO: iter: 006460, lr: 0.00100, time: 0.528 (0.651), cls_loss: 1.834 (2.916), reg_loss: 0.412 (0.766), total_loss: 2.246 (3.682), eta: 1 day, 21:50:06, mem: 2645M
+2019-10-15 02:11:04,443 SSD.trainer INFO: iter: 006470, lr: 0.00100, time: 0.550 (0.651), cls_loss: 2.092 (2.914), reg_loss: 0.548 (0.766), total_loss: 2.639 (3.680), eta: 1 day, 21:49:20, mem: 2645M
+2019-10-15 02:11:08,862 SSD.trainer INFO: iter: 006480, lr: 0.00100, time: 0.442 (0.650), cls_loss: 1.966 (2.913), reg_loss: 0.518 (0.766), total_loss: 2.484 (3.678), eta: 1 day, 21:47:52, mem: 2645M
+2019-10-15 02:11:14,084 SSD.trainer INFO: iter: 006490, lr: 0.00100, time: 0.522 (0.650), cls_loss: 2.015 (2.912), reg_loss: 0.495 (0.765), total_loss: 2.510 (3.677), eta: 1 day, 21:46:55, mem: 2645M
+2019-10-15 02:11:19,305 SSD.trainer INFO: iter: 006500, lr: 0.00100, time: 0.522 (0.650), cls_loss: 2.095 (2.910), reg_loss: 0.468 (0.765), total_loss: 2.563 (3.675), eta: 1 day, 21:45:59, mem: 2645M
+2019-10-15 02:11:24,803 SSD.trainer INFO: iter: 006510, lr: 0.00100, time: 0.550 (0.650), cls_loss: 2.157 (2.909), reg_loss: 0.496 (0.764), total_loss: 2.653 (3.673), eta: 1 day, 21:45:14, mem: 2645M
+2019-10-15 02:11:31,228 SSD.trainer INFO: iter: 006520, lr: 0.00100, time: 0.642 (0.650), cls_loss: 2.008 (2.908), reg_loss: 0.470 (0.764), total_loss: 2.479 (3.672), eta: 1 day, 21:45:04, mem: 2645M
+2019-10-15 02:11:38,980 SSD.trainer INFO: iter: 006530, lr: 0.00100, time: 0.775 (0.650), cls_loss: 1.885 (2.906), reg_loss: 0.553 (0.763), total_loss: 2.438 (3.670), eta: 1 day, 21:45:46, mem: 2645M
+2019-10-15 02:11:44,832 SSD.trainer INFO: iter: 006540, lr: 0.00100, time: 0.585 (0.650), cls_loss: 2.007 (2.905), reg_loss: 0.420 (0.763), total_loss: 2.428 (3.668), eta: 1 day, 21:45:15, mem: 2645M
+2019-10-15 02:11:49,862 SSD.trainer INFO: iter: 006550, lr: 0.00100, time: 0.503 (0.650), cls_loss: 2.180 (2.904), reg_loss: 0.490 (0.763), total_loss: 2.670 (3.666), eta: 1 day, 21:44:11, mem: 2645M
+2019-10-15 02:11:54,112 SSD.trainer INFO: iter: 006560, lr: 0.00100, time: 0.425 (0.649), cls_loss: 1.917 (2.902), reg_loss: 0.476 (0.762), total_loss: 2.393 (3.664), eta: 1 day, 21:42:38, mem: 2645M
+2019-10-15 02:11:58,248 SSD.trainer INFO: iter: 006570, lr: 0.00100, time: 0.414 (0.649), cls_loss: 1.991 (2.901), reg_loss: 0.515 (0.762), total_loss: 2.506 (3.663), eta: 1 day, 21:41:01, mem: 2645M
+2019-10-15 02:12:02,844 SSD.trainer INFO: iter: 006580, lr: 0.00100, time: 0.460 (0.649), cls_loss: 2.027 (2.900), reg_loss: 0.476 (0.761), total_loss: 2.503 (3.661), eta: 1 day, 21:39:41, mem: 2645M
+2019-10-15 02:12:09,594 SSD.trainer INFO: iter: 006590, lr: 0.00100, time: 0.675 (0.649), cls_loss: 1.973 (2.898), reg_loss: 0.487 (0.761), total_loss: 2.460 (3.659), eta: 1 day, 21:39:45, mem: 2645M
+2019-10-15 02:12:13,728 SSD.trainer INFO: iter: 006600, lr: 0.00100, time: 0.413 (0.648), cls_loss: 2.016 (2.897), reg_loss: 0.487 (0.760), total_loss: 2.503 (3.657), eta: 1 day, 21:38:08, mem: 2645M
+2019-10-15 02:12:18,089 SSD.trainer INFO: iter: 006610, lr: 0.00100, time: 0.436 (0.648), cls_loss: 1.921 (2.895), reg_loss: 0.470 (0.760), total_loss: 2.391 (3.655), eta: 1 day, 21:36:40, mem: 2645M
+2019-10-15 02:12:24,232 SSD.trainer INFO: iter: 006620, lr: 0.00100, time: 0.614 (0.648), cls_loss: 2.091 (2.894), reg_loss: 0.583 (0.760), total_loss: 2.674 (3.654), eta: 1 day, 21:36:21, mem: 2645M
+2019-10-15 02:12:28,484 SSD.trainer INFO: iter: 006630, lr: 0.00100, time: 0.425 (0.648), cls_loss: 1.953 (2.893), reg_loss: 0.461 (0.759), total_loss: 2.414 (3.652), eta: 1 day, 21:34:49, mem: 2645M
+2019-10-15 02:12:33,021 SSD.trainer INFO: iter: 006640, lr: 0.00100, time: 0.454 (0.647), cls_loss: 1.811 (2.891), reg_loss: 0.424 (0.759), total_loss: 2.235 (3.650), eta: 1 day, 21:33:29, mem: 2645M
+2019-10-15 02:12:38,038 SSD.trainer INFO: iter: 006650, lr: 0.00100, time: 0.502 (0.647), cls_loss: 2.087 (2.890), reg_loss: 0.492 (0.758), total_loss: 2.579 (3.648), eta: 1 day, 21:32:27, mem: 2645M
+2019-10-15 02:12:43,542 SSD.trainer INFO: iter: 006660, lr: 0.00100, time: 0.550 (0.647), cls_loss: 2.023 (2.889), reg_loss: 0.468 (0.758), total_loss: 2.491 (3.646), eta: 1 day, 21:31:44, mem: 2645M
+2019-10-15 02:12:47,501 SSD.trainer INFO: iter: 006670, lr: 0.00100, time: 0.396 (0.647), cls_loss: 2.016 (2.887), reg_loss: 0.464 (0.757), total_loss: 2.480 (3.645), eta: 1 day, 21:30:02, mem: 2645M
+2019-10-15 02:12:52,041 SSD.trainer INFO: iter: 006680, lr: 0.00100, time: 0.454 (0.646), cls_loss: 2.111 (2.886), reg_loss: 0.522 (0.757), total_loss: 2.633 (3.643), eta: 1 day, 21:28:42, mem: 2645M
+2019-10-15 02:12:59,294 SSD.trainer INFO: iter: 006690, lr: 0.00100, time: 0.725 (0.646), cls_loss: 2.053 (2.885), reg_loss: 0.478 (0.757), total_loss: 2.531 (3.642), eta: 1 day, 21:29:06, mem: 2645M
+2019-10-15 02:13:04,713 SSD.trainer INFO: iter: 006700, lr: 0.00100, time: 0.542 (0.646), cls_loss: 2.080 (2.884), reg_loss: 0.451 (0.756), total_loss: 2.531 (3.640), eta: 1 day, 21:28:20, mem: 2645M
+2019-10-15 02:13:10,375 SSD.trainer INFO: iter: 006710, lr: 0.00100, time: 0.566 (0.646), cls_loss: 2.101 (2.882), reg_loss: 0.434 (0.756), total_loss: 2.534 (3.638), eta: 1 day, 21:27:43, mem: 2645M
+2019-10-15 02:13:14,486 SSD.trainer INFO: iter: 006720, lr: 0.00100, time: 0.411 (0.646), cls_loss: 1.852 (2.881), reg_loss: 0.451 (0.755), total_loss: 2.302 (3.636), eta: 1 day, 21:26:08, mem: 2645M
+2019-10-15 02:13:19,751 SSD.trainer INFO: iter: 006730, lr: 0.00100, time: 0.526 (0.646), cls_loss: 2.057 (2.880), reg_loss: 0.442 (0.755), total_loss: 2.498 (3.635), eta: 1 day, 21:25:17, mem: 2645M
+2019-10-15 02:13:24,796 SSD.trainer INFO: iter: 006740, lr: 0.00100, time: 0.504 (0.645), cls_loss: 2.135 (2.879), reg_loss: 0.450 (0.754), total_loss: 2.585 (3.633), eta: 1 day, 21:24:17, mem: 2645M

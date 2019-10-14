@@ -7,13 +7,9 @@ from PIL import Image
 from ssd.structures.container import Container
 
 
-class VOCDataset(torch.utils.data.Dataset):
-    class_names = ('__background__',
-                   'aeroplane', 'bicycle', 'bird', 'boat',
-                   'bottle', 'bus', 'car', 'cat', 'chair',
-                   'cow', 'diningtable', 'dog', 'horse',
-                   'motorbike', 'person', 'pottedplant',
-                   'sheep', 'sofa', 'train', 'tvmonitor')
+class CustomDataset(torch.utils.data.Dataset):
+    class_names = ( '__background__', # always index 0
+    'neutral', 'anger', 'surprise', 'smile', 'sad')
 
     def __init__(self, data_dir, split, transform=None, target_transform=None, keep_difficult=False):
         """Dataset for VOC data.
@@ -21,15 +17,15 @@ class VOCDataset(torch.utils.data.Dataset):
             data_dir: the root of the VOC2007 or VOC2012 dataset, the directory contains the following sub-directories:
                 Annotations, ImageSets, JPEGImages, SegmentationClass, SegmentationObject.
         """
-        self.data_dir = data_dir
         self.split = split
+        if self.split == 'trainval':
+            self.data_dir = os.path.join(data_dir, "train")
+        if self.split == 'test':
+            self.data_dir = os.path.join(data_dir, "test")
         self.transform = transform
         self.target_transform = target_transform
-        image_sets_file = os.path.join(self.data_dir, "ImageSets", "Main", "%s.txt" % self.split)
-        print(image_sets_file)
-        import sys
-        sys.exit()
-        self.ids = VOCDataset._read_image_ids(image_sets_file)
+        image_sets_file = os.path.join(self.data_dir, "%s.txt" % self.split)
+        self.ids = CustomDataset._read_image_ids(image_sets_file)
         self.keep_difficult = keep_difficult
 
         self.class_dict = {class_name: i for i, class_name in enumerate(self.class_names)}
@@ -67,7 +63,7 @@ class VOCDataset(torch.utils.data.Dataset):
         return ids
 
     def _get_annotation(self, image_id):
-        annotation_file = os.path.join(self.data_dir, "Annotations", "%s.xml" % image_id)
+        annotation_file = os.path.join(self.data_dir, "annotations", "%s.xml" % image_id)
         objects = ET.parse(annotation_file).findall("object")
         boxes = []
         labels = []
@@ -91,14 +87,16 @@ class VOCDataset(torch.utils.data.Dataset):
 
     def get_img_info(self, index):
         img_id = self.ids[index]
-        annotation_file = os.path.join(self.data_dir, "Annotations", "%s.xml" % img_id)
+        annotation_file = os.path.join(self.data_dir, "annotations", "%s.xml" % img_id)
         anno = ET.parse(annotation_file).getroot()
         size = anno.find("size")
         im_info = tuple(map(int, (size.find("height").text, size.find("width").text)))
         return {"height": im_info[0], "width": im_info[1]}
 
     def _read_image(self, image_id):
-        image_file = os.path.join(self.data_dir, "JPEGImages", "%s.jpg" % image_id)
+        image_file = os.path.join(self.data_dir, "img", "%s.jpg" % image_id)
+        if not os.path.isfile(image_file):
+            image_file = image_file[:-4] + '.JPG'
         image = Image.open(image_file).convert("RGB")
         image = np.array(image)
         return image

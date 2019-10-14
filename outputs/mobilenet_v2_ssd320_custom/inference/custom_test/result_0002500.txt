@@ -1,0 +1,6 @@
+mAP: 0.6054
+neutral         : 0.6587
+anger           : 0.5524
+surprise        : 0.6243
+smile           : 0.6197
+sad             : 0.5720
